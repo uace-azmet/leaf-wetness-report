@@ -32,7 +32,7 @@ theme =
       background-color: #FFFFFF !important;
       border-bottom-color: #E2E9EB !important;
       border-bottom-width: 6px !important;
-    } */
+    }
     
     .nav-item {
       background-color: #FFFFFF !important;

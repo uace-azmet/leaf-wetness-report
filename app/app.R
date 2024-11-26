@@ -21,29 +21,65 @@ library(vroom)
 #source("./R/scr##DEF.R", local = TRUE)
 
 
+link_shiny <- tags$a(shiny::icon("github"), "Shiny", href = "https://github.com/rstudio/shiny", target = "_blank")
+link_posit <- tags$a(shiny::icon("r-project"), "Posit", href = "https://posit.co", target = "_blank")
+
+
 # UI --------------------
 
 ui <- htmltools::htmlTemplate(
   
   filename = "azmet-shiny-template.html",
   
-  pageNavbar = bslib::page_navbar(
+  pageNavbar= bslib::page_navbar(
     bslib::nav_panel(
-      #p("First tab content."), 
-      title = "Current Conditions",
-      #bslib::layout_columns(
-        cardsCurrentConditions[[1]], 
-        cardsCurrentConditions[[2]], 
-        cardsCurrentConditions[[3]], 
-        cardsCurrentConditions[[4]], 
-        cardsCurrentConditions[[5]]
-      #)
+      title = "Current Conditions", 
+      htmltools::p("First tab content."),
+      value = "Current Conditions"
     ),
-    bslib::nav_panel(title = "Recent Data", p("Second tab content.")),
-    bslib::nav_panel(title = "Data Variables", p("Third tab content."))
+    bslib::nav_panel(
+      title = "Past 48 Hours", 
+      htmltools::p("Second tab content."),
+      value = "Past 48 Hours"
+    ),
+    bslib::nav_panel(
+      title = "Past 30 Days", 
+      htmltools::p("Third tab content"),
+      value = "Past 30 Days"
+    ),
     
-    # `scr0x_navsetTab.R`
-  )#,
+    collapsible = FALSE,
+    fillable = TRUE,
+    fillable_mobile = FALSE,
+    footer = shiny::htmlOutput(outputId = "reportPageText"),
+    id = "pageNavbar",
+    selected = "Current Conditions",
+    sidebar = NULL,
+    theme = theme, # `scr03_theme.R`
+    title = "NULL",
+    #underline = TRUE,
+    #fluid = TRUE,
+    #window_title = "Leaf Wetness Report"
+  #)
+  
+  #bslib::page_navbar(
+  #  title = "Page NavBar",
+  #  bslib::nav_panel(
+  #    title = "Current Conditions",
+  #    p("First tab content.")
+  #bslib::layout_columns(
+  #  cardsCurrentConditions[[1]], 
+  #  cardsCurrentConditions[[2]], 
+  #  cardsCurrentConditions[[3]], 
+  #  cardsCurrentConditions[[4]], 
+  #  cardsCurrentConditions[[5]]
+  #)
+  #  ),
+  #  bslib::nav_panel(title = "Recent Data", p("Second tab content.")),
+  #  bslib::nav_panel(title = "Data Variables", p("Third tab content."))
+    
+  # `scr0x_navsetTab.R`
+  #),
   
   #shiny::htmlOutput(outputId = "figureHelpText"),
   #htmltools::br(),
@@ -56,6 +92,7 @@ ui <- htmltools::htmlTemplate(
   #theme = theme, # `scr03_theme.R`
   #lang = NULL,
   #window_title = NA
+  )
 )
 
 
