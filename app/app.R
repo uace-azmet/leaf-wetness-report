@@ -9,6 +9,7 @@
 #library(azmetr)
 library(bslib)
 library(dplyr)
+library(DT)
 library(htmltools)
 library(lubridate)
 library(shiny)
@@ -21,10 +22,6 @@ library(vroom)
 #source("./R/scr##DEF.R", local = TRUE)
 
 
-link_shiny <- tags$a(shiny::icon("github"), "Shiny", href = "https://github.com/rstudio/shiny", target = "_blank")
-link_posit <- tags$a(shiny::icon("r-project"), "Posit", href = "https://posit.co", target = "_blank")
-
-
 # UI --------------------
 
 ui <- htmltools::htmlTemplate(
@@ -34,7 +31,15 @@ ui <- htmltools::htmlTemplate(
   pageNavbar= bslib::page_navbar(
     bslib::nav_panel(
       title = "Current Conditions", 
-      htmltools::p("First tab content."),
+      bslib::layout_columns(
+        cardsCurrentConditions[[1]], 
+        cardsCurrentConditions[[2]], 
+        cardsCurrentConditions[[3]], 
+        cardsCurrentConditions[[4]], 
+        cardsCurrentConditions[[5]],
+        
+        col_widths = breakpoints(sm = c(12), md = c(6, 6), lg = c(4, 4, 4))
+      ),
       value = "Current Conditions"
     ),
     bslib::nav_panel(
@@ -45,6 +50,10 @@ ui <- htmltools::htmlTemplate(
     bslib::nav_panel(
       title = "Past 30 Days", 
       htmltools::p("Third tab content"),
+      DT::datatable(
+        iris, extensions = 'FixedHeader',
+        options = list(pageLength = 50, fixedHeader = TRUE)
+      ),
       value = "Past 30 Days"
     ),
     
@@ -53,7 +62,7 @@ ui <- htmltools::htmlTemplate(
     fillable_mobile = FALSE,
     footer = shiny::htmlOutput(outputId = "reportPageText"),
     id = "pageNavbar",
-    selected = "Current Conditions",
+    selected = "Past 48 Hours",
     sidebar = NULL,
     theme = theme, # `scr03_theme.R`
     title = "NULL",
@@ -107,7 +116,7 @@ server <- function(input, output, session) {
   # Outputs -----
   
   output$reportPageText <- renderUI({
-    htmltools::p(htmltools::HTML("AZMet data are from "))
+    htmltools::p(htmltools::HTML("FOOTER: AZMet data are from "))
   })
 }
 
