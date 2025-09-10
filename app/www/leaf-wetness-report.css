@@ -186,8 +186,13 @@
 
 .next:hover {
   background-color: rgb(226, 233, 235) !important;
+} */
+
+.page-bottom-text {
+  color: #191919;
 }
 
+/*
 .prev:hover {
   background-color: rgb(226, 233, 235) !important;
 }

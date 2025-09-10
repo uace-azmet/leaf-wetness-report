@@ -1,21 +1,31 @@
-#' `fxn_reportPageText.R` - Build footer for figure based on user input
+#' `fxn_pageBottomText.R` - Build supporting text for page
 #' 
-#' @param timeStep - AZMet data time step
-#' @return `reportPageText` - Footer for figure based on user input
+#' @param activeTab - currently active tab in user session
+#' @return `pageBottomText` - Supporting text for page
 
 
-fxn_reportPageText <- function(
-    #timeStep
-  ) {
+fxn_pageBottomText <- function(activeTab) {
   
-  timeStep <- "TIMESTEP"
   
-  # Inputs
-  apiURL <- a(
-    "api.azmet.arizona.edu", 
-    href="https://api.azmet.arizona.edu/v1/observations/daily",
-    target="_blank"
-  )
+  # Define inputs -----
+  
+  if (activeTab == "latest-conditions" | activeTab == "past-24-hours") {
+    apiURL <- a(
+      "api.azmet.arizona.edu", 
+      href="https://api.azmet.arizona.edu/v1/observations/lw15min",
+      target="_blank"
+    )
+    
+    timeStep <- "15-minute"
+  } else { # activeTab == "past-30-days"
+    apiURL <- a(
+      "api.azmet.arizona.edu", 
+      href="https://api.azmet.arizona.edu/v1/observations/lwdaily",
+      target="_blank"
+    )
+    
+    timeStep <- "daily"
+  }
   
   azmetrURL <- a(
     "azmetr", 
@@ -57,19 +67,23 @@ fxn_reportPageText <- function(
     target="_blank"
   )
   
-  # Footer text
-  figureFooter <- 
+  
+  # Build text -----
+  
+  pageBottomText <- 
     htmltools::p(
       htmltools::HTML(
         paste0(
-          timeStep, " AZMet data are from ", apiURL, " and accessed using the ", azmetrURL, " R package. Values from recent dates may be based on provisional data. More information about ", webpageDataVariables, ", ", webpageNetworkMap, ", and ", webpageStationMetadata, " is available on the ", webpageAZMet, ". Users of AZMet data and related information assume all risks of its use.",
+          "AZMet ", timeStep, " leaf wetness data are from ", apiURL, " and accessed using the ", azmetrURL, " R package. Values from recent dates may be based on provisional data. More information about ", webpageDataVariables, ", ", webpageNetworkMap, ", and ", webpageStationMetadata, " is available on the ", webpageAZMet, ". Users of AZMet data and related information assume all risks of its use.",
           htmltools::br(), htmltools::br(),
           "To cite the above AZMet data, please use: 'Arizona Meteorological Network (", todayYear, ") Arizona Meteorological Network (AZMet) Data. https://azmet.arizona.edu. Accessed ", todayDate, "', along with 'Arizona Meteorological Network (", todayYear, ") Battery Voltage Viewer. https://viz.datascience.arizona.edu/azmet/battery-voltage-viewer. Accessed ", todayDate, "'.",
           htmltools::br(), htmltools::br(),
           "For information on how this webpage is put together, please visit the ", webpageCode, " for this tool."
         )
-      )
+      ),
+      
+      class = "page-bottom-text"
     )
   
-  return(reportPageText)
+  return(pageBottomText)
 }
