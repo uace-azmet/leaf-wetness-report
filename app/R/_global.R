@@ -1,10 +1,11 @@
 # Libraries --------------------
 
-# library(azmetr)
+library(azmetr)
 library(bslib)
 # library(dplyr)
 # library(htmltools)
 # library(lubridate)
+library(reactable)
 library(shiny)
 library(shinyjs)
 # library(vroom)

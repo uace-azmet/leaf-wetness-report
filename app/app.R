@@ -126,11 +126,20 @@ ui <- htmltools::htmlTemplate(
 
 server <- function(input, output, session) {
   
+  
+  lw15min <- azmetr::az_lw15min() %>% 
+    dplyr::filter(meta_station_name %in% c("Roll", "Wellton ETo", "Yuma N.Gila", "Yuma South", "Yuma Valley", "Yuma Valley ETo"))
+  
+  
   # Observables -----
   
   # Reactives -----
   
   # Outputs -----
+  
+  output$latestConditionsTable <- reactable::renderReactable({
+    fxn_latestConditionsTable(inData = lw15min)
+  })
   
   output$pageBottomText <- shiny::renderUI({
     #shiny::req(dataETL())
