@@ -17,7 +17,7 @@
 /* https://stackoverflow.com/questions/77114751/is-it-possible-to-modify-the-arrow-that-collapses-the-sidebar */
 /* .bslib-sidebar-layout > .collapse-toggle > .collapse-icon {
   fill: #989898 !important;
-}
+} */
 
 .btn {
   background-color: #FFFFFF; 
@@ -45,7 +45,7 @@
   color: #FFFFFF;
 }
 
-.century.active.disabled.focused {
+/* .century.active.disabled.focused {
   background-color: rgb(226, 233, 235) !important;
   border-color: none !important;
   color: var(--bs-body-color) !important;
@@ -218,7 +218,7 @@
 
 .selectize-input.items.full.has-options.has-items {
   border-radius: 0px;
-}
+} */
 
 .shiny-notification {
   background-color: rgba(30,82,136,0.8) !important; 
@@ -233,7 +233,7 @@
   top: calc(50%) !important; 
 }
 
-.table-condensed {
+/* .table-condensed {
   background-color: #FFFFFF; 
   color: var(--bs-body-color);
 }

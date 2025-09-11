@@ -117,6 +117,14 @@ ui <- htmltools::htmlTemplate(
     # ),
     
     # shiny::htmlOutput(outputId = "downloadButtonsDiv"),
+    htmltools::div(
+      shiny::uiOutput(outputId = "refreshDataButton"), # Common, regardless of card tab
+      htmltools::HTML("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"),
+      shiny::uiOutput(outputId = "refreshDataInfo"), # Common, regardless of card tab
+      
+      style = "display: flex; align-items: top; gap: 0px;", # Flexbox styling
+    ),
+    
     shiny::htmlOutput(outputId = "pageBottomText") # Common, regardless of card tab
   )
 )
@@ -125,25 +133,56 @@ ui <- htmltools::htmlTemplate(
 # Server --------------------
 
 server <- function(input, output, session) {
-  
-  
-  lw15min <- azmetr::az_lw15min() %>% 
-    dplyr::filter(meta_station_name %in% c("Roll", "Wellton ETo", "Yuma N.Gila", "Yuma South", "Yuma Valley", "Yuma Valley ETo"))
+  shinyjs::useShinyjs(html = TRUE)
+  shinyjs::hideElement("pageBottomText")
   
   
   # Observables -----
   
+  shiny::observeEvent(lw15min(), {shinyjs::showElement("pageBottomText")})
+  
+  
   # Reactives -----
+  
+  lw15min <- shiny::reactive({
+    fxn_lw15min()
+  }) %>% 
+    shiny::bindEvent(
+      input$refreshDataButton,
+      ignoreNULL = FALSE,
+      ignoreInit = TRUE
+    )
+  
   
   # Outputs -----
   
-  output$latestConditionsTable <- reactable::renderReactable({
-    fxn_latestConditionsTable(inData = lw15min)
-  })
+  # output$latestConditionsTable <- reactable::renderReactable({
+  #   fxn_latestConditionsTable(inData = lw15min())
+  # })
   
   output$pageBottomText <- shiny::renderUI({
     #shiny::req(dataETL())
     fxn_pageBottomText(activeTab = input$navsetCardTab)
+  })
+  
+  output$refreshDataButton <- shiny::renderUI({
+    #shiny::req(dataETL())
+    shiny::actionButton(
+      inputId = "refreshDataButton", 
+      label = "REFRESH DATA",
+      icon = shiny::icon(name = "rotate-right", lib = "font-awesome"),
+      class = "btn btn-block btn-blue"
+    )
+  })
+  
+  output$refreshDataInfo <- shiny::renderUI({
+    #req(dataETL())
+    bslib::tooltip(
+      bsicons::bs_icon("info-circle"),
+      "Click or tap to refresh the above table with the latest 15-minute data.",
+      id = "refreshDataInfo",
+      placement = "right"
+    )
   })
 }
 
