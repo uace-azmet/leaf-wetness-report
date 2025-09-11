@@ -41,9 +41,9 @@ ui <- htmltools::htmlTemplate(
       bslib::nav_panel(
         title = "Latest Conditions",
         
-        # shiny::htmlOutput(outputId = "nwsTableTitle"),
+        shiny::htmlOutput(outputId = "latestConditionsTableTitle"),
         reactable::reactableOutput(outputId = "latestConditionsTable"),
-        # shiny::htmlOutput(outputId = "nwsTableFooter"),
+        shiny::htmlOutput(outputId = "latestConditionsTableFooter"),
         
         value = "latest-conditions"
       ),
@@ -119,7 +119,7 @@ ui <- htmltools::htmlTemplate(
     # shiny::htmlOutput(outputId = "downloadButtonsDiv"),
     htmltools::div(
       shiny::uiOutput(outputId = "refreshDataButton"), # Common, regardless of card tab
-      htmltools::HTML("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"),
+      htmltools::HTML("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"),
       shiny::uiOutput(outputId = "refreshDataInfo"), # Common, regardless of card tab
       
       style = "display: flex; align-items: top; gap: 0px;", # Flexbox styling
@@ -135,11 +135,17 @@ ui <- htmltools::htmlTemplate(
 server <- function(input, output, session) {
   shinyjs::useShinyjs(html = TRUE)
   shinyjs::hideElement("pageBottomText")
+  shinyjs::hideElement("refreshDataButton") # Needs to be 'present' on page for `dataETL <- shiny::reactive({})` statement to work on initial page load
+  shinyjs::hideElement("refreshDataInfo")
   
   
   # Observables -----
   
-  shiny::observeEvent(lw15min(), {shinyjs::showElement("pageBottomText")})
+  shiny::observeEvent(lw15min(), {
+    shinyjs::showElement("pageBottomText")
+    shinyjs::showElement("refreshDataButton")
+    shinyjs::showElement("refreshDataInfo")
+  })
   
   
   # Reactives -----
@@ -163,6 +169,16 @@ server <- function(input, output, session) {
   
   output$latestConditionsTable <- reactable::renderReactable({
     fxn_latestConditionsTable(inData = latestConditionsData())
+  })
+  
+  output$latestConditionsTableFooter <- shiny::renderUI({
+    shiny::req(lw15min())
+    fxn_nwsTableFooter()
+  })
+  
+  output$latestConditionsTableTitle <- shiny::renderUI({
+    shiny::req(lw15min())
+    fxn_latestConditionsTableTitle()
   })
   
   output$pageBottomText <- shiny::renderUI({
