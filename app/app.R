@@ -173,7 +173,7 @@ server <- function(input, output, session) {
   
   output$latestConditionsTableFooter <- shiny::renderUI({
     shiny::req(lw15min())
-    fxn_nwsTableFooter()
+    fxn_latestConditionsTableFooter()
   })
   
   output$latestConditionsTableTitle <- shiny::renderUI({

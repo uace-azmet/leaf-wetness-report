@@ -47,6 +47,13 @@
   color: #FFFFFF;
 }
 
+.card-body.bslib-gap-spacing.html-fill-item.html-fill-container {
+  padding-bottom: 0px;
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-top: 48px;
+}
+
 /* .century.active.disabled.focused {
   background-color: rgb(226, 233, 235) !important;
   border-color: none !important;
@@ -139,7 +146,14 @@
   padding-bottom: 1rem;
 }
 
-/* .modal-body {
+/* .main.bslib-gap-spacing.html-fill-container {
+  padding-bottom: 24px;
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-top: 48px;
+}
+
+ .modal-body {
   color: var(--bs-body-color) !important;
 }
 
@@ -292,3 +306,7 @@
   font-size: 1rem;
   text-align: left;
 } */
+
+#refreshDataButton {
+  margin-bottom: 48px;
+}
