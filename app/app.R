@@ -42,7 +42,7 @@ ui <- htmltools::htmlTemplate(
         title = "Latest Conditions",
         
         # shiny::htmlOutput(outputId = "nwsTableTitle"),
-        # reactable::reactableOutput(outputId = "nwsTable"),
+        reactable::reactableOutput(outputId = "latestConditionsTable"),
         # shiny::htmlOutput(outputId = "nwsTableFooter"),
         
         value = "latest-conditions"
@@ -153,12 +153,17 @@ server <- function(input, output, session) {
       ignoreInit = TRUE
     )
   
+  # Filter and format latest conditions data for the most recent report from each station
+  latestConditionsData <- shiny::eventReactive(lw15min(), {
+    fxn_latestConditionsData(inData = lw15min())
+  })
+  
   
   # Outputs -----
   
-  # output$latestConditionsTable <- reactable::renderReactable({
-  #   fxn_latestConditionsTable(inData = lw15min())
-  # })
+  output$latestConditionsTable <- reactable::renderReactable({
+    fxn_latestConditionsTable(inData = latestConditionsData())
+  })
   
   output$pageBottomText <- shiny::renderUI({
     #shiny::req(dataETL())
@@ -179,7 +184,7 @@ server <- function(input, output, session) {
     #req(dataETL())
     bslib::tooltip(
       bsicons::bs_icon("info-circle"),
-      "Click or tap to refresh the above table with the latest 15-minute data.",
+      "Click or tap to refresh the above table with the latest leaf wetness conditions.",
       id = "refreshDataInfo",
       placement = "right"
     )

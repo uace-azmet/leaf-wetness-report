@@ -21,7 +21,11 @@ fxn_lw15min <- function() {
     
     dplyr::filter(
       meta_station_name %in% c(
-        "Roll", "Wellton ETo", "Yuma N.Gila", "Yuma South", "Yuma Valley", "Yuma Valley ETo"
+        "Roll", 
+        "Wellton ETo", 
+        "Yuma N.Gila", 
+        "Yuma South", 
+        "Yuma Valley"
       )
     ) |> 
     
@@ -39,9 +43,11 @@ fxn_lw15min <- function() {
     dplyr::mutate(
       dplyr::across(
         c(
+          "lw1_mean_mV",
           "lw1_total_con_mins",
           "lw1_total_dry_mins",
           "lw1_total_wet_mins",
+          "lw2_mean_mV",
           "lw2_total_con_mins",
           "lw2_total_dry_mins",
           "lw2_total_wet_mins",
@@ -67,15 +73,15 @@ fxn_lw15min <- function() {
       )
     ) |>
     
-    dplyr::mutate( ###
-      dplyr::across(
-        c(
-          "lw1_mean_mV",
-          "lw2_mean_mV"
-        ),
-        \(x) round(x, digits = 2)
-      )
-    ) |>
+    # dplyr::mutate( ###
+    #   dplyr::across(
+    #     c(
+    #       "lw1_mean_mV",
+    #       "lw2_mean_mV"
+    #     ),
+    #     \(x) round(x, digits = 2)
+    #   )
+    # ) |>
     
     dplyr::arrange(meta_station_name)
   
