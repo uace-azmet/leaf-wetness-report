@@ -16,7 +16,7 @@ fxn_latestConditionsTableTitle <- function() {
       htmltools::HTML("&nbsp;&nbsp;"),
       bslib::tooltip(
         bsicons::bs_icon("info-circle"),
-        "Scroll or swipe over the table to view additional rows and columns.",
+        "Scroll or swipe over the table to view additional columns on narrow browser windows.",
         id = "infolatestConditionsTableTitle",
         placement = "right"
       ),

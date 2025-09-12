@@ -5,16 +5,19 @@
 
 
 fxn_latestConditionsTable <- function(inData) {
-  inData <- inData |> 
-    dplyr::select(
-      meta_station_name,
-      datetime,
-      lw1_mean_mV,
-      lw2_mean_mV,
-      temp_wetbulb_meanF
+  inData <- inData %>% 
+    dplyr::mutate(
+      temp_air_color = dplyr::case_when(
+        temp_air_30cm_meanF <= 100 ~ "#EF4056",
+        TRUE ~ "#FFFFFF"
+      )# ,
+      # dwpt_color = dplyr::case_when(
+      #   dwpt_30cm_meanF <= 50 ~ "#EF4056",
+      #   TRUE ~ "#FFFFFF"
+      # )
     )
   
-  latestConditionsTable <- inData |>
+  latestConditionsTable <- inData %>% 
     reactable::reactable(
       columns = list(
         meta_station_name = reactable::colDef(
@@ -70,7 +73,10 @@ fxn_latestConditionsTable <- function(inData) {
           name = 
             htmltools::HTML(
               paste0(
-                "lw1<br>", tags$span(style = "font-weight: normal; font-size: 0.8rem", "(mV)")
+                "lw1<sup>", 
+                tags$span(style = "font-weight: normal", "1"),
+                "</sup><br>", 
+                tags$span(style = "font-weight: normal; font-size: 0.8rem", "(mV)")
               )
             ),
           format = reactable::colFormat(digits = 0),
@@ -82,7 +88,10 @@ fxn_latestConditionsTable <- function(inData) {
           name = 
             htmltools::HTML(
               paste0(
-                "lw2<br>", tags$span(style = "font-weight: normal; font-size: 0.8rem", "(mV)")
+                "lw2<sup>", 
+                tags$span(style = "font-weight: normal", "1"),
+                "</sup><br>", 
+                tags$span(style = "font-weight: normal; font-size: 0.8rem", "(mV)")
               )
             ),
           format = reactable::colFormat(digits = 0),
@@ -90,19 +99,50 @@ fxn_latestConditionsTable <- function(inData) {
           na = "NA",
           rowHeader = TRUE
         ),
-        temp_wetbulb_meanF = reactable::colDef(
+        temp_air_30cm_meanF = reactable::colDef(
           name = 
             htmltools::HTML(
               paste0(
-                "T<sub>wetbulb</sub><br>", 
+                "T<sup>", 
+                tags$span(style = "font-weight: normal", "1,2"),
+                "</sup><br>", 
                 tags$span(style = "font-weight: normal; font-size: 0.8rem", "(°F)")
               )
+            ),
+          cell = 
+            reactablefmtr::color_tiles( # https://kcuilla.github.io/reactablefmtr/reference/color_tiles.html
+              data = .,
+              color_ref = "temp_air_color",
+              opacity = 1
             ),
           format = reactable::colFormat(digits = 1),
           html = TRUE,
           na = "NA",
           rowHeader = TRUE
-        )
+        ),
+        dwpt_30cm_meanF = reactable::colDef(
+          name = 
+            htmltools::HTML(
+              paste0(
+                "T<sub>dew point</sub><sup>", 
+                tags$span(style = "font-weight: normal", "1"),
+                "</sup><br>", 
+                tags$span(style = "font-weight: normal; font-size: 0.8rem", "(°F)")
+              )
+            ),
+          # cell = 
+          #   reactablefmtr::color_tiles( # https://kcuilla.github.io/reactablefmtr/reference/color_tiles.html
+          #     data = .,
+          #     color_ref = "dwpt_color",
+          #     opacity = 1
+          #   ),
+          format = reactable::colFormat(digits = 1),
+          html = TRUE,
+          na = "NA",
+          rowHeader = TRUE
+        ),
+        temp_air_color = reactable::colDef(show = FALSE)# ,
+        # dwpt_color = reactable::colDef(show = FALSE)
       ),
       #columnGroups = NULL,
       rownames = FALSE,
@@ -130,11 +170,11 @@ fxn_latestConditionsTable <- function(inData) {
       selection = NULL,
       defaultSelected = NULL,
       onClick = NULL,
-      highlight = TRUE,
+      highlight = FALSE,
       outlined = FALSE,
       bordered = FALSE,
-      borderless = TRUE,
-      striped = TRUE,
+      borderless = FALSE,
+      striped = FALSE,
       compact = TRUE,
       #wrap = TRUE,
       #showSortIcon = TRUE,
@@ -151,7 +191,7 @@ fxn_latestConditionsTable <- function(inData) {
           color = NULL,
           backgroundColor = "#FFFFFF",
           borderColor = "#dee2e6",
-          borderWidth = "2px",
+          borderWidth = "0.5px",
           stripedColor = NULL,
           highlightColor = NULL,
           cellPadding = NULL,

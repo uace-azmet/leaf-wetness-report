@@ -11,9 +11,9 @@ fxn_latestConditionsData <- function(inData) {
       datetime,
       lw1_mean_mV,
       lw2_mean_mV,
-      temp_wetbulb_meanF
+      temp_air_30cm_meanF,
+      dwpt_30cm_meanF
     ) |>
-    
     dplyr::group_by(meta_station_name) |>
     dplyr::filter(datetime == max(datetime)) |>
     dplyr::ungroup()
