@@ -69,36 +69,36 @@ fxn_latestConditionsTable <- function(inData) {
           na = "NA",
           rowHeader = TRUE
         ),
-        lw1_mean_mV = reactable::colDef(
-          name = 
-            htmltools::HTML(
-              paste0(
-                "lw1<sup>", 
-                tags$span(style = "font-weight: normal", "1"),
-                "</sup><br>", 
-                tags$span(style = "font-weight: normal; font-size: 0.8rem", "(mV)")
-              )
-            ),
-          format = reactable::colFormat(digits = 0),
-          html = TRUE,
-          na = "NA",
-          rowHeader = TRUE
-        ),
-        lw2_mean_mV = reactable::colDef(
-          name = 
-            htmltools::HTML(
-              paste0(
-                "lw2<sup>", 
-                tags$span(style = "font-weight: normal", "1"),
-                "</sup><br>", 
-                tags$span(style = "font-weight: normal; font-size: 0.8rem", "(mV)")
-              )
-            ),
-          format = reactable::colFormat(digits = 0),
-          html = TRUE,
-          na = "NA",
-          rowHeader = TRUE
-        ),
+        # lw1_mean_mV = reactable::colDef(
+        #   name = 
+        #     htmltools::HTML(
+        #       paste0(
+        #         "lw1<sup>", 
+        #         tags$span(style = "font-weight: normal", "1"),
+        #         "</sup><br>", 
+        #         tags$span(style = "font-weight: normal; font-size: 0.8rem", "(mV)")
+        #       )
+        #     ),
+        #   format = reactable::colFormat(digits = 0),
+        #   html = TRUE,
+        #   na = "NA",
+        #   rowHeader = TRUE
+        # ),
+        # lw2_mean_mV = reactable::colDef(
+        #   name = 
+        #     htmltools::HTML(
+        #       paste0(
+        #         "lw2<sup>", 
+        #         tags$span(style = "font-weight: normal", "1"),
+        #         "</sup><br>", 
+        #         tags$span(style = "font-weight: normal; font-size: 0.8rem", "(mV)")
+        #       )
+        #     ),
+        #   format = reactable::colFormat(digits = 0),
+        #   html = TRUE,
+        #   na = "NA",
+        #   rowHeader = TRUE
+        # ),
         temp_air_30cm_meanF = reactable::colDef(
           name = 
             htmltools::HTML(
@@ -137,6 +137,27 @@ fxn_latestConditionsTable <- function(inData) {
           #     opacity = 1
           #   ),
           format = reactable::colFormat(digits = 1),
+          html = TRUE,
+          na = "NA",
+          rowHeader = TRUE
+        ),
+        mean_mV = reactable::colDef(
+          name =
+            htmltools::HTML(
+              paste0(
+                "mean_mV<sup>",
+                tags$span(style = "font-weight: normal", "1"),
+                "</sup><br>",
+                tags$span(style = "font-weight: normal; font-size: 0.8rem", "(mV)")
+              )
+            ),
+          format = reactable::colFormat(digits = 0),
+          html = TRUE,
+          na = "NA",
+          rowHeader = TRUE
+        ),
+        lwSensor = reactable::colDef(
+          name = "Leaf Wetness Sensor",
           html = TRUE,
           na = "NA",
           rowHeader = TRUE

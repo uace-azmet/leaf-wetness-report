@@ -10,15 +10,15 @@ fxn_latestConditionsTableTitle <- function() {
         paste0(
           bsicons::bs_icon("table"), 
           htmltools::HTML("&nbsp;&nbsp;"),
-          toupper("The latest leaf wetness conditions from across Yuma County")
+          toupper("The latest leaf wetness conditions from across Yuma County"),
+          htmltools::HTML("&nbsp;&nbsp;&nbsp;&nbsp;"),
+          bslib::tooltip(
+            bsicons::bs_icon("info-circle"),
+            "Scroll or swipe over the table to view additional columns on narrow browser windows.",
+            id = "infolatestConditionsTableTitle",
+            placement = "right"
+          )
         )
-      ),
-      htmltools::HTML("&nbsp;&nbsp;"),
-      bslib::tooltip(
-        bsicons::bs_icon("info-circle"),
-        "Scroll or swipe over the table to view additional columns on narrow browser windows.",
-        id = "infolatestConditionsTableTitle",
-        placement = "right"
       ),
       
       class = "latest-conditions-table-title"

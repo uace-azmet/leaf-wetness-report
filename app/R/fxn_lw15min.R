@@ -73,16 +73,6 @@ fxn_lw15min <- function() {
       )
     ) |>
     
-    # dplyr::mutate( ###
-    #   dplyr::across(
-    #     c(
-    #       "lw1_mean_mV",
-    #       "lw2_mean_mV"
-    #     ),
-    #     \(x) round(x, digits = 2)
-    #   )
-    # ) |>
-    
     dplyr::arrange(meta_station_name)
   
   on.exit(shiny::removeNotification(id = idRetrievingData), add = TRUE)
