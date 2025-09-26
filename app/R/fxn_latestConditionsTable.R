@@ -5,15 +5,6 @@
 
 
 fxn_latestConditionsTable <- function(inData) {
-  # Needed for cell-color functionality, which overrides typical "na" value assignment
-  fxn_hideNA <- function(x) {  
-    if (is.na(x)) {
-      return("")
-    } else {
-      return(sprintf("%.1f", x))
-    }
-  }
-  
   inData <- inData %>% 
     dplyr::mutate(
       temp_air_color = dplyr::case_when(
@@ -101,7 +92,7 @@ fxn_latestConditionsTable <- function(inData) {
             color_ref = "temp_air_color",
             opacity = 1
           ),
-          format = \(x) fxn_hideNA(x),
+          format = reactable::colFormat(digits = 1),
           html = TRUE,
           #na = "NA",
           rowHeader = TRUE,
