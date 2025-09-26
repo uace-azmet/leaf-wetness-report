@@ -5,9 +5,9 @@
 
 fxn_lw15min <- function() {
   idRetrievingData <- shiny::showNotification(
-    ui = "Retrieving the latest data . . .", 
-    action = NULL, 
-    duration = NULL, 
+    ui = "Retrieving the latest data . . .",
+    action = NULL,
+    duration = NULL,
     closeButton = FALSE,
     id = "idRetrievingData",
     type = "message"

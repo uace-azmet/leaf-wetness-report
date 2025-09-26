@@ -5,6 +5,15 @@
 
 
 fxn_latestConditionsTable <- function(inData) {
+  # Needed for cell-color functionality, which overrides typical "na" value assignment
+  fxn_hideNA <- function(x) {  
+    if (is.na(x)) {
+      return("")
+    } else {
+      return(sprintf("%.1f", x))
+    }
+  }
+  
   inData <- inData %>% 
     dplyr::mutate(
       temp_air_color = dplyr::case_when(
@@ -17,7 +26,7 @@ fxn_latestConditionsTable <- function(inData) {
       # )
     )
   
-  latestConditionsTable <- inData %>% 
+   latestConditionsTable <- inData %>% 
     reactable::reactable(
       columns = list(
         meta_station_name = reactable::colDef(
@@ -40,11 +49,11 @@ fxn_latestConditionsTable <- function(inData) {
           #details = NULL,
           #filterInput = NULL,
           html = TRUE,
-          na = "NA",
+          #na = "NA",
           rowHeader = FALSE,
-          minWidth = 150,
+          #minWidth = 150,
           #maxWidth = NULL,
-          #width = NULL,
+          width = 120,
           #align = NULL,
           #vAlign = NULL,
           #headerVAlign = NULL,
@@ -65,40 +74,11 @@ fxn_latestConditionsTable <- function(inData) {
         datetime = reactable::colDef(
           name = "Latest Update",
           html = TRUE,
-          minWidth = 180,
-          na = "NA",
-          rowHeader = TRUE
+          #minWidth = 180,
+          #na = "NA",
+          rowHeader = TRUE,
+          width = 180
         ),
-        # lw1_mean_mV = reactable::colDef(
-        #   name = 
-        #     htmltools::HTML(
-        #       paste0(
-        #         "lw1<sup>", 
-        #         tags$span(style = "font-weight: normal", "1"),
-        #         "</sup><br>", 
-        #         tags$span(style = "font-weight: normal; font-size: 0.8rem", "(mV)")
-        #       )
-        #     ),
-        #   format = reactable::colFormat(digits = 0),
-        #   html = TRUE,
-        #   na = "NA",
-        #   rowHeader = TRUE
-        # ),
-        # lw2_mean_mV = reactable::colDef(
-        #   name = 
-        #     htmltools::HTML(
-        #       paste0(
-        #         "lw2<sup>", 
-        #         tags$span(style = "font-weight: normal", "1"),
-        #         "</sup><br>", 
-        #         tags$span(style = "font-weight: normal; font-size: 0.8rem", "(mV)")
-        #       )
-        #     ),
-        #   format = reactable::colFormat(digits = 0),
-        #   html = TRUE,
-        #   na = "NA",
-        #   rowHeader = TRUE
-        # ),
         temp_air_30cm_meanF = reactable::colDef(
           name = 
             htmltools::HTML(
@@ -109,16 +89,24 @@ fxn_latestConditionsTable <- function(inData) {
                 tags$span(style = "font-weight: normal; font-size: 0.8rem", "(°F)")
               )
             ),
-          cell = 
-            reactablefmtr::color_tiles( # https://kcuilla.github.io/reactablefmtr/reference/color_tiles.html
-              data = .,
-              color_ref = "temp_air_color",
-              opacity = 1
-            ),
-          format = reactable::colFormat(digits = 1),
+          # cell =
+          #   reactablefmtr::color_tiles( # https://kcuilla.github.io/reactablefmtr/reference/color_tiles.html
+          #     data = .,
+          #     color_ref = "temp_air_color",
+          #     opacity = 1,
+          #     number_fmt = \(x) fxn_hideNA(x)
+          #   ),
+          style = reactablefmtr::color_scales(
+            data = .,
+            color_ref = "temp_air_color",
+            opacity = 1
+          ),
+          format = \(x) fxn_hideNA(x),
           html = TRUE,
-          na = "NA",
-          rowHeader = TRUE
+          #na = "NA",
+          rowHeader = TRUE,
+          align = "right",
+          width = 100
         ),
         dwpt_30cm_meanF = reactable::colDef(
           name = 
@@ -138,8 +126,10 @@ fxn_latestConditionsTable <- function(inData) {
           #   ),
           format = reactable::colFormat(digits = 1),
           html = TRUE,
-          na = "NA",
-          rowHeader = TRUE
+          #na = "NA",
+          rowHeader = TRUE,
+          align = "right",
+          width = 100
         ),
         mean_mV = reactable::colDef(
           name =
@@ -154,20 +144,23 @@ fxn_latestConditionsTable <- function(inData) {
           format = reactable::colFormat(digits = 0),
           html = TRUE,
           na = "NA",
-          rowHeader = TRUE
+          rowHeader = TRUE,
+          align = "center"
         ),
         lwSensor = reactable::colDef(
-          name = "Leaf Wetness Sensor",
+          name = "Sensor",
           html = TRUE,
           na = "NA",
-          rowHeader = TRUE
+          rowHeader = TRUE,
+          align = "left",
+          width = 100
         ),
-        temp_air_color = reactable::colDef(show = FALSE)# ,
+        temp_air_color = reactable::colDef(show = FALSE)#,
         # dwpt_color = reactable::colDef(show = FALSE)
       ),
       #columnGroups = NULL,
       rownames = FALSE,
-      #groupBy = NULL,
+      groupBy = NULL,
       sortable = FALSE,
       resizable = FALSE,
       filterable = FALSE,

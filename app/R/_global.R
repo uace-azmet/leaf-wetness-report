@@ -3,11 +3,17 @@
 library(azmetr)
 library(bslib)
 library(dplyr)
+
+library(gt)
+
 library(htmltools)
 # library(lubridate)
+
 library(reactable)
 library(reactablefmtr)
+
 library(reshape2)
+
 library(shiny)
 library(shinyjs)
 # library(vroom)
