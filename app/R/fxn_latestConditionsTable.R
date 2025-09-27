@@ -10,11 +10,11 @@ fxn_latestConditionsTable <- function(inData) {
       temp_air_color = dplyr::case_when(
         temp_air_30cm_meanF <= 100 ~ "#EF4056",
         TRUE ~ "#FFFFFF"
-      )# ,
-      # dwpt_color = dplyr::case_when(
-      #   dwpt_30cm_meanF <= 50 ~ "#EF4056",
-      #   TRUE ~ "#FFFFFF"
-      # )
+      ) ,
+      dwpt_color = dplyr::case_when(
+        dwpt_30cm_meanF >= temp_air_30cm_meanF ~ "#EF4056",
+        TRUE ~ "#FFFFFF"
+      )
     )
   
    latestConditionsTable <- inData %>% 
@@ -44,7 +44,7 @@ fxn_latestConditionsTable <- function(inData) {
           rowHeader = FALSE,
           #minWidth = 150,
           #maxWidth = NULL,
-          width = 120,
+          width = 100,
           #align = NULL,
           #vAlign = NULL,
           #headerVAlign = NULL,
@@ -68,7 +68,7 @@ fxn_latestConditionsTable <- function(inData) {
           #minWidth = 180,
           #na = "NA",
           rowHeader = TRUE,
-          width = 180
+          width = 170
         ),
         temp_air_30cm_meanF = reactable::colDef(
           name = 
@@ -80,13 +80,6 @@ fxn_latestConditionsTable <- function(inData) {
                 tags$span(style = "font-weight: normal; font-size: 0.8rem", "(°F)")
               )
             ),
-          # cell =
-          #   reactablefmtr::color_tiles( # https://kcuilla.github.io/reactablefmtr/reference/color_tiles.html
-          #     data = .,
-          #     color_ref = "temp_air_color",
-          #     opacity = 1,
-          #     number_fmt = \(x) fxn_hideNA(x)
-          #   ),
           style = reactablefmtr::color_scales(
             data = .,
             color_ref = "temp_air_color",
@@ -104,17 +97,17 @@ fxn_latestConditionsTable <- function(inData) {
             htmltools::HTML(
               paste0(
                 "T<sub>dew point</sub><sup>", 
-                tags$span(style = "font-weight: normal", "1"),
+                tags$span(style = "font-weight: normal", "1,3"),
                 "</sup><br>", 
                 tags$span(style = "font-weight: normal; font-size: 0.8rem", "(°F)")
               )
             ),
-          # cell = 
-          #   reactablefmtr::color_tiles( # https://kcuilla.github.io/reactablefmtr/reference/color_tiles.html
-          #     data = .,
-          #     color_ref = "dwpt_color",
-          #     opacity = 1
-          #   ),
+          style =
+            reactablefmtr::color_scales(
+              data = .,
+              color_ref = "dwpt_color",
+              opacity = 1
+            ),
           format = reactable::colFormat(digits = 1),
           html = TRUE,
           #na = "NA",
@@ -132,22 +125,61 @@ fxn_latestConditionsTable <- function(inData) {
                 tags$span(style = "font-weight: normal; font-size: 0.8rem", "(mV)")
               )
             ),
+          cell =
+            reactablefmtr::data_bars(
+              data = .,
+              text_position = "outside-end",
+              min_value = 200,
+              max_value = 400
+            ),
+          # cell = function(value){
+          #   horizontalBarPlot <-# insert plotly horizontal bar chart into reactable cell
+          #     plotly::plot_ly(
+          #       data = .,
+          #       x = ~mean_mV,
+          #       y = ~graph_count,
+          #       type = "bar",
+          #       orientation = "h"
+          #     ) %>% 
+          #     plotly::layout(
+          #       #margin = list(l = 50, r = 10, b = 10, t = 10),
+          #       xaxis = list(title = "", showgrid = FALSE, showticklabels = FALSE),
+          #       yaxis = list(title = "", showgrid = FALSE),
+          #       autosize = TRUE
+          #     ) %>% 
+          #     plotly::config(displayModeBar = FALSE) # Hide the Plotly toolbar
+          #   
+          #   #htmltools::tagList(horizontalBarPlot)
+          # },
           format = reactable::colFormat(digits = 0),
           html = TRUE,
           na = "NA",
           rowHeader = TRUE,
-          align = "center"
+          align = "left",
+          minWidth = 160,
+          # style = function() { # https://stackoverflow.com/questions/36598624/vertical-line-inside-td-using-a-div
+          #   dryThreshold <- ((273 - 200) / 200) * 100
+          #   wetThreshold <- ((284 - 200) / 200) * 100
+          #   
+          #   list(
+          #     background = paste0(
+          #       "linear-gradient(to right, transparent ", dryThreshold, "%, #191919 ", dryThreshold, "%, #191919 ", wetThreshold, "%, transparent ", wetThreshold, "%)"
+          #     ),
+          #     background_repeat = "no-repeat",
+          #     background_size = "100% 100%"
+          #   )
+          # }
         ),
-        lwSensor = reactable::colDef(
-          name = "Sensor",
+        lw_sensor = reactable::colDef(
+          name = "Sensor Status",
           html = TRUE,
           na = "NA",
           rowHeader = TRUE,
           align = "left",
-          width = 100
+          width = 120
         ),
-        temp_air_color = reactable::colDef(show = FALSE)#,
-        # dwpt_color = reactable::colDef(show = FALSE)
+        temp_air_color = reactable::colDef(show = FALSE),
+        dwpt_color = reactable::colDef(show = FALSE)
       ),
       #columnGroups = NULL,
       rownames = FALSE,
@@ -195,8 +227,8 @@ fxn_latestConditionsTable <- function(inData) {
         reactable::reactableTheme(
           color = NULL,
           backgroundColor = "#FFFFFF",
-          borderColor = "#dee2e6",
-          borderWidth = "0.5px",
+          borderColor = NULL,# "#dee2e6",
+          borderWidth = NULL, #"0.5px",
           stripedColor = NULL,
           highlightColor = NULL,
           cellPadding = NULL,
@@ -204,12 +236,12 @@ fxn_latestConditionsTable <- function(inData) {
           tableStyle = NULL,
           headerStyle = 
             list(
-              color = "#191919", 
-              fontFamily = "monospace", 
-              fontSize = "0.8rem",
-              borderBottomColor = rgb(180/255, 180/255, 180/255, 1.0),
-              borderBottomWidth = "1px",
-              boxShadow = "0px 1px 0px 0px #e3e3e3"
+              color = "#191919",
+              fontFamily = "monospace",
+              fontSize = "0.8rem"
+              # borderBottomColor = rgb(180/255, 180/255, 180/255, 1.0),
+              # borderBottomWidth = "1px",
+              # boxShadow = "0px 1px 0px 0px #e3e3e3"
             ),
           groupHeaderStyle = NULL,
           tableBodyStyle = NULL,

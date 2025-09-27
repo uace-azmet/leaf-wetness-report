@@ -4,14 +4,14 @@
 
 
 fxn_lw15min <- function() {
-  idRetrievingData <- shiny::showNotification(
-    ui = "Retrieving the latest data . . .",
-    action = NULL,
-    duration = NULL,
-    closeButton = FALSE,
-    id = "idRetrievingData",
-    type = "message"
-  )
+  # idRetrievingData <- shiny::showNotification(
+  #   ui = "Retrieving the latest data . . .",
+  #   action = NULL,
+  #   duration = NULL,
+  #   closeButton = FALSE,
+  #   id = "idRetrievingData",
+  #   type = "message"
+  # )
   
   lw15min <- 
     azmetr::az_lw15min(
@@ -75,7 +75,7 @@ fxn_lw15min <- function() {
     
     dplyr::arrange(meta_station_name)
   
-  on.exit(shiny::removeNotification(id = idRetrievingData), add = TRUE)
+  # on.exit(shiny::removeNotification(id = idRetrievingData), add = TRUE)
   
   return(lw15min)
 }

@@ -2,18 +2,19 @@
 
 library(azmetr)
 library(bslib)
+library(dataui)
 library(dplyr)
 
-library(gt)
+library(ggplot2)
 
 library(htmltools)
 # library(lubridate)
 
+library(plotly)
+
 library(reactable)
 library(reactablefmtr)
-
 library(reshape2)
-
 library(shiny)
 library(shinyjs)
 # library(vroom)
