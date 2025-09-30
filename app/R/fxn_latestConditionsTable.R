@@ -6,9 +6,20 @@
 
 fxn_latestConditionsTable <- function(inData) {
   inData <- inData %>% 
+    # https://stackoverflow.com/questions/78275267/add-a-second-groupname-col-in-gt-table-without-concatenating-the-column-valu
+    dplyr::mutate(
+      meta_station_name = factor(meta_station_name, levels = unique(meta_station_name))
+    ) %>% 
+    # dplyr::arrange(meta_station_name, datetime) %>% 
+    dplyr::mutate(
+      datetime = ifelse(dplyr::row_number() == 1, datetime, ""),
+      temp_air_30cm_meanF = ifelse(dplyr::row_number() == 1, temp_air_30cm_meanF, NA),
+      dwpt_30cm_meanF = ifelse(dplyr::row_number() == 1, dwpt_30cm_meanF, NA), 
+      .by = meta_station_name
+    ) %>% 
     dplyr::mutate(
       temp_air_color = dplyr::case_when(
-        temp_air_30cm_meanF <= 100 ~ "#EF4056",
+        temp_air_30cm_meanF <= 100 ~ "#f19e1f",
         TRUE ~ "#FFFFFF"
       ) ,
       dwpt_color = dplyr::case_when(
@@ -16,6 +27,15 @@ fxn_latestConditionsTable <- function(inData) {
         TRUE ~ "#FFFFFF"
       )
     )
+  
+  
+  # lw15min |> # https://stackoverflow.com/questions/78275267/add-a-second-groupname-col-in-gt-table-without-concatenating-the-column-valu
+  #   dplyr::mutate(meta_station_name = factor(meta_station_name, levels = unique(meta_station_name))) |>
+  #   dplyr::arrange(meta_station_name, datetime) |>
+  #   dplyr::mutate(
+  #     datetime = ifelse(dplyr::row_number() == 1, as.character(datetime), ""), .by = c(meta_station_name, datetime)
+  #   )
+  
   
    latestConditionsTable <- inData %>% 
     reactable::reactable(
@@ -83,7 +103,7 @@ fxn_latestConditionsTable <- function(inData) {
           style = reactablefmtr::color_scales(
             data = .,
             color_ref = "temp_air_color",
-            opacity = 1
+            opacity = 1.0
           ),
           format = reactable::colFormat(digits = 1),
           html = TRUE,
@@ -106,7 +126,7 @@ fxn_latestConditionsTable <- function(inData) {
             reactablefmtr::color_scales(
               data = .,
               color_ref = "dwpt_color",
-              opacity = 1
+              opacity = 1.0
             ),
           format = reactable::colFormat(digits = 1),
           html = TRUE,
@@ -246,7 +266,20 @@ fxn_latestConditionsTable <- function(inData) {
           groupHeaderStyle = NULL,
           tableBodyStyle = NULL,
           rowGroupStyle = NULL,
-          rowStyle = NULL,
+          rowStyle = 
+            reactablefmtr::group_border_sort( # but, see https://stackoverflow.com/questions/66946229/insert-borders-underneath-selected-rows-in-reactable-r
+              columns = "meta_station_name",
+              border_color = "red"
+            ),
+            # htmlwidgets::JS(
+            #   paste0(
+            #     "function(rowInfo) {",
+            #       "if (rowInfo.index % 2 === 0) {", # Check if the row index is even (0-indexed)
+            #         "return { borderBottom: '1px solid #191919' }", # Apply a bottom border to even rows
+            #       "}",
+            #     "}"
+            #   )
+            # ),
           rowStripedStyle = NULL,
           rowHighlightStyle = NULL,
           rowSelectedStyle = NULL,

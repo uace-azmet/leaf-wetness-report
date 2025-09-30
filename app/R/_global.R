@@ -7,7 +7,11 @@ library(dplyr)
 
 library(ggplot2)
 
+library(gt)
+library(gtExtras)
+
 library(htmltools)
+library(htmlwidgets)
 # library(lubridate)
 
 library(plotly)

@@ -6,15 +6,6 @@
 
 fxn_latestConditionsData <- function(inData) {
   latestConditionsData <- inData |>
-    # dplyr::select(
-    #   meta_station_name,
-    #   datetime,
-    #   lw1_mean_mV,
-    #   lw2_mean_mV,
-    #   temp_air_30cm_meanF,
-    #   dwpt_30cm_meanF
-    # ) |>
-    
     dplyr::group_by(meta_station_name) |>
     dplyr::filter(datetime == max(datetime)) |>
     dplyr::ungroup() |>
@@ -29,22 +20,18 @@ fxn_latestConditionsData <- function(inData) {
     
     dplyr::arrange(meta_station_name, lw_sensor) |>
     
+    # https://stackoverflow.com/questions/78275267/add-a-second-groupname-col-in-gt-table-without-concatenating-the-column-valu
     dplyr::mutate(
-      meta_station_name = 
+      datetime = ifelse(dplyr::row_number() == 1, datetime, ""),
+      temp_air_30cm_meanF = ifelse(dplyr::row_number() == 1, temp_air_30cm_meanF, NA),
+      dwpt_30cm_meanF = ifelse(dplyr::row_number() == 1, dwpt_30cm_meanF, NA), 
+      .by = meta_station_name
+    ) |>
+    
+    dplyr::mutate(
+      meta_station_name =
         dplyr::if_else(
           lw_sensor == "lw1_mean_mV", meta_station_name, NA
-        ),
-      datetime = 
-        dplyr::if_else(
-          lw_sensor == "lw1_mean_mV", datetime, NA
-        ),
-      temp_air_30cm_meanF = 
-        dplyr::if_else(
-          lw_sensor == "lw1_mean_mV", temp_air_30cm_meanF, NA
-        ),
-      dwpt_30cm_meanF = 
-        dplyr::if_else(
-          lw_sensor == "lw1_mean_mV", dwpt_30cm_meanF, NA
         ),
       lw_sensor =
         dplyr::if_else(
@@ -62,8 +49,8 @@ fxn_latestConditionsData <- function(inData) {
       lw_sensor
     )
     
-    latestConditionsData <- latestConditionsData |>
-      dplyr::mutate(graph_count = seq(1:nrow(latestConditionsData)))
+    # latestConditionsData <- latestConditionsData |>
+    #   dplyr::mutate(graph_count = seq(1:nrow(latestConditionsData)))
     
   return(latestConditionsData)
 }
