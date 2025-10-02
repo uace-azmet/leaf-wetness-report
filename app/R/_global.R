@@ -5,6 +5,7 @@ library(bslib)
 library(dataui)
 library(dplyr)
 
+library(ggpattern)
 library(ggplot2)
 
 library(gt)

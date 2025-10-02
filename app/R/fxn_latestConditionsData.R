@@ -37,7 +37,6 @@ fxn_latestConditionsData <- function(inData) {
         dplyr::if_else(
           lw_sensor == "lw1_mean_mV", "Sensor 1", "Sensor 2"
         )
-      # graph_count = seq(1:nrow(inData))
     ) |>
     
     dplyr::select(
@@ -49,8 +48,14 @@ fxn_latestConditionsData <- function(inData) {
       lw_sensor
     )
     
-    # latestConditionsData <- latestConditionsData |>
-    #   dplyr::mutate(graph_count = seq(1:nrow(latestConditionsData)))
+    latestConditionsData <- latestConditionsData |>
+      dplyr::mutate(
+        row_number = seq(1:nrow(latestConditionsData)),
+        mean_mV_adj = (mean_mV - 200) / 200,
+        mean_mV_range = 1,
+        graph = mean_mV
+        # mean_mV_non = 400 - mean_mV
+      )
     
   return(latestConditionsData)
 }
