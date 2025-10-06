@@ -145,32 +145,36 @@ fxn_latestConditionsTable <- function(inData) {
                 tags$span(style = "font-weight: normal; font-size: 0.8rem", "(mV)")
               )
             ),
-          cell =
-            reactablefmtr::data_bars(
-              data = .,
-              text_position = "outside-end",
-              min_value = 200,
-              max_value = 400
-            ),
-          # cell = function(value){
-          #   horizontalBarPlot <-# insert plotly horizontal bar chart into reactable cell
-          #     plotly::plot_ly(
-          #       data = .,
-          #       x = ~mean_mV,
-          #       y = ~graph_count,
-          #       type = "bar",
-          #       orientation = "h"
-          #     ) %>% 
-          #     plotly::layout(
-          #       #margin = list(l = 50, r = 10, b = 10, t = 10),
-          #       xaxis = list(title = "", showgrid = FALSE, showticklabels = FALSE),
-          #       yaxis = list(title = "", showgrid = FALSE),
-          #       autosize = TRUE
-          #     ) %>% 
-          #     plotly::config(displayModeBar = FALSE) # Hide the Plotly toolbar
-          #   
-          #   #htmltools::tagList(horizontalBarPlot)
-          # },
+          # cell =
+          #   reactablefmtr::data_bars(
+          #     data = .,
+          #     text_position = "outside-end",
+          #     min_value = 200,
+          #     max_value = 400
+          #   ),
+          cell = function(value) {
+            fxn_latestConditionsTableBarGraph(
+              #inData = .,
+              value = value
+            )
+            # horizontalBarPlot <-# insert plotly horizontal bar chart into reactable cell
+            #   plotly::plot_ly(
+            #     data = .,
+            #     x = ~mean_mV,
+            #     y = ~graph_count,
+            #     type = "bar",
+            #     orientation = "h"
+            #   ) %>%
+            #   plotly::layout(
+            #     #margin = list(l = 50, r = 10, b = 10, t = 10),
+            #     xaxis = list(title = "", showgrid = FALSE, showticklabels = FALSE),
+            #     yaxis = list(title = "", showgrid = FALSE),
+            #     autosize = TRUE
+            #   ) %>%
+            #   plotly::config(displayModeBar = FALSE) # Hide the Plotly toolbar
+            # 
+            # #htmltools::tagList(horizontalBarPlot)
+          },
           format = reactable::colFormat(digits = 0),
           html = TRUE,
           na = "NA",

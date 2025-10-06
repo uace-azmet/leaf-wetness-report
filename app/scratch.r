@@ -17,26 +17,13 @@ fxn_plotHorizontalBar <- function(value) {
   test <- lw15min |>
     dplyr::filter(row_number == value) |>
     ggplot2::ggplot() +
-    ggplot2::geom_col(ggplot2::aes(x = mean_mV_range, y = as.factor(row_number)), fill = "lightgray", width = 1) +
-    ggplot2::geom_col(ggplot2::aes(x = mean_mV_adj, y = as.factor(row_number)), fill = "darkgray", width = 1) +
-    # ggplot2::geom_segment(ggplot2::aes(x = (273 - 200) / 200, xend = (273 - 200) / 200, y = 0.5, yend = 1.5), linetype = "dotted", linewidth = 0.3) +
-    # ggplot2::geom_segment(ggplot2::aes(x = (284 - 200) / 200, xend = (284 - 200) / 200, y = 0.5, yend = 1.5), linetype = "dotted", linewidth = 0.3) +
-    ggpattern::geom_ribbon_pattern(
-      ggplot2::aes(
-        
-        xmin = (273 - 200) / 200,
-        xmax = (284 - 200) / 200,
-        ymin = 0.5,
-        ymax = 1.5
-      ),
-      pattern = "point",
-      fill = "#191919",
-      pattern_alpha = 0.5
-    ) +
-    # ggplot2::annotate("text", x = ((273 - 200) / 200 - 0.075), y = 1.0 - 0.05, label = "DRY", size = 3) +
-    # ggplot2::annotate("text", x = ((284 - 200) / 200 + 0.075), y = 1.0 - 0.05, label = "WET", size = 3) +
-    ggplot2::annotate("text", x = (((273 - 200) / 2) / 200), y = 1.0 - 0.05, label = "DRY", size = 3) +
-    ggplot2::annotate("text", x = (((400 - ((400 - 284) / 2)) - 200) / 200), y = 1.0 - 0.05, label = "WET", size = 3) +
+    ggplot2::geom_col(ggplot2::aes(x = mean_mV_range, y = as.factor(row_number)), color = "#e3e3e3", fill = "#FFFFFF", linewidth = 0.3) +
+    ggplot2::geom_col(ggplot2::aes(x = mean_mV_adj, y = as.factor(row_number)), fill = "#c9c9c9", width = 1) +
+    ggplot2::geom_segment(ggplot2::aes(x = (273 - 200) / 200, xend = (273 - 200) / 200, y = 0.5, yend = 1.5), color = "#191919", linetype = "dotted", linewidth = 0.3) +
+    ggplot2::geom_segment(ggplot2::aes(x = (284 - 200) / 200, xend = (284 - 200) / 200, y = 0.5, yend = 1.5), color = "#191919", linetype = "dotted", linewidth = 0.3) +
+    ggplot2::annotate("text", x = (((273 - 200) / 2) / 200), y = 1.0 - 0.05, color = "#191919", label = "DRY", size = 2.5) +
+    ggplot2::annotate("text", x = (((284 - ((284 - 273) / 2)) - 200) / 200), y = 1.0 - 0.05, color = "#191919", label = "T", size = 2.5) +
+    ggplot2::annotate("text", x = (((400 - ((400 - 284) / 2)) - 200) / 200), y = 1.0 - 0.05, color = "#191919", label = "WET", size = 2.5) +
     ggplot2::xlim(0, 1) +
     ggplot2::theme_void()
   
@@ -61,7 +48,6 @@ fxn_plotHorizontalBar <- function(value) {
     plotly::style(hoverinfo = "none")
   
   return(test)
-  #return(htmlwidgets::saveWidget("plotHorizontalBar.html", selfcontained = TRUE))
 }
 
 lw15min |>
