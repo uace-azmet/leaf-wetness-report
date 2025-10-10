@@ -259,6 +259,10 @@
   top: calc(50%) !important; 
 }
 
+.tab-content.html-fill-item.html-fill-container {
+  padding-bottom: 24px;
+}
+
 /* .table-condensed {
   background-color: #FFFFFF; 
   color: var(--bs-body-color);
@@ -306,10 +310,6 @@
   font-size: 1rem;
   text-align: left;
 } */
-
-#latestConditionsTable {
-  cursor: default !important;
-}
 
 #refreshDataButton {
   margin-bottom: 48px;

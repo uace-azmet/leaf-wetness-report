@@ -5,6 +5,7 @@
 
 
 fxn_latestConditionsData <- function(inData) {
+  
   latestConditionsData <- inData %>%
     dplyr::group_by(meta_station_name) %>%
     dplyr::filter(datetime == max(datetime)) %>%
@@ -26,43 +27,28 @@ fxn_latestConditionsData <- function(inData) {
       datetime = ifelse(dplyr::row_number() == 1, datetime, ""),
       temp_air_30cm_meanF = ifelse(dplyr::row_number() == 1, temp_air_30cm_meanF, NA),
       dwpt_30cm_meanF = ifelse(dplyr::row_number() == 1, dwpt_30cm_meanF, NA),
-      lw_sensor = ifelse(dplyr::row_number() == 1, "Sensor 1", "Sensor 2"),
+      lw_sensor = ifelse(dplyr::row_number() == 1, "&nbsp;&nbsp;&nbsp;Sensor 1", "&nbsp;&nbsp;&nbsp;Sensor 2"),
       .by = meta_station_name
     ) %>%
     
     dplyr::mutate(
       meta_station_name = factor(meta_station_name, levels = unique(meta_station_name)),
       row_number = seq(1:nrow(.)),
-      mean_mV_adj = (mean_mV - 200) / 200,
+      mean_mV_adj = (mean_mV - minMeanMV) / rangeMeanMV,
       temp_air_color = dplyr::case_when(
-        temp_air_30cm_meanF <= 100 ~ "#f19e1f",
+        temp_air_30cm_meanF <= thresholdTempAir ~ "#f19e1f",
         TRUE ~ "#FFFFFF"
       ),
       dwpt_color = dplyr::case_when(
         dwpt_30cm_meanF >= temp_air_30cm_meanF ~ "#f19e1f",
         TRUE ~ "#FFFFFF"
+      ),
+      bar_color = dplyr::case_when(
+        mean_mV <= thresholdMeanMVDry ~ "#bfbfbf",
+        mean_mV >= thresholdMeanMVWet ~ "#378dbd",
+        TRUE ~ "add8e6" # --azmet-light-blue
       )
     ) %>%
-    
-    
-    
-    # dplyr::mutate(
-    #   row_number = seq(1:nrow(inData)),
-    #   mean_mV_adj = (mean_mV - 200) / 200#,
-    #   #mean_mV_range = 1,
-    #   #graph = mean_mV
-    #   # mean_mV_non = 400 - mean_mV
-    # ) %>% 
-    # dplyr::mutate(
-    #   temp_air_color = dplyr::case_when(
-    #     temp_air_30cm_meanF <= 100 ~ "#f19e1f",
-    #     TRUE ~ "#FFFFFF"
-    #   ) ,
-    #   dwpt_color = dplyr::case_when(
-    #     dwpt_30cm_meanF >= temp_air_30cm_meanF ~ "#f19e1f",
-    #     TRUE ~ "#FFFFFF"
-    #   )
-    # )
     
     dplyr::select(
       meta_station_name,
@@ -74,7 +60,8 @@ fxn_latestConditionsData <- function(inData) {
       mean_mV,
       mean_mV_adj,
       temp_air_color,
-      dwpt_color
+      dwpt_color,
+      bar_color
     )
     
   return(latestConditionsData)

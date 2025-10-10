@@ -4,19 +4,10 @@ library(azmetr)
 library(bslib)
 library(dataui)
 library(dplyr)
-
-library(ggpattern)
-library(ggplot2)
-
-library(gt)
-library(gtExtras)
-
 library(htmltools)
 library(htmlwidgets)
 # library(lubridate)
-
 library(plotly)
-
 library(reactable)
 library(reactablefmtr)
 library(reshape2)
@@ -34,3 +25,13 @@ library(shinyjs)
 #source("./R/scr_scriptName.R", local = TRUE)
 
 shiny::addResourcePath("shinyjs", system.file("srcjs", package = "shinyjs"))
+
+
+# Variables --------------------
+
+maxMeanMV <- 400
+minMeanMV <- 200
+rangeMeanMV <- 200
+thresholdMeanMVDry <- 250#273
+thresholdMeanMVWet <- 265#284
+thresholdTempAir <- 82#32 # for `latestConditionsTable` warning cell color
