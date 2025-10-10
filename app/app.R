@@ -41,7 +41,7 @@ ui <- htmltools::htmlTemplate(
       bslib::nav_panel(
         title = "Latest Conditions",
         
-        shiny::htmlOutput(outputId = "latestConditionsTableTitle"),
+        shiny::htmlOutput(outputId = "latestConditionsTitle"),
         reactable::reactableOutput(outputId = "latestConditionsTable"),
         shiny::htmlOutput(outputId = "latestConditionsTableFooter"),
         
@@ -56,9 +56,9 @@ ui <- htmltools::htmlTemplate(
         # bslib::layout_sidebar(
         #   # sidebar = slsSidebar, # `scr##_slsSidebar.R`
         #   
-        #   # shiny::htmlOutput(outputId = "slsGraphTitle"),
+            shiny::htmlOutput(outputId = "past24HoursTitle"),
         #   # plotly::plotlyOutput(outputId = "slsGraph"),
-        #   # shiny::htmlOutput(outputId = "slsGraphFooter"),
+            shiny::htmlOutput(outputId = "past24HoursGraphFooter"),
         #   
         #   #fillable = TRUE,
         #   #fill = TRUE,
@@ -84,9 +84,9 @@ ui <- htmltools::htmlTemplate(
         # bslib::layout_sidebar(
         #   # sidebar = slsSidebar, # `scr##_slsSidebar.R`
         #   
-        #   # shiny::htmlOutput(outputId = "slsGraphTitle"),
+            shiny::htmlOutput(outputId = "past30DaysTitle"),
         #   # plotly::plotlyOutput(outputId = "slsGraph"),
-        #   # shiny::htmlOutput(outputId = "slsGraphFooter"),
+            shiny::htmlOutput(outputId = "past30DaysGraphFooter"),
         #   
         #   #fillable = TRUE,
         #   #fill = TRUE,
@@ -176,14 +176,34 @@ server <- function(input, output, session) {
     fxn_latestConditionsTableFooter()
   })
   
-  output$latestConditionsTableTitle <- shiny::renderUI({
+  output$latestConditionsTitle <- shiny::renderUI({
     shiny::req(lw15min())
-    fxn_latestConditionsTableTitle()
+    fxn_latestConditionsTitle()
   })
   
   output$pageBottomText <- shiny::renderUI({
     #shiny::req(dataETL())
     fxn_pageBottomText(activeTab = input$navsetCardTab)
+  })
+  
+  output$past24HoursGraphFooter <- shiny::renderUI({
+    shiny::req(lw15min())
+    fxn_past24HoursGraphFooter()
+  })
+  
+  output$past24HoursTitle <- shiny::renderUI({
+    shiny::req(lw15min()) # Need to change to `lwdaily()`
+    fxn_past24HoursTitle()
+  })
+  
+  output$past30DaysGraphFooter <- shiny::renderUI({
+    shiny::req(lw15min())
+    fxn_past30DaysGraphFooter()
+  })
+  
+  output$past30DaysTitle <- shiny::renderUI({
+    shiny::req(lw15min()) # Need to change to `lwdaily()`
+    fxn_past30DaysTitle()
   })
   
   output$refreshDataButton <- shiny::renderUI({

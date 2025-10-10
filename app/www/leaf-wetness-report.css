@@ -142,7 +142,8 @@
   margin-top: 0.25rem;
 }
 
-.latest-conditions-table-title {
+.latest-conditions-title {
+  color: #191919;
   padding-bottom: 1rem;
 }
 
@@ -216,6 +217,30 @@
 
 .page-bottom-text {
   color: #191919;
+}
+
+.past-24-hours-graph-footer {
+  color: #606060; 
+  font-size: 0.85rem;
+  font-style: normal;
+  margin-top: 0.25rem;
+}
+
+.past-24-hours-title {
+  color: #191919;
+  padding-bottom: 1rem;
+}
+
+.past-30-days-graph-footer {
+  color: #606060; 
+  font-size: 0.85rem;
+  font-style: normal;
+  margin-top: 0.25rem;
+}
+
+.past-30-days-title {
+  color: #191919;
+  padding-bottom: 1rem;
 }
 
 /*

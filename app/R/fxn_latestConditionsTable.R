@@ -108,14 +108,7 @@ fxn_latestConditionsTable <- function(inData) {
           width = 100
         ),
         lw_sensor = reactable::colDef(
-          name = 
-            htmltools::HTML(
-              paste0(
-                "&nbsp;&nbsp;&nbsp;Sensor<sup>",
-                tags$span(style = "font-weight: normal", "1"),
-                "</sup>"
-              )
-            ),
+          name = "&nbsp;&nbsp;&nbsp;Sensor",
           html = TRUE,
           na = "NA",
           rowHeader = TRUE,

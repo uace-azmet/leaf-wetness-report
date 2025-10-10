@@ -1,10 +1,10 @@
-#' `fxn_latestConditionsTableTitle.R` - Build title for latest conditions table
+#' `fxn_latestConditionsTitle.R` - Build title for latest conditions tab
 #' 
-#' @return `latestConditionsTableTitle` - Title for latest conditions table
+#' @return `latestConditionsTitle` - Title for latest conditions tab
 
 
-fxn_latestConditionsTableTitle <- function() {
-  latestConditionsTableTitle <- 
+fxn_latestConditionsTitle <- function() {
+  latestConditionsTitle <- 
     htmltools::p(
       htmltools::HTML(
         paste0(
@@ -15,14 +15,14 @@ fxn_latestConditionsTableTitle <- function() {
           bslib::tooltip(
             bsicons::bs_icon("info-circle"),
             "Scroll or swipe over the table to view additional columns on narrow browser windows.",
-            id = "infolatestConditionsTableTitle",
+            id = "infolatestConditionsTitle",
             placement = "right"
           )
         )
       ),
       
-      class = "latest-conditions-table-title"
+      class = "latest-conditions-title"
     )
   
-  return(latestConditionsTableTitle)
+  return(latestConditionsTitle)
 }
