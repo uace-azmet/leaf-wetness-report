@@ -307,6 +307,10 @@
   text-align: left;
 } */
 
+#latestConditionsTable {
+  cursor: default !important;
+}
+
 #refreshDataButton {
   margin-bottom: 48px;
 }

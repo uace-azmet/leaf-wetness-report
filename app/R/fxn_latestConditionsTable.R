@@ -5,39 +5,8 @@
 
 
 fxn_latestConditionsTable <- function(inData) {
-  inData <- inData %>% 
-    # https://stackoverflow.com/questions/78275267/add-a-second-groupname-col-in-gt-table-without-concatenating-the-column-valu
-    dplyr::mutate(
-      meta_station_name = factor(meta_station_name, levels = unique(meta_station_name))
-    ) %>% 
-    # dplyr::arrange(meta_station_name, datetime) %>% 
-    dplyr::mutate(
-      datetime = ifelse(dplyr::row_number() == 1, datetime, ""),
-      temp_air_30cm_meanF = ifelse(dplyr::row_number() == 1, temp_air_30cm_meanF, NA),
-      dwpt_30cm_meanF = ifelse(dplyr::row_number() == 1, dwpt_30cm_meanF, NA), 
-      .by = meta_station_name
-    ) %>% 
-    dplyr::mutate(
-      temp_air_color = dplyr::case_when(
-        temp_air_30cm_meanF <= 100 ~ "#f19e1f",
-        TRUE ~ "#FFFFFF"
-      ) ,
-      dwpt_color = dplyr::case_when(
-        dwpt_30cm_meanF >= temp_air_30cm_meanF ~ "#EF4056",
-        TRUE ~ "#FFFFFF"
-      )
-    )
   
-  
-  # lw15min |> # https://stackoverflow.com/questions/78275267/add-a-second-groupname-col-in-gt-table-without-concatenating-the-column-valu
-  #   dplyr::mutate(meta_station_name = factor(meta_station_name, levels = unique(meta_station_name))) |>
-  #   dplyr::arrange(meta_station_name, datetime) |>
-  #   dplyr::mutate(
-  #     datetime = ifelse(dplyr::row_number() == 1, as.character(datetime), ""), .by = c(meta_station_name, datetime)
-  #   )
-  
-  
-   latestConditionsTable <- inData %>% 
+  latestConditionsTable <- inData %>% 
     reactable::reactable(
       columns = list(
         meta_station_name = reactable::colDef(
@@ -66,7 +35,7 @@ fxn_latestConditionsTable <- function(inData) {
           #maxWidth = NULL,
           width = 100,
           #align = NULL,
-          #vAlign = NULL,
+          vAlign = "center",
           #headerVAlign = NULL,
           sticky = "left",
           class = "table-reactable-column-station",
@@ -81,13 +50,14 @@ fxn_latestConditionsTable <- function(inData) {
           ),
           #footerClass = NULL,
           #footerStyle = NULL
-        ), 
+        ),
         datetime = reactable::colDef(
           name = "Latest Update",
           html = TRUE,
           #minWidth = 180,
           #na = "NA",
           rowHeader = TRUE,
+          vAlign = "center",
           width = 170
         ),
         temp_air_30cm_meanF = reactable::colDef(
@@ -110,6 +80,7 @@ fxn_latestConditionsTable <- function(inData) {
           #na = "NA",
           rowHeader = TRUE,
           align = "right",
+          vAlign = "center",
           width = 100
         ),
         dwpt_30cm_meanF = reactable::colDef(
@@ -133,7 +104,147 @@ fxn_latestConditionsTable <- function(inData) {
           #na = "NA",
           rowHeader = TRUE,
           align = "right",
+          vAlign = "center",
           width = 100
+        ),
+        lw_sensor = reactable::colDef(
+          name = "Sensor",
+          html = TRUE,
+          na = "NA",
+          rowHeader = TRUE,
+          align = "left",
+          vAlign = "center",
+          width = 90
+        ),
+        row_number = reactable::colDef(
+          name = "Row Number",
+          cell = 
+            function(value) {
+              plotly::plot_ly( # Depicts range of 200-400 mV
+                data = .[value, ],
+                x = 1,
+                y = ~as.factor(row_number),
+                marker = list(color = "#eeeeee"),
+                name = "mV range",
+                showlegend = FALSE,
+                hoverinfo = "none",
+                hovertext = "none",
+                type = "bar",
+                orientation = "h",
+                height = 24
+              ) %>%
+                
+                plotly::add_trace( # Depicts `mean_mV` values
+                  inherit = TRUE,
+                  x = ~mean_mV_adj,
+                  marker = list(color = "#c9c9c9"),
+                  name = "mV value"
+                ) %>% 
+                
+                plotly::config(
+                  displaylogo = FALSE,
+                  displayModeBar = FALSE
+                ) %>%
+                
+                plotly::layout(
+                  annotations = list(
+                    list( # Dry zone
+                      align = "center",
+                      showarrow = FALSE,
+                      text = "DRY",
+                      x = (((273 - 200) / 2) / 200),
+                      xanchor = "center",
+                      xref = "x",
+                      xshift = 0,
+                      y = 0.5,
+                      yanchor = "center",
+                      yref = "paper"
+                    ),
+                    list( # Transition zone
+                      align = "center",
+                      showarrow = FALSE,
+                      text = "T",
+                      x = (((284 - ((284 - 273) / 2)) - 200) / 200),
+                      xanchor = "center",
+                      xref = "x",
+                      xshift = 0,
+                      y = 0.5,
+                      yanchor = "center",
+                      yref = "paper"
+                    ),
+                    list( # Wet zone
+                      align = "center",
+                      showarrow = FALSE,
+                      text = "WET",
+                      x = (((400 - ((400 - 284) / 2)) - 200) / 200),
+                      xanchor = "center",
+                      xref = "x",
+                      xshift = 0,
+                      y = 0.5,
+                      yanchor = "center",
+                      yref = "paper"
+                    )
+                  ),
+                  barmode = "overlay",
+                  font = list(
+                    color = "#191919",
+                    family = "proxima-nova, calibri, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+                    size = 12
+                  ),
+                  margin = list(
+                    l = 0,
+                    r = 0,
+                    b = 0,
+                    t = 0,
+                    pad = 0
+                  ),
+                  shapes = 
+                    list(
+                      list( # Lower transition threshold
+                        type = "line",
+                        x0 = ((273 - 200) / 200),
+                        x1 = ((273 - 200) / 200),
+                        y0 = 0,
+                        y1 = 1,
+                        yref = "paper",
+                        line = list(
+                          color = "#191919",
+                          dash = "solid",
+                          width = 1
+                        ),
+                        layer = "above"
+                      ),
+                      list( # Upper transition threshold
+                        type = "line",
+                        x0 = ((284 - 200) / 200),
+                        x1 = ((284 - 200) / 200),
+                        y0 = 0,
+                        y1 = 1,
+                        yref = "paper",
+                        line = list(
+                          ccolor = "#191919",
+                          dash = "solid",
+                          width = 1
+                        ),
+                        layer = "above"
+                      )
+                    ),
+                  xaxis = list(
+                    fixedrange = TRUE,
+                    visible = FALSE
+                  ),
+                  yaxis = list(
+                    fixedrange = TRUE,
+                    visible = FALSE
+                  )
+                )
+            },
+          html = TRUE,
+          na = "NA",
+          rowHeader = TRUE,
+          align = "left",
+          vAlign = "center",
+          width = 256
         ),
         mean_mV = reactable::colDef(
           name =
@@ -145,65 +256,16 @@ fxn_latestConditionsTable <- function(inData) {
                 tags$span(style = "font-weight: normal; font-size: 0.8rem", "(mV)")
               )
             ),
-          # cell =
-          #   reactablefmtr::data_bars(
-          #     data = .,
-          #     text_position = "outside-end",
-          #     min_value = 200,
-          #     max_value = 400
-          #   ),
-          cell = function(value) {
-            fxn_latestConditionsTableBarGraph(
-              #inData = .,
-              value = value
-            )
-            # horizontalBarPlot <-# insert plotly horizontal bar chart into reactable cell
-            #   plotly::plot_ly(
-            #     data = .,
-            #     x = ~mean_mV,
-            #     y = ~graph_count,
-            #     type = "bar",
-            #     orientation = "h"
-            #   ) %>%
-            #   plotly::layout(
-            #     #margin = list(l = 50, r = 10, b = 10, t = 10),
-            #     xaxis = list(title = "", showgrid = FALSE, showticklabels = FALSE),
-            #     yaxis = list(title = "", showgrid = FALSE),
-            #     autosize = TRUE
-            #   ) %>%
-            #   plotly::config(displayModeBar = FALSE) # Hide the Plotly toolbar
-            # 
-            # #htmltools::tagList(horizontalBarPlot)
-          },
-          format = reactable::colFormat(digits = 0),
           html = TRUE,
           na = "NA",
           rowHeader = TRUE,
-          align = "left",
-          minWidth = 160,
-          # style = function() { # https://stackoverflow.com/questions/36598624/vertical-line-inside-td-using-a-div
-          #   dryThreshold <- ((273 - 200) / 200) * 100
-          #   wetThreshold <- ((284 - 200) / 200) * 100
-          #   
-          #   list(
-          #     background = paste0(
-          #       "linear-gradient(to right, transparent ", dryThreshold, "%, #191919 ", dryThreshold, "%, #191919 ", wetThreshold, "%, transparent ", wetThreshold, "%)"
-          #     ),
-          #     background_repeat = "no-repeat",
-          #     background_size = "100% 100%"
-          #   )
-          # }
-        ),
-        lw_sensor = reactable::colDef(
-          name = "Sensor Status",
-          html = TRUE,
-          na = "NA",
-          rowHeader = TRUE,
-          align = "left",
-          width = 120
+          align = "right",
+          vAlign = "center",
+          width = 100
         ),
         temp_air_color = reactable::colDef(show = FALSE),
-        dwpt_color = reactable::colDef(show = FALSE)
+        dwpt_color = reactable::colDef(show = FALSE),
+        mean_mV_adj = reactable::colDef(show = FALSE)
       ),
       #columnGroups = NULL,
       rownames = FALSE,
@@ -275,15 +337,15 @@ fxn_latestConditionsTable <- function(inData) {
               columns = "meta_station_name",
               border_color = "red"
             ),
-            # htmlwidgets::JS(
-            #   paste0(
-            #     "function(rowInfo) {",
-            #       "if (rowInfo.index % 2 === 0) {", # Check if the row index is even (0-indexed)
-            #         "return { borderBottom: '1px solid #191919' }", # Apply a bottom border to even rows
-            #       "}",
-            #     "}"
-            #   )
-            # ),
+          # htmlwidgets::JS(
+          #   paste0(
+          #     "function(rowInfo) {",
+          #       "if (rowInfo.index % 2 === 0) {", # Check if the row index is even (0-indexed)
+          #         "return { borderBottom: '1px solid #191919' }", # Apply a bottom border to even rows
+          #       "}",
+          #     "}"
+          #   )
+          # ),
           rowStripedStyle = NULL,
           rowHighlightStyle = NULL,
           rowSelectedStyle = NULL,

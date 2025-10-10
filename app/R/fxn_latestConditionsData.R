@@ -1,14 +1,14 @@
-#' `fxn_latestConditionsData.R` - Filter 15-minute leaf wetness data for the most recent report from each station
+#' `fxn_latestConditionsData.R` - Transform most recent 15-minute leaf wetness data from each station for table
 #' 
 #' @param inData - 15-minute leaf wetness data from `fxn_lw15min.R`
-#' @return `latestConditionsData` - Most recent leaf wetness data from each station, tibble format
+#' @return `latestConditionsData` - Most recent 15-minute leaf wetness data from each station, transformed for table
 
 
 fxn_latestConditionsData <- function(inData) {
-  latestConditionsData <- inData |>
-    dplyr::group_by(meta_station_name) |>
-    dplyr::filter(datetime == max(datetime)) |>
-    dplyr::ungroup() |>
+  latestConditionsData <- inData %>%
+    dplyr::group_by(meta_station_name) %>%
+    dplyr::filter(datetime == max(datetime)) %>%
+    dplyr::ungroup() %>%
     
     reshape2::melt(
       id.vars = c("meta_station_name", "datetime", "temp_air_30cm_meanF", "dwpt_30cm_meanF"),
@@ -16,46 +16,66 @@ fxn_latestConditionsData <- function(inData) {
       variable.name = "lw_sensor",
       value.name = "mean_mV",
       na.rm = FALSE
-    ) |>
+    ) %>%
     
-    dplyr::arrange(meta_station_name, lw_sensor) |>
+    dplyr::arrange(meta_station_name, lw_sensor) %>%
     
     # https://stackoverflow.com/questions/78275267/add-a-second-groupname-col-in-gt-table-without-concatenating-the-column-valu
     dplyr::mutate(
+      meta_station_name = ifelse(dplyr::row_number() == 1, meta_station_name, ""),
       datetime = ifelse(dplyr::row_number() == 1, datetime, ""),
       temp_air_30cm_meanF = ifelse(dplyr::row_number() == 1, temp_air_30cm_meanF, NA),
-      dwpt_30cm_meanF = ifelse(dplyr::row_number() == 1, dwpt_30cm_meanF, NA), 
+      dwpt_30cm_meanF = ifelse(dplyr::row_number() == 1, dwpt_30cm_meanF, NA),
+      lw_sensor = ifelse(dplyr::row_number() == 1, "Sensor 1", "Sensor 2"),
       .by = meta_station_name
-    ) |>
+    ) %>%
     
     dplyr::mutate(
-      meta_station_name =
-        dplyr::if_else(
-          lw_sensor == "lw1_mean_mV", meta_station_name, NA
-        ),
-      lw_sensor =
-        dplyr::if_else(
-          lw_sensor == "lw1_mean_mV", "Sensor 1", "Sensor 2"
-        )
-    ) |>
+      meta_station_name = factor(meta_station_name, levels = unique(meta_station_name)),
+      row_number = seq(1:nrow(.)),
+      mean_mV_adj = (mean_mV - 200) / 200,
+      temp_air_color = dplyr::case_when(
+        temp_air_30cm_meanF <= 100 ~ "#f19e1f",
+        TRUE ~ "#FFFFFF"
+      ),
+      dwpt_color = dplyr::case_when(
+        dwpt_30cm_meanF >= temp_air_30cm_meanF ~ "#f19e1f",
+        TRUE ~ "#FFFFFF"
+      )
+    ) %>%
+    
+    
+    
+    # dplyr::mutate(
+    #   row_number = seq(1:nrow(inData)),
+    #   mean_mV_adj = (mean_mV - 200) / 200#,
+    #   #mean_mV_range = 1,
+    #   #graph = mean_mV
+    #   # mean_mV_non = 400 - mean_mV
+    # ) %>% 
+    # dplyr::mutate(
+    #   temp_air_color = dplyr::case_when(
+    #     temp_air_30cm_meanF <= 100 ~ "#f19e1f",
+    #     TRUE ~ "#FFFFFF"
+    #   ) ,
+    #   dwpt_color = dplyr::case_when(
+    #     dwpt_30cm_meanF >= temp_air_30cm_meanF ~ "#f19e1f",
+    #     TRUE ~ "#FFFFFF"
+    #   )
+    # )
     
     dplyr::select(
       meta_station_name,
       datetime,
       temp_air_30cm_meanF,
       dwpt_30cm_meanF,
+      lw_sensor,
+      row_number,
       mean_mV,
-      lw_sensor
+      mean_mV_adj,
+      temp_air_color,
+      dwpt_color
     )
-    
-    latestConditionsData <- latestConditionsData |>
-      dplyr::mutate(
-        row_number = seq(1:nrow(latestConditionsData)),
-        mean_mV_adj = (mean_mV - 200) / 200,
-        mean_mV_range = 1,
-        graph = mean_mV
-        # mean_mV_non = 400 - mean_mV
-      )
     
   return(latestConditionsData)
 }
