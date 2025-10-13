@@ -120,7 +120,7 @@ fxn_latestConditionsTable <- function(inData) {
           name = 
             htmltools::HTML(
               paste0(
-                "Wetness<sup>",
+                "Condition<sup>",
                 tags$span(style = "font-weight: normal", "4"),
                 "</sup>"
               )
@@ -133,9 +133,12 @@ fxn_latestConditionsTable <- function(inData) {
                 y = ~as.factor(row_number),
                 marker = list(color = "#eeeeee"),
                 name = "mV range",
-                showlegend = FALSE,
                 hoverinfo = "none",
-                hovertext = "none",
+                # text = ~paste0(
+                #   "<br><b>Condition:</b>  ", condition,
+                #   "<br><b>DC:</b>  ", mean_mV, " mV"
+                # ),
+                showlegend = FALSE,
                 type = "bar",
                 orientation = "h",
                 height = 24
@@ -145,12 +148,15 @@ fxn_latestConditionsTable <- function(inData) {
                   inherit = TRUE,
                   x = ~mean_mV_adj,
                   marker = list(color = ~bar_color),
-                  name = "mV value"
+                  name = "mV value",
+                  hovertext = ~condition,
+                  hovertemplate = ~paste0("<b>Condition:  </b>",  .data$condition, "<extra></extra>")
                 ) %>% 
                 
                 plotly::config(
                   displaylogo = FALSE,
-                  displayModeBar = FALSE
+                  displayModeBar = FALSE,
+                  scrollZoom = FALSE
                 ) %>%
                 
                 plotly::layout(
@@ -194,9 +200,15 @@ fxn_latestConditionsTable <- function(inData) {
                   ),
                   barmode = "overlay",
                   font = list(
-                    color = "#191919",
+                    color = "#666666",
                     family = "proxima-nova, calibri, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
                     size = 12
+                  ),
+                  hoverlabel = list(
+                    font = list(
+                      family = "proxima-nova, calibri, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+                      size = 14
+                    )
                   ),
                   margin = list(
                     l = 0,
@@ -215,7 +227,7 @@ fxn_latestConditionsTable <- function(inData) {
                         y1 = 1,
                         yref = "paper",
                         line = list(
-                          color = "#191919",
+                          color = "#666666",
                           dash = "solid",
                           width = 1
                         ),
@@ -229,7 +241,7 @@ fxn_latestConditionsTable <- function(inData) {
                         y1 = 1,
                         yref = "paper",
                         line = list(
-                          ccolor = "#191919",
+                          color = "#666666",
                           dash = "solid",
                           width = 1
                         ),
@@ -271,6 +283,7 @@ fxn_latestConditionsTable <- function(inData) {
           width = 50
         ),
         mean_mV_adj = reactable::colDef(show = FALSE),
+        condition = reactable::colDef(show = FALSE),
         temp_air_color = reactable::colDef(show = FALSE),
         dwpt_color = reactable::colDef(show = FALSE),
         bar_color = reactable::colDef(show = FALSE)

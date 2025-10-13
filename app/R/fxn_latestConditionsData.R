@@ -35,6 +35,11 @@ fxn_latestConditionsData <- function(inData) {
       meta_station_name = factor(meta_station_name, levels = unique(meta_station_name)),
       row_number = seq(1:nrow(.)),
       mean_mV_adj = (mean_mV - minMeanMV) / rangeMeanMV,
+      condition = dplyr::case_when(
+        mean_mV <= thresholdMeanMVDry ~ "Dry",
+        mean_mV >= thresholdMeanMVWet ~ "Wet",
+        TRUE ~ "Transition between Wet and Dry"
+      ),
       temp_air_color = dplyr::case_when(
         temp_air_30cm_meanF <= thresholdTempAir ~ "#f19e1f",
         TRUE ~ "#FFFFFF"
@@ -59,6 +64,7 @@ fxn_latestConditionsData <- function(inData) {
       row_number,
       mean_mV,
       mean_mV_adj,
+      condition,
       temp_air_color,
       dwpt_color,
       bar_color
