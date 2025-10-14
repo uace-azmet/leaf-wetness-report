@@ -13,7 +13,6 @@ library(reactablefmtr)
 library(reshape2)
 library(shiny)
 library(shinyjs)
-# library(vroom)
 
 
 # Files --------------------
@@ -28,6 +27,17 @@ shiny::addResourcePath("shinyjs", system.file("srcjs", package = "shinyjs"))
 
 
 # Variables --------------------
+
+azmetStationMetadata <- azmetr::station_info |>
+  dplyr::filter(
+    meta_station_name %in% c(
+      "Roll", 
+      "Wellton ETo", 
+      "Yuma N.Gila", 
+      "Yuma South", 
+      "Yuma Valley"
+    )
+  )
 
 maxMeanMV <- 400
 minMeanMV <- 200

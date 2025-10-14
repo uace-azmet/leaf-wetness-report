@@ -53,8 +53,8 @@ ui <- htmltools::htmlTemplate(
       bslib::nav_panel(
         title = "Past 24 Hours",
         
-        # bslib::layout_sidebar(
-        #   # sidebar = slsSidebar, # `scr##_slsSidebar.R`
+        bslib::layout_sidebar(
+          sidebar = past24HoursSidebar, # `scr##_past24HoursSidebar.R`
         #   
             shiny::htmlOutput(outputId = "past24HoursTitle"),
         #   # plotly::plotlyOutput(outputId = "slsGraph"),
@@ -70,7 +70,7 @@ ui <- htmltools::htmlTemplate(
         #   #padding = NULL,
         #   #gap = NULL,
         #   #height = NULL
-        # ),
+        ),
         
         value = "past-24-hours"
       ),
@@ -81,7 +81,7 @@ ui <- htmltools::htmlTemplate(
       bslib::nav_panel(
         title = "Past 30 Days",
         
-        # bslib::layout_sidebar(
+        bslib::layout_sidebar(
         #   # sidebar = slsSidebar, # `scr##_slsSidebar.R`
         #   
             shiny::htmlOutput(outputId = "past30DaysTitle"),
@@ -98,7 +98,7 @@ ui <- htmltools::htmlTemplate(
         #   #padding = NULL,
         #   #gap = NULL,
         #   #height = NULL
-        # ),
+        ),
         
         value = "past-30-days"
       )
