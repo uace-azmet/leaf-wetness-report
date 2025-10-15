@@ -17,13 +17,14 @@ fxn_past24HoursGraph <- function(inData, azmetStation) {
   
   # Variables ----------
   
-  inData <- inData %>% 
+  inData <- inData %>%
     dplyr::mutate(datetime = lubridate::ymd_hms(datetime))
-  
-  dataOtherStations <- inData %>% 
-    dplyr::filter(meta_station_name != azmetStation)
-  
-  dataSelectedStation <- inData %>% 
+
+  dataOtherStations <- inData %>%
+    dplyr::filter(meta_station_name != azmetStation) %>% 
+    dplyr::group_by(meta_station_name)
+
+  dataSelectedStation <- inData %>%
     dplyr::filter(meta_station_name == azmetStation)
   
   layoutFontFamily <- "proxima-nova, calibri, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\""
@@ -31,129 +32,224 @@ fxn_past24HoursGraph <- function(inData, azmetStation) {
   
   # Graphs ----------
   
-  # Leaf wetness sensor mean mV -----
+  # Leaf wetness -----
   
   # "lw1_mean_mV"
   # "lw2_mean_mV"
   
-  # lw_mean_mV <-
-  #   plotly::plot_ly(
-  #     data = dataCountsAllYears,
-  #     x = ~pseudo_date,
-  #     y = ~`Level 2`,
-  #     type = "scatter",
-  #     mode = "lines+markers",
-  #     hoverinfo = "text",
-  #     legendgroup = paste(
-  #       min(inData$date_year, na.rm = TRUE),
-  #       max(inData$date_year, na.rm = TRUE),
-  #       sep = "-"
-  #     ),
-  #     line = list(
-  #       color = "rgba(166, 166, 166, 1.0)",
-  #       shape = "hvh", # https://plotly.com/python/line-charts/
-  #       width = 1.0
-  #     ),
-  #     marker = list(
-  #       color = "rgba(166, 166, 166, 1.0)",
-  #       size = 2
-  #     ),
-  #     name = paste(
-  #       min(inData$date_year, na.rm = TRUE),
-  #       max(inData$date_year, na.rm = TRUE),
-  #       sep = "-"
-  #     ),
-  #     showlegend = TRUE,
-  #     text = ~paste0(
-  #       "<b>Day-of-year:</b>  ", date_doy,
-  #       "<br><b>Day-of-year Frequency:</b>  ", `Level 2`,
-  #       "<br><b>Day-of-year Relative Frequency:</b>  ", format(round(rel_freqL2, digits = 2), nsmall = 2)
-  #     )
-  #   ) %>%
-  #   plotly::add_trace(
-  #     inherit = TRUE,
-  #     data = dataCountsCurrentYear,
-  #     hoverinfo = "text",
-  #     legendgroup = max(inData$date_year, na.rm = TRUE),
-  #     line = list(
-  #       color = "rgba(25, 25, 25, 1.0)",
-  #       shape = "hvh", # https://plotly.com/python/line-charts/
-  #       width = 1.0
-  #     ),
-  #     marker = list(
-  #       color = "rgba(25, 25, 25, 1.0)",
-  #       size = 2
-  #     ),
-  #     name = max(inData$date_year, na.rm = TRUE),
-  #     showlegend = TRUE,
-  #     text = ~paste0(
-  #       "<b>Date:</b>  ", gsub(" 0", " ", format(pseudo_date, "%b %d, %Y")),
-  #       "<br><b>Frequency:</b>  ", `Level 2`, "<br>"
-  #     )
-  #   )
+  dielectricConstant <-
+    plotly::plot_ly(
+      data = dataOtherStations,
+      x = ~datetime,
+      y = ~lw1_mean_mV,
+      type = "scatter",
+      mode = "lines+markers",
+      hoverinfo = "text",
+      line = list(
+        color = "rgba(201, 201, 201, 1.0)",
+        width = 1.0
+      ),
+      marker = list(
+        color = "rgba(201, 201, 201, 1.0)",
+        size = 2
+      ),
+      name = "other stations",
+      showlegend = TRUE,
+      text = ~paste0(
+        "<br><b>DC<sub>sensor 1</sub></b><sup>", tags$span(style = "font-weight: normal", "1"), "</sup><b>:</b>  ", lw1_mean_mV,
+        "<br><b>AZMet Station:</b>  ", meta_station_name,
+        "<br><b>Date:</b>  ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+        "<br><b>Time:</b>  ", format(datetime, "%H:%M:%S")
+      )
+    ) %>%
+    
+    plotly::add_trace(
+      inherit = FALSE,
+      data = dataSelectedStation,
+      x = ~datetime,
+      y = ~lw2_mean_mV,
+      type = "scatter",
+      mode = "lines+markers",
+      hoverinfo = "text",
+      line = list(
+        color = "rgba(19, 19, 19, 1.0)",
+        width = 1.0
+      ),
+      marker = list(
+        color = "rgba(19, 19, 19, 1.0)",
+        size = 2
+      ),
+      name = ~meta_station_name,
+      showlegend = TRUE,
+      text = ~paste0(
+        "<br><b>DC<sub>sensor 2</sub></b><sup>", tags$span(style = "font-weight: normal", "1"), "</sup><b>:</b>  ", lw2_mean_mV,
+        "<br><b>AZMet Station:</b>  ", meta_station_name,
+        "<br><b>Date:</b>  ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+        "<br><b>Time:</b>  ", format(datetime, "%H:%M:%S")
+      )
+    ) %>% 
+    
+    plotly::add_trace(
+      inherit = FALSE,
+      data = dataSelectedStation,
+      x = ~datetime,
+      y = ~lw1_mean_mV,
+      type = "scatter",
+      mode = "lines+markers",
+      hoverinfo = "text",
+      line = list(
+        color = "rgba(19, 19, 19, 1.0)",
+        width = 1.0
+      ),
+      marker = list(
+        color = "rgba(19, 19, 19, 1.0)",
+        size = 2
+      ),
+      name = ~meta_station_name,
+      showlegend = TRUE,
+      text = ~paste0(
+        "<br><b>DC<sub>sensor 1</sub></b><sup>", tags$span(style = "font-weight: normal", "1"), "</sup><b>:</b>  ", lw1_mean_mV,
+        "<br><b>AZMet Station:</b>  ", meta_station_name,
+        "<br><b>Date:</b>  ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+        "<br><b>Time:</b>  ", format(datetime, "%H:%M:%S")
+      )
+    ) %>% 
+    
+    plotly::add_trace(
+      inherit = FALSE,
+      data = dataSelectedStation,
+      x = ~datetime,
+      y = ~lw2_mean_mV,
+      type = "scatter",
+      mode = "lines+markers",
+      hoverinfo = "text",
+      line = list(
+        color = "rgba(19, 19, 19, 1.0)",
+        width = 1.0
+      ),
+      marker = list(
+        color = "rgba(19, 19, 19, 1.0)",
+        size = 2
+      ),
+      name = ~meta_station_name,
+      showlegend = TRUE,
+      text = ~paste0(
+        "<br><b>DC<sub>sensor 2</sub></b><sup>", tags$span(style = "font-weight: normal", "1"), "</sup><b>:</b>  ", lw2_mean_mV,
+        "<br><b>AZMet Station:</b>  ", meta_station_name,
+        "<br><b>Date:</b>  ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+        "<br><b>Time:</b>  ", format(datetime, "%H:%M:%S")
+      )
+    )
   
-  # air temp and dwpt mean F -----
+  # Air temperature -----
   
-  # "dwpt_30cm_meanF",
-  # "temp_air_30cm_meanF"
+  airTemperature <-
+    plotly::plot_ly(
+      data = dataOtherStations,
+      x = ~datetime,
+      y = ~temp_air_30cm_meanF,
+      type = "scatter",
+      mode = "lines+markers",
+      hoverinfo = "text",
+      line = list(
+        color = "rgba(201, 201, 201, 1.0)",
+        width = 1.0
+      ),
+      marker = list(
+        color = "rgba(201, 201, 201, 1.0)",
+        size = 2
+      ),
+      name = "other stations",
+      showlegend = TRUE,
+      text = ~paste0(
+        "<br><b>T<sub>air</sub></b><sup>", tags$span(style = "font-weight: normal", "1"), "</sup><b>:</b>  ", temp_air_30cm_meanF,
+        "<br><b>AZMet Station:</b>  ", meta_station_name,
+        "<br><b>Date:</b>  ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+        "<br><b>Time:</b>  ", format(datetime, "%H:%M:%S")
+      )
+    ) %>%
+    
+    plotly::add_trace(
+      inherit = FALSE,
+      data = dataSelectedStation,
+      x = ~datetime,
+      y = ~temp_air_30cm_meanF,
+      type = "scatter",
+      mode = "lines+markers",
+      hoverinfo = "text",
+      line = list(
+        color = "rgba(19, 19, 19, 1.0)",
+        width = 1.0
+      ),
+      marker = list(
+        color = "rgba(19, 19, 19, 1.0)",
+        size = 2
+      ),
+      name = ~meta_station_name,
+      showlegend = TRUE,
+      text = ~paste0(
+        "<br><b>T<sub>air</sub></b><sup>", tags$span(style = "font-weight: normal", "1"), "</sup><b>:</b>  ", temp_air_30cm_meanF,
+        "<br><b>AZMet Station:</b>  ", meta_station_name,
+        "<br><b>Date:</b>  ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+        "<br><b>Time:</b>  ", format(datetime, "%H:%M:%S")
+      )
+    )
   
-  # level1 <- 
-  #   plotly::plot_ly(
-  #     data = dataCountsAllYears,
-  #     x = ~pseudo_date,
-  #     y = ~`Level 1`,
-  #     type = "scatter",
-  #     mode = "lines+markers",
-  #     hoverinfo = "text",
-  #     legendgroup = paste(
-  #       min(inData$date_year, na.rm = TRUE),
-  #       max(inData$date_year, na.rm = TRUE),
-  #       sep = "-"
-  #     ),
-  #     line = list(
-  #       color = "rgba(166, 166, 166, 1.0)",
-  #       shape = "hvh", # https://plotly.com/python/line-charts/
-  #       width = 1.0
-  #     ),
-  #     marker = list(
-  #       color = "rgba(166, 166, 166, 1.0)",
-  #       size = 2
-  #     ),
-  #     name = paste(
-  #       min(inData$date_year, na.rm = TRUE),
-  #       max(inData$date_year, na.rm = TRUE),
-  #       sep = "-"
-  #     ),
-  #     showlegend = FALSE,
-  #     text = ~paste0(
-  #       "<b>Day-of-year:</b>  ", date_doy,
-  #       "<br><b>Day-of-year Frequency:</b>  ", `Level 1`,
-  #       "<br><b>Day-of-year Relative Frequency:</b>  ", format(round(rel_freqL1, digits = 2), nsmall = 2)
-  #     )
-  #   ) %>% 
-  #   plotly::add_trace(
-  #     inherit = TRUE,
-  #     data = dataCountsCurrentYear,
-  #     hoverinfo = "text",
-  #     legendgroup = max(inData$date_year, na.rm = TRUE),
-  #     line = list(
-  #       color = "rgba(25, 25, 25, 1.0)",
-  #       shape = "hvh", # https://plotly.com/python/line-charts/
-  #       width = 1.0
-  #     ),
-  #     marker = list(
-  #       color = "rgba(25, 25, 25, 1.0)",
-  #       size = 2
-  #     ),
-  #     name = max(inData$date_year, na.rm = TRUE),
-  #     showlegend = FALSE,
-  #     text = ~paste0(
-  #       "<b>Date:</b>  ", gsub(" 0", " ", format(pseudo_date, "%b %d, %Y")),
-  #       "<br><b>Frequency:</b>  ", `Level 1`, "<br>"
-  #     )
-  #   )
+  # Dew point temperature -----
   
-  # Relative humidity mean -----
+  dewPointTemperature <-
+    plotly::plot_ly(
+      data = dataOtherStations,
+      x = ~datetime,
+      y = ~dwpt_30cm_meanF,
+      type = "scatter",
+      mode = "lines+markers",
+      hoverinfo = "text",
+      line = list(
+        color = "rgba(201, 201, 201, 1.0)",
+        width = 1.0
+      ),
+      marker = list(
+        color = "rgba(201, 201, 201, 1.0)",
+        size = 2
+      ),
+      name = "other stations",
+      showlegend = TRUE,
+      text = ~paste0(
+        "<br><b>T<sub>dew point</sub></b><sup>", tags$span(style = "font-weight: normal", "1"), "</sup><b>:</b>  ", dwpt_30cm_meanF,
+        "<br><b>AZMet Station:</b>  ", meta_station_name,
+        "<br><b>Date:</b>  ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+        "<br><b>Time:</b>  ", format(datetime, "%H:%M:%S")
+      )
+    ) %>%
+    
+    plotly::add_trace(
+      inherit = FALSE,
+      data = dataSelectedStation,
+      x = ~datetime,
+      y = ~dwpt_30cm_meanF,
+      type = "scatter",
+      mode = "lines+markers",
+      hoverinfo = "text",
+      line = list(
+        color = "rgba(19, 19, 19, 1.0)",
+        width = 1.0
+      ),
+      marker = list(
+        color = "rgba(19, 19, 19, 1.0)",
+        size = 2
+      ),
+      name = ~meta_station_name,
+      showlegend = TRUE,
+      text = ~paste0(
+        "<br><b>T<sub>dew point</sub></b><sup>", tags$span(style = "font-weight: normal", "1"), "</sup><b>:</b>  ", dwpt_30cm_meanF,
+        "<br><b>AZMet Station:</b>  ", meta_station_name,
+        "<br><b>Date:</b>  ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+        "<br><b>Time:</b>  ", format(datetime, "%H:%M:%S")
+      )
+    )
+  
+  # Relative humidity -----
   
   relativeHumidity <-
     plotly::plot_ly(
@@ -165,7 +261,6 @@ fxn_past24HoursGraph <- function(inData, azmetStation) {
       hoverinfo = "text",
       line = list(
         color = "rgba(201, 201, 201, 1.0)",
-        # shape = "hvh", # https://plotly.com/python/line-charts/
         width = 1.0
       ),
       marker = list(
@@ -173,14 +268,15 @@ fxn_past24HoursGraph <- function(inData, azmetStation) {
         size = 2
       ),
       name = "other stations",
-      showlegend = FALSE,
+      showlegend = TRUE,
       text = ~paste0(
-        # "<br><b>", stationVariable, ":</b>  ", .data[[stationVariable]],
+        "<br><b>RH</b><sup>", tags$span(style = "font-weight: normal", "1"), "</sup><b>:</b>  ", relative_humidity_30cm_mean,
         "<br><b>AZMet Station:</b>  ", meta_station_name,
         "<br><b>Date:</b>  ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
         "<br><b>Time:</b>  ", format(datetime, "%H:%M:%S")
       )
     ) %>%
+    
     plotly::add_trace(
       inherit = FALSE,
       data = dataSelectedStation,
@@ -190,19 +286,17 @@ fxn_past24HoursGraph <- function(inData, azmetStation) {
       mode = "lines+markers",
       hoverinfo = "text",
       line = list(
-        # color = "rgba(19, 19, 19, 1.0)",
-        color = ~meta_station_name,
-        # shape = "hvh", # https://plotly.com/python/line-charts/
+        color = "rgba(19, 19, 19, 1.0)",
         width = 1.0
       ),
       marker = list(
-        # color = "rgba(19, 19, 19, 1.0)",
+        color = "rgba(19, 19, 19, 1.0)",
         size = 2
       ),
       name = ~meta_station_name,
-      showlegend = FALSE,
+      showlegend = TRUE,
       text = ~paste0(
-        # "<br><b>", stationVariable, ":</b>  ", .data[[stationVariable]],
+        "<br><b>RH</b><sup>", tags$span(style = "font-weight: normal", "1"), "</sup><b>:</b>  ", relative_humidity_30cm_mean,
         "<br><b>AZMet Station:</b>  ", meta_station_name,
         "<br><b>Date:</b>  ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
         "<br><b>Time:</b>  ", format(datetime, "%H:%M:%S")
@@ -212,187 +306,188 @@ fxn_past24HoursGraph <- function(inData, azmetStation) {
   
   # Stacked subplots ----------
   
-  past24HoursGraph <- relativeHumidity
-  #   plotly::subplot(
-  #     level2, 
-  #     level1, 
-  #     none,
-  #     #heights = c(1/3, 1/3, 1/3),
-  #     margin = 0.05,
-  #     nrows = 3, 
-  #     shareX = TRUE,
-  #     shareY = TRUE,
-  #     titleX = FALSE,
-  #     titleY = FALSE,
-  #     widths = 1
-  #   ) %>% 
-  #   
-  #   plotly::config(
-  #     displaylogo = FALSE,
-  #     displayModeBar = TRUE,
-  #     modeBarButtonsToRemove = c(
-  #       "autoScale2d",
-  #       "hoverClosestCartesian",
-  #       "hoverCompareCartesian",
-  #       "lasso2d",
-  #       "select"
-  #     ),
-  #     scrollZoom = FALSE,
-  #     toImageButtonOptions = list(
-  #       format = "png", # Either png, svg, jpeg, or webp
-  #       filename = "AZMet-cotton-heat-stress",
-  #       height = 400,
-  #       width = 700,
-  #       scale = 5
-  #     )
-  #   ) %>%
-  #   
-  #   plotly::layout(
-  #     annotations = list(
-  #       list( # No Heat Stress
-  #         align = "left",
-  #         font = list(
-  #           color = "#3b3b3b",
-  #           family = layoutFontFamily,
-  #           size = 12
-  #         ),
-  #         showarrow = FALSE,
-  #         text = "LEVEL 2 HEAT STRESS",
-  #         x = 0,
-  #         xanchor = "left",
-  #         xref = "paper",
-  #         xshift = 24,
-  #         y = max(dataCountsAllYears$None, na.rm = TRUE),
-  #         yanchor = "top",
-  #         yref = "y1"  
-  #       ),
-  #       list( # No Heat Stress
-  #         align = "left",
-  #         font = list(
-  #           color = "#3b3b3b",
-  #           family = layoutFontFamily,
-  #           size = 12
-  #         ),
-  #         showarrow = FALSE,
-  #         text = "LEVEL 1 HEAT STRESS",
-  #         x = 0,
-  #         xanchor = "left",
-  #         xref = "paper",
-  #         xshift = 24,
-  #         y = max(dataCountsAllYears$None, na.rm = TRUE),
-  #         yanchor = "top",
-  #         yref = "y2"  
-  #       ),
-  #       list( # No Heat Stress
-  #         align = "left",
-  #         font = list(
-  #           color = "#3b3b3b",
-  #           family = layoutFontFamily,
-  #           size = 12
-  #         ),
-  #         showarrow = FALSE,
-  #         text = "NO HEAT STRESS",
-  #         x = 0,
-  #         xanchor = "left",
-  #         xref = "paper",
-  #         xshift = 24,
-  #         y = max(dataCountsAllYears$None, na.rm = TRUE),
-  #         yanchor = "top",
-  #         yref = "y3"  
-  #       )
-  #     ),
-  #     font = list(
-  #       color = "#191919",
-  #       family = layoutFontFamily,
-  #       size = 13
-  #     ),
-  #     hoverdistance = 1,
-  #     hoverlabel = list(
-  #       bgcolor = "rgba(255, 255, 255, 0.75)",
-  #       bordercolor = "transparent",
-  #       font = list(
-  #         color = "#191919",
-  #         family = layoutFontFamily,
-  #         size = 14
-  #       )
-  #     ),
-  #     hovermode = "x unified",
-  #     legend = list(
-  #       orientation = "h",
-  #       traceorder = "reversed",
-  #       x = 0.00,
-  #       xanchor = "left",
-  #       xref = "container",
-  #       y = 1.05,
-  #       yanchor = "bottom",
-  #       yref = "container"
-  #     ),
-  #     margin = list(
-  #       l = 0,
-  #       r = 50, # For space between plot and modebar
-  #       b = 80, # For space between x-axis title and caption or figure help text
-  #       t = 0,
-  #       pad = 3
-  #     ),
-  #     modebar = list(
-  #       bgcolor = "#FFFFFF",
-  #       orientation = "v"
-  #     ),
-  #     spikedistance = 1,
-  #     xaxis = list(
-  #       range = list(
-  #         min(dataCountsAllYears$pseudo_date) - 0.5, 
-  #         max(dataCountsAllYears$pseudo_date) + 0.5
-  #       ),
-  #       spikecolor = "#a6a6a6",
-  #       spikedash = "dot",
-  #       spikemode = "across+marker",
-  #       spikesnap = "hovered data",
-  #       spikethickness = "-2",
-  #       tickformat = format("%b %e"),
-  #       title = list(
-  #         font = list(size = 14),
-  #         standoff = 25,
-  #         text = "Month and Day"
-  #       ),
-  #       zeroline = FALSE
-  #     ),
-  #     yaxis = list(
-  #       fixedrange = TRUE,
-  #       range = list(
-  #         0 - 0.1, 
-  #         max(dataCountsAllYears$None, na.rm = TRUE) + 0.1
-  #       ),
-  #       zeroline = TRUE,
-  #       zerolinecolor = "#eee",
-  #       zerolinewidth = 0.5
-  #     ),
-  #     yaxis2 = list(
-  #       fixedrange = TRUE,
-  #       range = list(
-  #         0 - 0.1, 
-  #         max(dataCountsAllYears$None, na.rm = TRUE) + 0.1
-  #       ),
-  #       title = list(
-  #         font = list(size = 14),
-  #         standoff = 25,
-  #         text = "Number of Times in Level (Frequency)"
-  #       ),
-  #       zeroline = TRUE,
-  #       zerolinecolor = "#eee",
-  #       zerolinewidth = 0.5
-  #     ),
-  #     yaxis3 = list(
-  #       fixedrange = TRUE,
-  #       range = list(
-  #         0 - 0.1, 
-  #         max(dataCountsAllYears$None, na.rm = TRUE) + 0.1
-  #       ),
-  #       zeroline = TRUE,
-  #       zerolinecolor = "#eee",
-  #       zerolinewidth = 0.5
-  #     )
-  #   )
+  past24HoursGraph <-
+    plotly::subplot(
+      dielectricConstant,
+      airTemperature,
+      dewPointTemperature,
+      relativeHumidity,
+      #heights = c(1/3, 1/3, 1/3),
+      margin = 0.05,
+      nrows = 4,
+      shareX = TRUE,
+      shareY = FALSE,
+      titleX = FALSE,
+      titleY = FALSE,
+      widths = 1
+    ) %>%
+
+    plotly::config(
+      displaylogo = FALSE,
+      displayModeBar = TRUE,
+      modeBarButtonsToRemove = c(
+        "autoScale2d",
+        "hoverClosestCartesian",
+        "hoverCompareCartesian",
+        "lasso2d",
+        "select"
+      ),
+      scrollZoom = FALSE,
+      toImageButtonOptions = list(
+        format = "png", # Either png, svg, jpeg, or webp
+        filename = "AZMet-leaf-wetness",
+        height = 400,
+        width = 700,
+        scale = 5
+      )
+    ) %>%
+
+    plotly::layout(
+  # #     annotations = list(
+  # #       list( # No Heat Stress
+  # #         align = "left",
+  # #         font = list(
+  # #           color = "#3b3b3b",
+  # #           family = layoutFontFamily,
+  # #           size = 12
+  # #         ),
+  # #         showarrow = FALSE,
+  # #         text = "LEVEL 2 HEAT STRESS",
+  # #         x = 0,
+  # #         xanchor = "left",
+  # #         xref = "paper",
+  # #         xshift = 24,
+  # #         y = max(dataCountsAllYears$None, na.rm = TRUE),
+  # #         yanchor = "top",
+  # #         yref = "y1"  
+  # #       ),
+  # #       list( # No Heat Stress
+  # #         align = "left",
+  # #         font = list(
+  # #           color = "#3b3b3b",
+  # #           family = layoutFontFamily,
+  # #           size = 12
+  # #         ),
+  # #         showarrow = FALSE,
+  # #         text = "LEVEL 1 HEAT STRESS",
+  # #         x = 0,
+  # #         xanchor = "left",
+  # #         xref = "paper",
+  # #         xshift = 24,
+  # #         y = max(dataCountsAllYears$None, na.rm = TRUE),
+  # #         yanchor = "top",
+  # #         yref = "y2"  
+  # #       ),
+  # #       list( # No Heat Stress
+  # #         align = "left",
+  # #         font = list(
+  # #           color = "#3b3b3b",
+  # #           family = layoutFontFamily,
+  # #           size = 12
+  # #         ),
+  # #         showarrow = FALSE,
+  # #         text = "NO HEAT STRESS",
+  # #         x = 0,
+  # #         xanchor = "left",
+  # #         xref = "paper",
+  # #         xshift = 24,
+  # #         y = max(dataCountsAllYears$None, na.rm = TRUE),
+  # #         yanchor = "top",
+  # #         yref = "y3"  
+  # #       )
+  # #     ),
+      font = list(
+        color = "#191919",
+        family = layoutFontFamily,
+        size = 13
+      ),
+      # hoverdistance = 1,
+      # hoverlabel = list(
+      #   bgcolor = "rgba(255, 255, 255, 0.75)",
+      #   bordercolor = "transparent",
+      #   font = list(
+      #     color = "#191919",
+      #     family = layoutFontFamily,
+      #     size = 14
+      #   )
+      # ),
+      # hovermode = "x unified",
+      legend = list(
+        orientation = "h",
+        traceorder = "reversed",
+        x = 0.00,
+        xanchor = "left",
+        xref = "container",
+        y = 1.05,
+        yanchor = "bottom",
+        yref = "container"
+      ),
+      margin = list(
+        l = 0,
+        r = 50, # For space between plot and modebar
+        b = 80, # For space between x-axis title and caption or figure help text
+        t = 0,
+        pad = 3
+      ),
+      modebar = list(
+        bgcolor = "#FFFFFF",
+        orientation = "v"
+      )#,
+      # spikedistance = 1#,
+  # #     xaxis = list(
+  # #       range = list(
+  # #         min(dataCountsAllYears$pseudo_date) - 0.5, 
+  # #         max(dataCountsAllYears$pseudo_date) + 0.5
+  # #       ),
+  # #       spikecolor = "#a6a6a6",
+  # #       spikedash = "dot",
+  # #       spikemode = "across+marker",
+  # #       spikesnap = "hovered data",
+  # #       spikethickness = "-2",
+  # #       tickformat = format("%b %e"),
+  # #       title = list(
+  # #         font = list(size = 14),
+  # #         standoff = 25,
+  # #         text = "Month and Day"
+  # #       ),
+  # #       zeroline = FALSE
+  # #     ),
+  # #     yaxis = list(
+  # #       fixedrange = TRUE,
+  # #       range = list(
+  # #         0 - 0.1, 
+  # #         max(dataCountsAllYears$None, na.rm = TRUE) + 0.1
+  # #       ),
+  # #       zeroline = TRUE,
+  # #       zerolinecolor = "#eee",
+  # #       zerolinewidth = 0.5
+  # #     ),
+  # #     yaxis2 = list(
+  # #       fixedrange = TRUE,
+  # #       range = list(
+  # #         0 - 0.1, 
+  # #         max(dataCountsAllYears$None, na.rm = TRUE) + 0.1
+  # #       ),
+  # #       title = list(
+  # #         font = list(size = 14),
+  # #         standoff = 25,
+  # #         text = "Number of Times in Level (Frequency)"
+  # #       ),
+  # #       zeroline = TRUE,
+  # #       zerolinecolor = "#eee",
+  # #       zerolinewidth = 0.5
+  # #     ),
+  # #     yaxis3 = list(
+  # #       fixedrange = TRUE,
+  # #       range = list(
+  # #         0 - 0.1, 
+  # #         max(dataCountsAllYears$None, na.rm = TRUE) + 0.1
+  # #       ),
+  # #       zeroline = TRUE,
+  # #       zerolinecolor = "#eee",
+  # #       zerolinewidth = 0.5
+  # #     )
+    )
   
   return(past24HoursGraph)
 }

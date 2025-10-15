@@ -64,7 +64,7 @@ fxn_latestConditionsTable <- function(inData) {
           name = 
             htmltools::HTML(
               paste0(
-                "T<sup>", 
+                "T<sub>air</sub><sup>", 
                 tags$span(style = "font-weight: normal", "1,2"),
                 "</sup><br>", 
                 tags$span(style = "font-weight: normal; font-size: 0.8rem", "(°F)")
@@ -81,7 +81,7 @@ fxn_latestConditionsTable <- function(inData) {
           rowHeader = TRUE,
           align = "right",
           vAlign = "center",
-          width = 100
+          width = 60
         ),
         dwpt_30cm_meanF = reactable::colDef(
           name = 
@@ -106,6 +106,24 @@ fxn_latestConditionsTable <- function(inData) {
           align = "right",
           vAlign = "center",
           width = 100
+        ),
+        relative_humidity_30cm_mean = reactable::colDef(
+          name = 
+            htmltools::HTML(
+              paste0(
+                "RH<sup>", 
+                tags$span(style = "font-weight: normal", "1"),
+                "</sup><br>", 
+                tags$span(style = "font-weight: normal; font-size: 0.8rem", "(%)")
+              )
+            ),
+          format = reactable::colFormat(digits = 0),
+          html = TRUE,
+          #na = "NA",
+          rowHeader = TRUE,
+          align = "right",
+          vAlign = "center",
+          width = 60
         ),
         lw_sensor = reactable::colDef(
           name = "&nbsp;&nbsp;&nbsp;Sensor",
@@ -352,28 +370,15 @@ fxn_latestConditionsTable <- function(inData) {
             list(
               color = "#191919",
               fontFamily = "monospace",
-              fontSize = "0.8rem"
-              # borderBottomColor = rgb(180/255, 180/255, 180/255, 1.0),
-              # borderBottomWidth = "1px",
-              # boxShadow = "0px 1px 0px 0px #e3e3e3"
+              fontSize = "0.8rem",
+              borderBottomColor = rgb(180/255, 180/255, 180/255, 1.0),
+              borderBottomWidth = "1px",
+              boxShadow = "0px 1px 0px 0px #e3e3e3"
             ),
           groupHeaderStyle = NULL,
           tableBodyStyle = NULL,
           rowGroupStyle = NULL,
           rowStyle = NULL,
-            # reactablefmtr::group_border_sort( # but, see https://stackoverflow.com/questions/66946229/insert-borders-underneath-selected-rows-in-reactable-r
-            #   columns = "meta_station_name",
-            #   border_color = "red"
-            # ),
-          # htmlwidgets::JS(
-          #   paste0(
-          #     "function(rowInfo) {",
-          #       "if (rowInfo.index % 2 === 0) {", # Check if the row index is even (0-indexed)
-          #         "return { borderBottom: '1px solid #191919' }", # Apply a bottom border to even rows
-          #       "}",
-          #     "}"
-          #   )
-          # ),
           rowStripedStyle = NULL,
           rowHighlightStyle = NULL,
           rowSelectedStyle = NULL,

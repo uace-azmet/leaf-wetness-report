@@ -39,9 +39,9 @@ azmetStationMetadata <- azmetr::station_info |>
     )
   )
 
-maxMeanMV <- 400
+maxMeanMV <- 700#400
 minMeanMV <- 200
-rangeMeanMV <- 200
+rangeMeanMV <- 500#200
 thresholdMeanMVDry <- 250#273
 thresholdMeanMVWet <- 265#284
 thresholdTempAir <- 82#32 # for `latestConditionsTable` warning cell color

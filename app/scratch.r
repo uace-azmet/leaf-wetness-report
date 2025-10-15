@@ -3,6 +3,26 @@ source("./app/R/fxn_latestConditionsData.R", local = TRUE)
 source("./app/R/fxn_c_to_f.R", local = TRUE)
 source("./app/R/fxn_mps_to_mph.R", local = TRUE)
 
+
+
+lw15min <- 
+  azmetr::az_lw15min(
+    start_date_time = 
+      lubridate::now(tzone = "America/Phoenix") - lubridate::hours(25)
+  )
+
+plotly::plot_ly(
+  data = lw15min,
+  x = ~datetime,
+  y = ~relative_humidity_30cm_mean,
+  type = "scatter",
+  mode = "lines+markers"
+)
+
+
+
+
+
 lw15min <- 
   fxn_lw15min() |> 
   fxn_latestConditionsData()

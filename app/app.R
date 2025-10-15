@@ -56,9 +56,9 @@ ui <- htmltools::htmlTemplate(
         bslib::layout_sidebar(
           sidebar = past24HoursSidebar, # `scr##_past24HoursSidebar.R`
         #   
-            shiny::htmlOutput(outputId = "past24HoursTitle"),
-            plotly::plotlyOutput(outputId = "past24HoursGraph"),
-            shiny::htmlOutput(outputId = "past24HoursGraphFooter"),
+          shiny::htmlOutput(outputId = "past24HoursTitle"),
+          plotly::plotlyOutput(outputId = "past24HoursGraph"),
+          shiny::htmlOutput(outputId = "past24HoursGraphFooter"),
         #   
         #   #fillable = TRUE,
         #   #fill = TRUE,
@@ -186,7 +186,7 @@ server <- function(input, output, session) {
     fxn_pageBottomText(activeTab = input$navsetCardTab)
   })
   
-  output$past24HoursGraph <- shiny::renderUI({
+  output$past24HoursGraph <- plotly::renderPlotly({
     shiny::req(lw15min())
     fxn_past24HoursGraph(
       inData = lw15min(),
