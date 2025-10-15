@@ -1,9 +1,10 @@
 #' `fxn_past24HoursTitle.R` - Build title for past 24 hours tab
 #' 
+#' @param azmetStation - AZMet station selection by user
 #' @return `past24HoursTitle` - Title for past 24 hours tab
 
 
-fxn_past24HoursTitle <- function() {
+fxn_past24HoursTitle <- function(azmetStation) {
   past24HoursTitle <- 
     htmltools::p(
       htmltools::HTML(
@@ -13,7 +14,7 @@ fxn_past24HoursTitle <- function() {
           htmltools::HTML("&nbsp;"),
           toupper(
             paste0(
-              "Leaf wetness conditions over the past 24 hours from across Yuma County"
+              "Leaf wetness conditions over the past 24 hours at the AZMet ", azmetStation, " Station"
             )
           ),
           htmltools::HTML("&nbsp;&nbsp;&nbsp;&nbsp;"),

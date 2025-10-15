@@ -57,7 +57,7 @@ ui <- htmltools::htmlTemplate(
           sidebar = past24HoursSidebar, # `scr##_past24HoursSidebar.R`
         #   
             shiny::htmlOutput(outputId = "past24HoursTitle"),
-        #   # plotly::plotlyOutput(outputId = "slsGraph"),
+            plotly::plotlyOutput(outputId = "past24HoursGraph"),
             shiny::htmlOutput(outputId = "past24HoursGraphFooter"),
         #   
         #   #fillable = TRUE,
@@ -172,18 +172,26 @@ server <- function(input, output, session) {
   })
   
   output$latestConditionsTableFooter <- shiny::renderUI({
-    shiny::req(lw15min())
+    shiny::req(latestConditionsData())
     fxn_latestConditionsTableFooter()
   })
   
   output$latestConditionsTitle <- shiny::renderUI({
-    shiny::req(lw15min())
+    shiny::req(latestConditionsData())
     fxn_latestConditionsTitle()
   })
   
   output$pageBottomText <- shiny::renderUI({
     #shiny::req(dataETL())
     fxn_pageBottomText(activeTab = input$navsetCardTab)
+  })
+  
+  output$past24HoursGraph <- shiny::renderUI({
+    shiny::req(lw15min())
+    fxn_past24HoursGraph(
+      inData = lw15min(),
+      azmetStation = input$azmetStation
+    )
   })
   
   output$past24HoursGraphFooter <- shiny::renderUI({
@@ -193,7 +201,7 @@ server <- function(input, output, session) {
   
   output$past24HoursTitle <- shiny::renderUI({
     shiny::req(lw15min()) # Need to change to `lwdaily()`
-    fxn_past24HoursTitle()
+    fxn_past24HoursTitle(azmetStation = input$azmetStation)
   })
   
   output$past30DaysGraphFooter <- shiny::renderUI({
