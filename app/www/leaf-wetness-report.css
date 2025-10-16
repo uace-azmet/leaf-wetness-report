@@ -91,11 +91,24 @@
   color: #191919;
 }
 
-.past-24-hours-graph-footer {
+.past-24-hours-card-header {
+  background-color: #F7F7F7 !important;
+  border-bottom-width: 1px !important;
+  border-bottom-color: var(--bs-card-border-color) !important;
+}
+
+.past-24-hours-card-layout-footer {
   color: #606060; 
   font-size: 0.85rem;
   font-style: normal;
   margin-top: 0.25rem;
+}
+
+.past-24-hours-latest-data-update {
+  color: #191919;
+  font-family: monospace !important;
+  font-size: 0.9rem;
+  margin-bottom: 12px;
 }
 
 .past-24-hours-title {
