@@ -83,7 +83,7 @@ ui <- htmltools::htmlTemplate(
         title = "Past 30 Days",
         
         bslib::layout_sidebar(
-        #   # sidebar = slsSidebar, # `scr##_slsSidebar.R`
+          sidebar = past30DaysSidebar, # `scr##_past30DaysSidebar.R`
         #   
             shiny::htmlOutput(outputId = "past30DaysTitle"),
         #   # plotly::plotlyOutput(outputId = "slsGraph"),
