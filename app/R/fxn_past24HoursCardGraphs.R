@@ -16,6 +16,7 @@ fxn_past24HoursCardGraphs <- function(azmetStation, inData) {
   
   # Variables ----------
   
+  
   inData <- inData %>% 
     dplyr::mutate(
       datetime = lubridate::ymd_hms(datetime),
@@ -38,48 +39,23 @@ fxn_past24HoursCardGraphs <- function(azmetStation, inData) {
   dataSelectedStation <- inData %>%
     dplyr::filter(meta_station_name == azmetStation)
   
-  hoverlabelFontColor = "#FFFFFF"
+  # hoverlabelFontColor = "#FFFFFF"
   hoverlabelFontSize = 14
   layoutFontColor = "#707070"
-  layoutFontColorAnnotation = "#989898"
   layoutFontFamily = "proxima-nova, calibri, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\""
   layoutFontSize = 11
   layoutMargin = 6
   layoutPadding = 0
-  traceLineColorOtherStations = "rgba(201, 201, 201, 1.0)"
+  traceLineColorOtherStations = "#bfbfbf"#"rgba(201, 201, 201, 1.0)"
   traceLineColorSelectedStations = "#191919"
   traceLineWidth = 1
-  traceMarkerColorOtherStations = "rgba(201, 201, 201, 1.0)"
+  traceMarkerColorOtherStations = "#bfbfbf"#"rgba(201, 201, 201, 1.0)"
   traceMarkerColorSelectedStation = "#191919"
   traceMarkerSize = 3
   
-  # Scale Y axis for showing dry-transition-wet conditions
-  maxMeanMVObs <- 
-    max(
-      c(max(inData$lw1_mean_mV, na.rm = TRUE), max(inData$lw2_mean_mV, na.rm = TRUE)), 
-      na.rm = TRUE
-    )
-  
-  if (maxMeanMVObs < thresholdMeanMVWet + 2) {
-    maxMeanMVObs <- thresholdMeanMVWet + 2
-  } else {
-    maxMeanMVObs <- maxMeanMVObs + 2
-  }
-  
-  minMeanMVObs <- 
-    min(
-      c(min(inData$lw1_mean_mV, na.rm = TRUE), min(inData$lw2_mean_mV, na.rm = TRUE)), 
-      na.rm = TRUE
-    )
-  
-  if (minMeanMVObs > thresholdMeanMVWet - 2) {
-    minMeanMVObs <- thresholdMeanMVWet - 2
-  } else {
-    minMeanMVObs <- minMeanMVObs - 2
-  }
-  
   
   # Graphs ----------
+  
   
   past24HoursCardGraphs <- list(
     
@@ -138,9 +114,9 @@ fxn_past24HoursCardGraphs <- function(azmetStation, inData) {
           size = layoutFontSize
         ),
         hoverlabel = list(
-          bordercolor = "rgba(0, 0, 0, 0)",
+          # bordercolor = "rgba(0, 0, 0, 0)",
           font = list(
-            color = hoverlabelFontColor,
+            # color = hoverlabelFontColor,
             family = layoutFontFamily,
             size = hoverlabelFontSize
           )
@@ -245,9 +221,9 @@ fxn_past24HoursCardGraphs <- function(azmetStation, inData) {
           size = layoutFontSize
         ),
         hoverlabel = list(
-          bordercolor = "rgba(0, 0, 0, 0)",
+          # bordercolor = "rgba(0, 0, 0, 0)",
           font = list(
-            color = hoverlabelFontColor,
+            # color = hoverlabelFontColor,
             family = layoutFontFamily,
             size = hoverlabelFontSize
           )
@@ -352,9 +328,9 @@ fxn_past24HoursCardGraphs <- function(azmetStation, inData) {
           size = layoutFontSize
         ),
         hoverlabel = list(
-          bordercolor = "rgba(0, 0, 0, 0)",
+          # bordercolor = "rgba(0, 0, 0, 0)",
           font = list(
-            color = hoverlabelFontColor,
+            # color = hoverlabelFontColor,
             family = layoutFontFamily,
             size = hoverlabelFontSize
           )
@@ -502,23 +478,6 @@ fxn_past24HoursCardGraphs <- function(azmetStation, inData) {
       
       plotly::layout(
         annotations = list(
-          list( # Transition
-            align = "left",
-            font = list(
-              color = "#add8e6",
-              family = layoutFontFamily,
-              size = layoutFontSize
-            ),
-            showarrow = FALSE,
-            text = "Transition between Dry and Wet",
-            x = 0,
-            xanchor = "left",
-            xref = "paper",
-            xshift = 5,
-            y = thresholdMeanMVDry + 1,
-            yanchor = "bottom",
-            yref = "y"
-          ),
           list( # Wet
             align = "left",
             font = list(
@@ -532,15 +491,31 @@ fxn_past24HoursCardGraphs <- function(azmetStation, inData) {
             xanchor = "left",
             xref = "paper",
             xshift = 5,
-            # y = mean(c(maxMeanMVObs, thresholdMeanMVWet)),
-            y = thresholdMeanMVWet + 1,
+            y = thresholdMeanMVWet,
             yanchor = "bottom",
+            yref = "y"
+          ),
+          list( # Transition
+            align = "left",
+            font = list(
+              color = "#81d3eb",
+              family = layoutFontFamily,
+              size = layoutFontSize
+            ),
+            showarrow = FALSE,
+            text = "Transition",
+            x = 0,
+            xanchor = "left",
+            xref = "paper",
+            xshift = 5,
+            y = mean(c(thresholdMeanMVDry, thresholdMeanMVWet)),
+            yanchor = "center",
             yref = "y"
           ),
           list( # Dry
             align = "left",
             font = list(
-              color = layoutFontColorAnnotation,
+              color = "#989898",
               family = layoutFontFamily,
               size = layoutFontSize
             ),
@@ -550,8 +525,8 @@ fxn_past24HoursCardGraphs <- function(azmetStation, inData) {
             xanchor = "left",
             xref = "paper",
             xshift = 5,
-            y = mean(c(minMeanMVObs, thresholdMeanMVDry)),
-            yanchor = "center",
+            y = thresholdMeanMVDry,
+            yanchor = "top",
             yref = "y"
           )
         ),
@@ -561,9 +536,9 @@ fxn_past24HoursCardGraphs <- function(azmetStation, inData) {
           size = layoutFontSize
         ),
         hoverlabel = list(
-          bordercolor = "rgba(0, 0, 0, 0)",
+          # bordercolor = "rgba(0, 0, 0, 0)",
           font = list(
-            color = hoverlabelFontColor,
+            # color = hoverlabelFontColor,
             family = layoutFontFamily,
             size = hoverlabelFontSize
           )
@@ -587,50 +562,30 @@ fxn_past24HoursCardGraphs <- function(azmetStation, inData) {
         ),
         shapes = 
           list(
-            list(
-              # fillcolor = "#add8e6",
-              layer = "below",
-              line = list(color = "#add8e6"),
-              # opacity = 0.5,
-              showlegend = FALSE,
-              # type = "rect",
-              type = "line",
-              x0 = 0,
-              x1 = 1,
-              xref = "paper",
-              y0 = thresholdMeanMVDry, # Transition min
-              y1 = thresholdMeanMVDry, # Transition max
-              # y1 = thresholdMeanMVWet, # Transition max
-              yref = "y"
-            ),
-            list(
-              # fillcolor = "#378dbd",
+            list( # Wet minimum threshold
               layer = "below",
               line = list(color = "#378dbd"),
-              # opacity = 0.5,
               showlegend = FALSE,
               type = "line",
               x0 = 0,
               x1 = 1,
               xref = "paper",
-              y0 = thresholdMeanMVWet, # Wet min
-              y1 = thresholdMeanMVWet, # Wet max
+              y0 = thresholdMeanMVWet,
+              y1 = thresholdMeanMVWet,
               yref = "y"
-            )#,
-            # list(
-            #   fillcolor = "#eeeeee",
-            #   layer = "below",
-            #   line = list(width = 0),
-            #   opacity = 1.0,
-            #   showlegend = FALSE,
-            #   type = "rect",
-            #   x0 = 0,
-            #   x1 = 1,
-            #   xref = "paper",
-            #   y0 = minMeanMVObs, # Dry min
-            #   y1 = thresholdMeanMVDry, #maxMeanMV, # Dry max
-            #   yref = "y"
-            # )
+            ),
+            list( # Transition minimum threshold
+              layer = "below",
+              line = list(color = "#81d3eb"),
+              showlegend = FALSE,
+              type = "line",
+              x0 = 0,
+              x1 = 1,
+              xref = "paper",
+              y0 = thresholdMeanMVDry,
+              y1 = thresholdMeanMVDry,
+              yref = "y"
+            )
           ),
         xaxis = list(
           fixedrange = TRUE,
@@ -660,6 +615,7 @@ fxn_past24HoursCardGraphs <- function(azmetStation, inData) {
         )
       )
   ) # `past24HoursCardGraphs`
+  
   
   return(past24HoursCardGraphs)
 }

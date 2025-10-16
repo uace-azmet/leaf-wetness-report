@@ -214,7 +214,7 @@ fxn_latestConditionsTable <- function(inData) {
                   ),
                   barmode = "overlay",
                   font = list(
-                    color = "#666666",
+                    color = "#707070",
                     family = "proxima-nova, calibri, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
                     size = 12
                   ),
@@ -241,7 +241,7 @@ fxn_latestConditionsTable <- function(inData) {
                         y1 = 1,
                         yref = "paper",
                         line = list(
-                          color = "#666666",
+                          color = "#707070",
                           dash = "solid",
                           width = 1
                         ),
@@ -255,7 +255,7 @@ fxn_latestConditionsTable <- function(inData) {
                         y1 = 1,
                         yref = "paper",
                         line = list(
-                          color = "#666666",
+                          color = "#707070",
                           dash = "solid",
                           width = 1
                         ),

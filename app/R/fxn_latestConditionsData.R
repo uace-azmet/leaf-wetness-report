@@ -6,6 +6,29 @@
 
 fxn_latestConditionsData <- function(inData) {
   
+  # For responsive bar graph scaling -----
+  
+  # maxMeanMV <- 400
+  # minMeanMV <- 200
+  # rangeMeanMV <- maxMeanMV - minMeanMV
+  
+  maxMeanMVObs <- 
+    max(
+      c(
+        max(inData$lw1_mean_mV, na.rm = TRUE), 
+        max(inData$lw2_mean_mV, na.rm = TRUE)
+      ), 
+      na.rm = TRUE
+    )
+  
+  if (maxMeanMVObs > maxMeanMV) {
+    maxMeanMV <- maxMeanMVObs
+    rangeMeanMV <- maxMeanMV - minMeanMV
+  }
+  
+  
+  # Data transform -----
+  
   latestConditionsData <- inData %>%
     dplyr::group_by(meta_station_name) %>%
     dplyr::filter(datetime == max(datetime)) %>%

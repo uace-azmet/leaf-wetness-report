@@ -55,23 +55,22 @@ ui <- htmltools::htmlTemplate(
         
         bslib::layout_sidebar(
           sidebar = past24HoursSidebar, # `scr##_past24HoursSidebar.R`
-        #   
+            
           shiny::htmlOutput(outputId = "past24HoursTitle"),
           shiny::htmlOutput(outputId = "past24HoursLatestDataUpdate"),
-          # plotly::plotlyOutput(outputId = "past24HoursCardLayout"),
           shiny::htmlOutput(outputId = "past24HoursCardLayout"),
           shiny::htmlOutput(outputId = "past24HoursCardLayoutFooter"),
-        #   
-        #   #fillable = TRUE,
-        #   #fill = TRUE,
-        #   #bg = NULL,
-        #   #fg = NULL,
-        #   #border = NULL,
-        #   #border_radius = NULL,
-        #   #border_color = NULL,
-        #   #padding = NULL,
-        #   #gap = NULL,
-        #   #height = NULL
+             
+          #fillable = TRUE,
+          #fill = TRUE,
+          #bg = NULL,
+          #fg = NULL,
+          #border = NULL,
+          #border_radius = NULL,
+          #border_color = NULL,
+          #padding = NULL,
+          #gap = NULL,
+          #height = NULL
         ),
         
         value = "past-24-hours"

@@ -196,5 +196,6 @@ fxn_past24HoursCardLayout <- function(inData, azmetStation, past24HoursCardGraph
     card_DC
   )
   
+  
   return(past24HoursCardLayout)
 }
