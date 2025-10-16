@@ -239,7 +239,7 @@ server <- function(input, output, session) {
   
   output$past24HoursTitle <- shiny::renderUI({
     shiny::req(lw15min())
-    fxn_past24HoursTitle(azmetStation = input$azmetStation)
+    fxn_past24HoursTitle()
   })
   
   output$past30DaysGraphFooter <- shiny::renderUI({

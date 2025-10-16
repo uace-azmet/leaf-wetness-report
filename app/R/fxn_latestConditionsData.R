@@ -39,7 +39,7 @@ fxn_latestConditionsData <- function(inData) {
       condition = dplyr::case_when(
         mean_mV <= thresholdMeanMVDry ~ "Dry",
         mean_mV >= thresholdMeanMVWet ~ "Wet",
-        TRUE ~ "Transition between Wet and Dry"
+        TRUE ~ "Transition between Dry and Wet"
       ),
       temp_air_color = dplyr::case_when(
         temp_air_30cm_meanF <= thresholdTempAir ~ "#f19e1f",
@@ -52,7 +52,7 @@ fxn_latestConditionsData <- function(inData) {
       bar_color = dplyr::case_when(
         mean_mV <= thresholdMeanMVDry ~ "#bfbfbf",
         mean_mV >= thresholdMeanMVWet ~ "#378dbd",
-        TRUE ~ "add8e6" # --azmet-light-blue
+        TRUE ~ "#add8e6" # --azmet-light-blue
       )
     ) %>%
     

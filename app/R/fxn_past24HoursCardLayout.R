@@ -18,7 +18,7 @@ fxn_past24HoursCardLayout <- function(inData, azmetStation, past24HoursCardGraph
     dplyr::filter(datetime == max(datetime)) %>% 
     dplyr::ungroup()
   
-  cardHeight = "200px"
+  cardHeight = "240px"
   classHeader <- "d-flex justify-content-between p-1 past-24-hours-card-header"
   styleHeaderHelpText <- "color: #989898; font-family: monospace; font-weight: normal; font-size: 0.8rem;"
   styleHeaderSub <- "font-family: monospace; font-weight: bold;"

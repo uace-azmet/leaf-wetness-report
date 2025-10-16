@@ -152,10 +152,6 @@ fxn_latestConditionsTable <- function(inData) {
                 marker = list(color = "#eeeeee"),
                 name = "mV range",
                 hoverinfo = "none",
-                # text = ~paste0(
-                #   "<br><b>Condition:</b>  ", condition,
-                #   "<br><b>DC:</b>  ", mean_mV, " mV"
-                # ),
                 showlegend = FALSE,
                 type = "bar",
                 orientation = "h",
