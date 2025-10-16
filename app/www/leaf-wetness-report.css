@@ -1,6 +1,6 @@
 /* class */
 
-/* [data-title]:after {
+[data-title]:after {
     background-color: rgba(30,82,136,0.8) !important;
     border-radius: var(--bs-border-radius) !important;
     color: #FFFFFF !important;
@@ -15,9 +15,9 @@
 }
 
 /* https://stackoverflow.com/questions/77114751/is-it-possible-to-modify-the-arrow-that-collapses-the-sidebar */
-/* .bslib-sidebar-layout > .collapse-toggle > .collapse-icon {
+.bslib-sidebar-layout > .collapse-toggle > .collapse-icon {
   fill: #989898 !important;
-} */
+}
 
 .btn {
   background-color: #FFFFFF; 
@@ -54,6 +54,127 @@
   padding-top: 48px;
 }
 
+.control-label {
+  color: #191919; 
+  font-weight: bold;
+}
+
+.data-display-title {
+  padding-bottom: 0.5rem !important;
+}
+
+.form-control:focus {
+  border: 1px solid #CCCCCC !important;
+  box-shadow: 0 0 0 0.1rem #0000001A;
+}
+
+.latest-conditions-table-footer {
+  color: #606060; 
+  font-size: 0.85rem;
+  font-style: normal;
+  margin-top: 0.25rem;
+}
+
+.latest-conditions-title {
+  color: #191919;
+  padding-bottom: 1rem;
+}
+
+.main.bslib-gap-spacing.html-fill-container {
+  padding-bottom: 24px;
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-top: 48px;
+}
+
+.page-bottom-text {
+  color: #191919;
+}
+
+.past-24-hours-card-header {
+  background-color: #F7F7F7 !important;
+  border-bottom-width: 1px !important;
+  border-bottom-color: var(--bs-card-border-color) !important;
+}
+
+.past-24-hours-card-layout-footer {
+  color: #606060; 
+  font-size: 0.85rem;
+  font-style: normal;
+  margin-top: 0.25rem;
+}
+
+.past-24-hours-latest-data-update {
+  color: #191919;
+  font-family: monospace !important;
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+}
+
+.past-24-hours-title {
+  color: #191919;
+  padding-bottom: 1rem;
+}
+
+.past-30-days-graph-footer {
+  color: #606060; 
+  font-size: 0.85rem;
+  font-style: normal;
+  margin-top: 0.25rem;
+}
+
+.past-30-days-title {
+  color: #191919;
+  padding-bottom: 1rem;
+}
+
+.selectize-dropdown .active {
+  background-color: rgb(226, 233, 235); 
+  color: var(--bs-body-color);
+}
+
+.selectize-dropdown .active:not(.selected) {
+  background-color: rgb(226, 233, 235); 
+  color: var(--bs-body-color);
+}
+
+.selectize-dropdown .selected:not(.active) {
+  background-color: var(--bs-body-bg); 
+  color: var(--bs-body-color);
+}
+
+.selectize-input {
+  border-color: #CCCCCC !important;
+}
+
+.selectize-input.items.full.has-options.has-items {
+  border-radius: 0px;
+}
+
+.shiny-notification {
+  background-color: rgba(30,82,136,0.8) !important; 
+  border-radius: var(--bs-border-radius) !important;
+  box-shadow: 0px 1px 2px rgba(var(--bslib-box-shadow-color-rgb)) !important;
+  color: #FFFFFF !important;
+  font-size: 12pt !important;
+  font-style: italic !important; 
+  font-weight: normal !important;
+  left: calc(50% - 150px) !important;
+  position: fixed !important; 
+  top: calc(50%) !important; 
+}
+
+.sidebar-content.bslib-gap-spacing {
+  padding-bottom: 24px !important;
+  padding-left: 24px !important;
+  padding-right: 24px !important;
+  padding-top: 48px !important;
+}
+
+.tab-content.html-fill-item.html-fill-container {
+  padding-bottom: 24px;
+}
+
 /* .century.active.disabled.focused {
   background-color: rgb(226, 233, 235) !important;
   border-color: none !important;
@@ -66,11 +187,6 @@
   border-color: none !important;
   color: var(--bs-body-color) !important;
   text-shadow: none !important;
-}
-
-.control-label {
-  color: var(--bs-body-color); 
-  font-weight: bold;
 }
 
 .datepicker {
@@ -120,40 +236,7 @@
   text-shadow: none !important;
 }
 
-.figure-help-text {
-  color: #989898;
-  font-size: 0.9rem;
-  font-style: italic;
-}
-
-.form-control:focus {
-  border: 1px solid #CCCCCC !important;
-  box-shadow: 0 0 0 0.1rem #0000001A;
-}
-
-.latest-conditions-table .rt-tr-group .rt-tr:hover {
-  background-color: #e2e9eb !important;
-} */
-
-.latest-conditions-table-footer {
-  color: #606060; 
-  font-size: 0.85rem;
-  font-style: normal;
-  margin-top: 0.25rem;
-}
-
-.latest-conditions-table-title {
-  padding-bottom: 1rem;
-}
-
-/* .main.bslib-gap-spacing.html-fill-container {
-  padding-bottom: 24px;
-  padding-left: 24px;
-  padding-right: 24px;
-  padding-top: 48px;
-}
-
- .modal-body {
+/* .modal-body {
   color: var(--bs-body-color) !important;
 }
 
@@ -214,54 +297,12 @@
   background-color: rgb(226, 233, 235) !important;
 } */
 
-.page-bottom-text {
-  color: #191919;
-}
-
 /*
 .prev:hover {
   background-color: rgb(226, 233, 235) !important;
 }
 
-.selectize-dropdown .active {
-  background-color: rgb(226, 233, 235); 
-  color: var(--bs-body-color);
-}
-
-.selectize-dropdown .active:not(.selected) {
-  background-color: rgb(226, 233, 235); 
-  color: var(--bs-body-color);
-}
-
-.selectize-dropdown .selected:not(.active) {
-  background-color: var(--bs-body-bg); 
-  color: var(--bs-body-color);
-}
-
-.selectize-input {
-  border-color: #CCCCCC !important;
-}
-
-.selectize-input.items.full.has-options.has-items {
-  border-radius: 0px;
-} */
-
-.shiny-notification {
-  background-color: rgba(30,82,136,0.8) !important; 
-  border-radius: var(--bs-border-radius) !important;
-  box-shadow: 0px 1px 2px rgba(var(--bslib-box-shadow-color-rgb)) !important;
-  color: #FFFFFF !important;
-  font-size: 12pt !important;
-  font-style: italic !important; 
-  font-weight: normal !important;
-  left: calc(50% - 150px) !important;
-  position: fixed !important; 
-  top: calc(50%) !important; 
-}
-
-.tab-content.html-fill-item.html-fill-container {
-  padding-bottom: 24px;
-}
+*/
 
 /* .table-condensed {
   background-color: #FFFFFF; 

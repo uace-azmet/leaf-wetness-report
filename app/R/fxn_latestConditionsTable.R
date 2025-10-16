@@ -64,7 +64,7 @@ fxn_latestConditionsTable <- function(inData) {
           name = 
             htmltools::HTML(
               paste0(
-                "T<sup>", 
+                "T<sub>air</sub><sup>", 
                 tags$span(style = "font-weight: normal", "1,2"),
                 "</sup><br>", 
                 tags$span(style = "font-weight: normal; font-size: 0.8rem", "(°F)")
@@ -81,7 +81,7 @@ fxn_latestConditionsTable <- function(inData) {
           rowHeader = TRUE,
           align = "right",
           vAlign = "center",
-          width = 100
+          width = 60
         ),
         dwpt_30cm_meanF = reactable::colDef(
           name = 
@@ -107,15 +107,26 @@ fxn_latestConditionsTable <- function(inData) {
           vAlign = "center",
           width = 100
         ),
-        lw_sensor = reactable::colDef(
+        relative_humidity_30cm_mean = reactable::colDef(
           name = 
             htmltools::HTML(
               paste0(
-                "&nbsp;&nbsp;&nbsp;Sensor<sup>",
+                "RH<sup>", 
                 tags$span(style = "font-weight: normal", "1"),
-                "</sup>"
+                "</sup><br>", 
+                tags$span(style = "font-weight: normal; font-size: 0.8rem", "(%)")
               )
             ),
+          format = reactable::colFormat(digits = 0),
+          html = TRUE,
+          #na = "NA",
+          rowHeader = TRUE,
+          align = "right",
+          vAlign = "center",
+          width = 60
+        ),
+        lw_sensor = reactable::colDef(
+          name = "&nbsp;&nbsp;&nbsp;Sensor",
           html = TRUE,
           na = "NA",
           rowHeader = TRUE,
@@ -127,7 +138,7 @@ fxn_latestConditionsTable <- function(inData) {
           name = 
             htmltools::HTML(
               paste0(
-                "Wetness<sup>",
+                "Condition<sup>",
                 tags$span(style = "font-weight: normal", "4"),
                 "</sup>"
               )
@@ -140,9 +151,8 @@ fxn_latestConditionsTable <- function(inData) {
                 y = ~as.factor(row_number),
                 marker = list(color = "#eeeeee"),
                 name = "mV range",
-                showlegend = FALSE,
                 hoverinfo = "none",
-                hovertext = "none",
+                showlegend = FALSE,
                 type = "bar",
                 orientation = "h",
                 height = 24
@@ -152,12 +162,15 @@ fxn_latestConditionsTable <- function(inData) {
                   inherit = TRUE,
                   x = ~mean_mV_adj,
                   marker = list(color = ~bar_color),
-                  name = "mV value"
+                  name = "mV value",
+                  hovertext = ~condition,
+                  hovertemplate = ~paste0("<b>Condition:  </b>",  .data$condition, "<extra></extra>")
                 ) %>% 
                 
                 plotly::config(
                   displaylogo = FALSE,
-                  displayModeBar = FALSE
+                  displayModeBar = FALSE,
+                  scrollZoom = FALSE
                 ) %>%
                 
                 plotly::layout(
@@ -201,9 +214,15 @@ fxn_latestConditionsTable <- function(inData) {
                   ),
                   barmode = "overlay",
                   font = list(
-                    color = "#191919",
+                    color = "#707070",
                     family = "proxima-nova, calibri, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
                     size = 12
+                  ),
+                  hoverlabel = list(
+                    font = list(
+                      family = "proxima-nova, calibri, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+                      size = 14
+                    )
                   ),
                   margin = list(
                     l = 0,
@@ -222,7 +241,7 @@ fxn_latestConditionsTable <- function(inData) {
                         y1 = 1,
                         yref = "paper",
                         line = list(
-                          color = "#191919",
+                          color = "#707070",
                           dash = "solid",
                           width = 1
                         ),
@@ -236,7 +255,7 @@ fxn_latestConditionsTable <- function(inData) {
                         y1 = 1,
                         yref = "paper",
                         line = list(
-                          ccolor = "#191919",
+                          color = "#707070",
                           dash = "solid",
                           width = 1
                         ),
@@ -278,6 +297,7 @@ fxn_latestConditionsTable <- function(inData) {
           width = 50
         ),
         mean_mV_adj = reactable::colDef(show = FALSE),
+        condition = reactable::colDef(show = FALSE),
         temp_air_color = reactable::colDef(show = FALSE),
         dwpt_color = reactable::colDef(show = FALSE),
         bar_color = reactable::colDef(show = FALSE)
@@ -346,28 +366,15 @@ fxn_latestConditionsTable <- function(inData) {
             list(
               color = "#191919",
               fontFamily = "monospace",
-              fontSize = "0.8rem"
-              # borderBottomColor = rgb(180/255, 180/255, 180/255, 1.0),
-              # borderBottomWidth = "1px",
-              # boxShadow = "0px 1px 0px 0px #e3e3e3"
+              fontSize = "0.8rem",
+              borderBottomColor = rgb(180/255, 180/255, 180/255, 1.0),
+              borderBottomWidth = "1px",
+              boxShadow = "0px 1px 0px 0px #e3e3e3"
             ),
           groupHeaderStyle = NULL,
           tableBodyStyle = NULL,
           rowGroupStyle = NULL,
           rowStyle = NULL,
-            # reactablefmtr::group_border_sort( # but, see https://stackoverflow.com/questions/66946229/insert-borders-underneath-selected-rows-in-reactable-r
-            #   columns = "meta_station_name",
-            #   border_color = "red"
-            # ),
-          # htmlwidgets::JS(
-          #   paste0(
-          #     "function(rowInfo) {",
-          #       "if (rowInfo.index % 2 === 0) {", # Check if the row index is even (0-indexed)
-          #         "return { borderBottom: '1px solid #191919' }", # Apply a bottom border to even rows
-          #       "}",
-          #     "}"
-          #   )
-          # ),
           rowStripedStyle = NULL,
           rowHighlightStyle = NULL,
           rowSelectedStyle = NULL,

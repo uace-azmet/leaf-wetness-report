@@ -41,7 +41,7 @@ ui <- htmltools::htmlTemplate(
       bslib::nav_panel(
         title = "Latest Conditions",
         
-        shiny::htmlOutput(outputId = "latestConditionsTableTitle"),
+        shiny::htmlOutput(outputId = "latestConditionsTitle"),
         reactable::reactableOutput(outputId = "latestConditionsTable"),
         shiny::htmlOutput(outputId = "latestConditionsTableFooter"),
         
@@ -53,24 +53,25 @@ ui <- htmltools::htmlTemplate(
       bslib::nav_panel(
         title = "Past 24 Hours",
         
-        # bslib::layout_sidebar(
-        #   # sidebar = slsSidebar, # `scr##_slsSidebar.R`
-        #   
-        #   # shiny::htmlOutput(outputId = "slsGraphTitle"),
-        #   # plotly::plotlyOutput(outputId = "slsGraph"),
-        #   # shiny::htmlOutput(outputId = "slsGraphFooter"),
-        #   
-        #   #fillable = TRUE,
-        #   #fill = TRUE,
-        #   #bg = NULL,
-        #   #fg = NULL,
-        #   #border = NULL,
-        #   #border_radius = NULL,
-        #   #border_color = NULL,
-        #   #padding = NULL,
-        #   #gap = NULL,
-        #   #height = NULL
-        # ),
+        bslib::layout_sidebar(
+          sidebar = past24HoursSidebar, # `scr##_past24HoursSidebar.R`
+            
+          shiny::htmlOutput(outputId = "past24HoursTitle"),
+          shiny::htmlOutput(outputId = "past24HoursLatestDataUpdate"),
+          shiny::htmlOutput(outputId = "past24HoursCardLayout"),
+          shiny::htmlOutput(outputId = "past24HoursCardLayoutFooter"),
+             
+          #fillable = TRUE,
+          #fill = TRUE,
+          #bg = NULL,
+          #fg = NULL,
+          #border = NULL,
+          #border_radius = NULL,
+          #border_color = NULL,
+          #padding = NULL,
+          #gap = NULL,
+          #height = NULL
+        ),
         
         value = "past-24-hours"
       ),
@@ -81,12 +82,12 @@ ui <- htmltools::htmlTemplate(
       bslib::nav_panel(
         title = "Past 30 Days",
         
-        # bslib::layout_sidebar(
+        bslib::layout_sidebar(
         #   # sidebar = slsSidebar, # `scr##_slsSidebar.R`
         #   
-        #   # shiny::htmlOutput(outputId = "slsGraphTitle"),
+            shiny::htmlOutput(outputId = "past30DaysTitle"),
         #   # plotly::plotlyOutput(outputId = "slsGraph"),
-        #   # shiny::htmlOutput(outputId = "slsGraphFooter"),
+            shiny::htmlOutput(outputId = "past30DaysGraphFooter"),
         #   
         #   #fillable = TRUE,
         #   #fill = TRUE,
@@ -98,7 +99,7 @@ ui <- htmltools::htmlTemplate(
         #   #padding = NULL,
         #   #gap = NULL,
         #   #height = NULL
-        # ),
+        ),
         
         value = "past-30-days"
       )
@@ -164,6 +165,25 @@ server <- function(input, output, session) {
     fxn_latestConditionsData(inData = lw15min())
   })
   
+  past24HoursCardGraphs <- shiny::eventReactive(
+    c(input$azmetStation, lw15min()), {
+      fxn_past24HoursCardGraphs(
+        azmetStation = input$azmetStation,
+        inData = lw15min()
+      )
+    }
+  )
+  
+  past24HoursCardLayout <- shiny::eventReactive(
+    c(input$azmetStation, lw15min(), past24HoursCardGraphs()), {
+      fxn_past24HoursCardLayout(
+        azmetStation = input$azmetStation,
+        inData = lw15min(),
+        past24HoursCardGraphs = past24HoursCardGraphs()
+      )
+    }
+  )
+  
   
   # Outputs -----
   
@@ -172,22 +192,67 @@ server <- function(input, output, session) {
   })
   
   output$latestConditionsTableFooter <- shiny::renderUI({
-    shiny::req(lw15min())
+    shiny::req(latestConditionsData())
     fxn_latestConditionsTableFooter()
   })
   
-  output$latestConditionsTableTitle <- shiny::renderUI({
-    shiny::req(lw15min())
-    fxn_latestConditionsTableTitle()
+  output$latestConditionsTitle <- shiny::renderUI({
+    shiny::req(latestConditionsData())
+    fxn_latestConditionsTitle()
   })
   
   output$pageBottomText <- shiny::renderUI({
-    #shiny::req(dataETL())
+    #shiny::req(lw15min())
     fxn_pageBottomText(activeTab = input$navsetCardTab)
   })
   
+  output$past24HoursCardLayout <- shiny::renderUI({
+    bslib::layout_column_wrap(
+      !!!past24HoursCardLayout(),
+      #class = ,
+      fill = TRUE,
+      fillable = TRUE,
+      fixed_width = FALSE,
+      #gap = "200px",
+      #height = "200px",
+      heights_equal = c("all", "row"),
+      height_mobile = NULL,
+      max_height = NULL,
+      min_height = NULL,
+      width = "300px"
+    )
+  })
+  
+  output$past24HoursLatestDataUpdate <- shiny::renderUI({
+    # shiny::req(lw15min())
+    fxn_past24HoursLatestDataUpdate(
+      azmetStation = input$azmetStation,
+      inData = lw15min()
+    )
+  })
+  
+  output$past24HoursCardLayoutFooter <- shiny::renderUI({
+    shiny::req(lw15min())
+    fxn_past24HoursCardLayoutFooter()
+  })
+  
+  output$past24HoursTitle <- shiny::renderUI({
+    shiny::req(lw15min())
+    fxn_past24HoursTitle()
+  })
+  
+  output$past30DaysGraphFooter <- shiny::renderUI({
+    shiny::req(lw15min()) # Need to change to `lwdaily()`
+    fxn_past30DaysGraphFooter()
+  })
+  
+  output$past30DaysTitle <- shiny::renderUI({
+    shiny::req(lw15min()) # Need to change to `lwdaily()`
+    fxn_past30DaysTitle()
+  })
+  
   output$refreshDataButton <- shiny::renderUI({
-    #shiny::req(dataETL())
+    #shiny::req(lw15min())
     shiny::actionButton(
       inputId = "refreshDataButton", 
       label = "REFRESH DATA",
@@ -197,7 +262,7 @@ server <- function(input, output, session) {
   })
   
   output$refreshDataInfo <- shiny::renderUI({
-    #req(dataETL())
+    #req(lw15min())
     bslib::tooltip(
       bsicons::bs_icon("info-circle"),
       "Click or tap to refresh the above table with the latest leaf wetness conditions.",

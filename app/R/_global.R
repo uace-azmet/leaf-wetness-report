@@ -1,22 +1,23 @@
 # Libraries --------------------
 
+
 library(azmetr)
 library(bslib)
 library(dataui)
 library(dplyr)
 library(htmltools)
 library(htmlwidgets)
-# library(lubridate)
+library(lubridate)
 library(plotly)
 library(reactable)
 library(reactablefmtr)
 library(reshape2)
 library(shiny)
 library(shinyjs)
-# library(vroom)
 
 
 # Files --------------------
+
 
 # Functions. Loaded automatically at app start if in `R` folder
 #source("./R/fxn_functionName.R", local = TRUE)
@@ -29,9 +30,21 @@ shiny::addResourcePath("shinyjs", system.file("srcjs", package = "shinyjs"))
 
 # Variables --------------------
 
+
+azmetStationMetadata <- azmetr::station_info |>
+  dplyr::filter(
+    meta_station_name %in% c(
+      "Roll", 
+      "Wellton ETo", 
+      "Yuma N.Gila", 
+      "Yuma South", 
+      "Yuma Valley"
+    )
+  )
+
 maxMeanMV <- 400
 minMeanMV <- 200
-rangeMeanMV <- 200
-thresholdMeanMVDry <- 250#273
-thresholdMeanMVWet <- 265#284
-thresholdTempAir <- 82#32 # for `latestConditionsTable` warning cell color
+rangeMeanMV <- maxMeanMV - minMeanMV
+thresholdMeanMVDry <- 273#245#273
+thresholdMeanMVWet <- 284#260#284
+thresholdTempAir <- 84#32 # for `latestConditionsTable` warning cell color
