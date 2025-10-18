@@ -28,16 +28,9 @@ past24HoursSidebar <-
     ),
     
     shiny::selectInput(
-      inputId = "azmetStation",
+      inputId = "azmetStationPast24Hours",
       label = "AZMet Station",
       choices = azmetStationMetadata[order(azmetStationMetadata$meta_station_name), ]$meta_station_name,
       selected = azmetStationMetadata[order(azmetStationMetadata$meta_station_name), ]$meta_station_name[1]
     )
-    
-    # shiny::selectInput(
-    #   inputId = "stationVariable", 
-    #   label = "Station Variable",
-    #   choices = NULL, # see `app.R`, shiny::updateSelectInput(inputId = "stationVariable")
-    #   selected = NULL # see `app.R`, shiny::updateSelectInput(inputId = "stationVariable")
-    # )
-  ) # bslib::sidebar()
+  )

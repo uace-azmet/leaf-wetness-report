@@ -84,21 +84,22 @@ ui <- htmltools::htmlTemplate(
         
         bslib::layout_sidebar(
           sidebar = past30DaysSidebar, # `scr##_past30DaysSidebar.R`
-        #   
-            shiny::htmlOutput(outputId = "past30DaysTitle"),
-        #   # plotly::plotlyOutput(outputId = "slsGraph"),
-            shiny::htmlOutput(outputId = "past30DaysGraphFooter"),
-        #   
-        #   #fillable = TRUE,
-        #   #fill = TRUE,
-        #   #bg = NULL,
-        #   #fg = NULL,
-        #   #border = NULL,
-        #   #border_radius = NULL,
-        #   #border_color = NULL,
-        #   #padding = NULL,
-        #   #gap = NULL,
-        #   #height = NULL
+          
+          shiny::htmlOutput(outputId = "past30DaysTitle"),
+          shiny::htmlOutput(outputId = "past30DaysLatestDataUpdate"),
+          shiny::htmlOutput(outputId = "past30DaysCardLayout"),
+          shiny::htmlOutput(outputId = "past30DaysCardLayoutFooter"),
+
+          #fillable = TRUE,
+          #fill = TRUE,
+          #bg = NULL,
+          #fg = NULL,
+          #border = NULL,
+          #border_radius = NULL,
+          #border_color = NULL,
+          #padding = NULL,
+          #gap = NULL,
+          #height = NULL
         ),
         
         value = "past-30-days"
@@ -109,15 +110,6 @@ ui <- htmltools::htmlTemplate(
         class = "border-0 rounded-0 shadow-none"
       ),
 
-    # htmltools::div(
-    #   shiny::uiOutput(outputId = "refreshDataButton"), # Common, regardless of card tab
-    #   htmltools::HTML("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"),
-    #   shiny::uiOutput(outputId = "refreshDataInfo"), # Common, regardless of card tab
-    #   
-    #   style = "display: flex; align-items: top; gap: 0px;", # Flexbox styling
-    # ),
-    
-    # shiny::htmlOutput(outputId = "downloadButtonsDiv"),
     htmltools::div(
       shiny::uiOutput(outputId = "refreshDataButton"), # Common, regardless of card tab
       htmltools::HTML("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"),
@@ -151,6 +143,10 @@ server <- function(input, output, session) {
   
   # Reactives -----
   
+  latestConditionsData <- shiny::eventReactive(lw15min(), {
+    fxn_latestConditionsData(inData = lw15min())
+  })
+  
   lw15min <- shiny::reactive({
     fxn_lw15min()
   }) %>% 
@@ -160,26 +156,44 @@ server <- function(input, output, session) {
       ignoreInit = TRUE
     )
   
-  # Filter and format latest conditions data for the most recent report from each station
-  latestConditionsData <- shiny::eventReactive(lw15min(), {
-    fxn_latestConditionsData(inData = lw15min())
+  lwdaily <- shiny::eventReactive(lw15min(), {
+    fxn_lwdaily()
   })
   
   past24HoursCardGraphs <- shiny::eventReactive(
-    c(input$azmetStation, lw15min()), {
+    c(input$azmetStationPast24Hours, lw15min()), {
       fxn_past24HoursCardGraphs(
-        azmetStation = input$azmetStation,
+        azmetStation = input$azmetStationPast24Hours,
         inData = lw15min()
       )
     }
   )
   
   past24HoursCardLayout <- shiny::eventReactive(
-    c(input$azmetStation, lw15min(), past24HoursCardGraphs()), {
+    c(input$azmetStationPast24Hours, lw15min(), past24HoursCardGraphs()), {
       fxn_past24HoursCardLayout(
-        azmetStation = input$azmetStation,
+        azmetStation = input$azmetStationPast24Hours,
         inData = lw15min(),
         past24HoursCardGraphs = past24HoursCardGraphs()
+      )
+    }
+  )
+  
+  past30DaysCardGraphs <- shiny::eventReactive(
+    c(input$azmetStationPast30Days, lwdaily()), {
+      fxn_past30DaysCardGraphs(
+        azmetStation = input$azmetStationPast30Days,
+        inData = lwdaily()
+      )
+    }
+  )
+  
+  past30DaysCardLayout <- shiny::eventReactive(
+    c(input$azmetStationPast30Days, lwdaily(), past30DaysCardGraphs()), {
+      fxn_past30DaysCardLayout(
+        azmetStation = input$azmetStationPast30Days,
+        inData = lwdaily(),
+        past30DaysCardGraphs = past30DaysCardGraphs()
       )
     }
   )
@@ -226,7 +240,7 @@ server <- function(input, output, session) {
   output$past24HoursLatestDataUpdate <- shiny::renderUI({
     # shiny::req(lw15min())
     fxn_past24HoursLatestDataUpdate(
-      azmetStation = input$azmetStation,
+      azmetStation = input$azmetStationPast24Hours,
       inData = lw15min()
     )
   })
@@ -241,13 +255,38 @@ server <- function(input, output, session) {
     fxn_past24HoursTitle()
   })
   
-  output$past30DaysGraphFooter <- shiny::renderUI({
-    shiny::req(lw15min()) # Need to change to `lwdaily()`
-    fxn_past30DaysGraphFooter()
+  output$past30DaysCardLayout <- shiny::renderUI({
+    bslib::layout_column_wrap(
+      !!!past30DaysCardLayout(),
+      #class = ,
+      fill = TRUE,
+      fillable = TRUE,
+      fixed_width = FALSE,
+      #gap = "200px",
+      #height = "200px",
+      heights_equal = c("all", "row"),
+      height_mobile = NULL,
+      max_height = NULL,
+      min_height = NULL,
+      width = "300px"
+    )
+  })
+  
+  output$past30DaysLatestDataUpdate <- shiny::renderUI({
+    # shiny::req(lwdaily())
+    fxn_past30DaysLatestDataUpdate(
+      azmetStation = input$azmetStationPast30Days,
+      inData = lwdaily()
+    )
+  })
+  
+  output$past30DaysCardLayoutFooter <- shiny::renderUI({
+    shiny::req(lwdaily())
+    fxn_past30DaysCardLayoutFooter()
   })
   
   output$past30DaysTitle <- shiny::renderUI({
-    shiny::req(lw15min()) # Need to change to `lwdaily()`
+    shiny::req(lwdaily())
     fxn_past30DaysTitle()
   })
   

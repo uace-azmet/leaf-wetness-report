@@ -1,25 +1,25 @@
-#' `fxn_past24HoursCardLayout.R` - Generate list of cards with 15-minute variable time series of 30-cm conditions based on selected station
+#' `fxn_past30DaysCardLayout.R` - Generate list of cards with daily variable time series of 30-cm conditions based on selected station
 #' 
 #' @param azmetStation - user-specified AZMet station
-#' @param inData - AZMet 15-minute leaf wetness data from `fxn_lw15min.R`
-#' @param past24HoursCardGraphs - `list` of plotly graphs from `fxn_past24HoursCardGraphs.R`
-#' @return `past24HoursCardLayout` - `list` of cards with 15-minute variable time series of 30-cm conditions based on selected station
+#' @param inData - AZMet daily leaf wetness data from `fxn_lwdaily.R`
+#' @param past30DaysCardGraphs - `list` of plotly graphs from `fxn_past30DaysCardGraphs.R`
+#' @return `past30DaysCardLayout` - `list` of cards with daily variable time series of 30-cm conditions based on selected station
 
 
-fxn_past24HoursCardLayout <- function(inData, azmetStation, past24HoursCardGraphs) {
+fxn_past30DaysCardLayout <- function(inData, azmetStation, past30DaysCardGraphs) {
   
   
   # Variables ----------
   
   inData <- inData %>%
     dplyr::filter(meta_station_name == azmetStation) %>% 
-    dplyr::mutate(datetime = lubridate::ymd_hms(datetime)) %>% 
+    dplyr::mutate(date = lubridate::ymd(date)) %>% 
     dplyr::group_by(meta_station_name) %>% 
-    dplyr::filter(datetime == max(datetime)) %>% 
+    dplyr::filter(date == max(date)) %>% 
     dplyr::ungroup()
   
   cardHeight = "240px"
-  classHeader <- "d-flex justify-content-between p-1 past-24-hours-card-header"
+  classHeader <- "d-flex justify-content-between p-1 past-30-days-card-header"
   styleHeaderHelpText <- "color: #989898; font-family: monospace; font-weight: normal; font-size: 0.8rem;"
   styleHeaderSub <- "font-family: monospace; font-weight: bold;"
   styleHeaderSup <- "font-family: monospace; font-weight: normal;"
@@ -56,9 +56,9 @@ fxn_past24HoursCardLayout <- function(inData, azmetStation, past24HoursCardGraph
       class = classHeader
     ),
     
-    bslib::card_body(past24HoursCardGraphs[[1]], class = "p-0"),
+    bslib::card_body(past30DaysCardGraphs[[1]], class = "p-0"),
     
-    class = "past-24-hours-card",
+    class = "past-30-days-card",
     fill = TRUE,
     full_screen = TRUE,
     height = cardHeight,
@@ -96,9 +96,9 @@ fxn_past24HoursCardLayout <- function(inData, azmetStation, past24HoursCardGraph
       class = classHeader
     ),
     
-    bslib::card_body(past24HoursCardGraphs[[2]], class = "p-0"),
+    bslib::card_body(past30DaysCardGraphs[[2]], class = "p-0"),
     
-    class = "past-24-hours-card",
+    class = "past-30-days-card",
     fill = TRUE,
     full_screen = TRUE,
     height = cardHeight,
@@ -136,9 +136,9 @@ fxn_past24HoursCardLayout <- function(inData, azmetStation, past24HoursCardGraph
       class = classHeader
     ),
     
-    bslib::card_body(past24HoursCardGraphs[[3]], class = "p-0"),
+    bslib::card_body(past30DaysCardGraphs[[3]], class = "p-0"),
     
-    class = "past-24-hours-card",
+    class = "past-30-days-card",
     fill = TRUE,
     full_screen = TRUE,
     height = cardHeight,
@@ -148,54 +148,54 @@ fxn_past24HoursCardLayout <- function(inData, azmetStation, past24HoursCardGraph
   )
   
   
-  # `lw*_mean_mV` -----
+  # `lw*_total_wet_hrs` -----
   
-  card_DC <- bslib::card(
-    bslib::card_header(
-      htmltools::div(
-        htmltools::HTML(
-          paste0(
-            tags$span(style = styleHeaderVariable, "DC"),
-            "<sup>", tags$span(style = styleHeaderSup, "1,2"), "</sup>"
-          )
-        )
-      ),
-      htmltools::div(
-        htmltools::HTML(
-          paste0(
-            tags$span(style = styleHeaderHelpText, "Latest Update: "),
-            tags$span(
-              style = styleHeaderValue,
-              paste0(format(inData$lw1_mean_mV, nsmall = 0), ", ", format(inData$lw2_mean_mV, nsmall = 0), " mV")
-            )
-          )
-        )
-      ),
-      
-      class = classHeader
-    ),
-    
-    bslib::card_body(past24HoursCardGraphs[[4]], class = "p-0"),
-    
-    class = "past-24-hours-card",
-    fill = TRUE,
-    full_screen = TRUE,
-    height = cardHeight,
-    id = NULL,
-    max_height = cardHeight,
-    min_height = cardHeight
-  ) 
+  # card_wet_hrs <- bslib::card(
+  #   bslib::card_header(
+  #     htmltools::div(
+  #       htmltools::HTML(
+  #         paste0(
+  #           tags$span(style = styleHeaderVariable, "Wet Hours"),
+  #           "<sup>", tags$span(style = styleHeaderSup, "1,2"), "</sup>"
+  #         )
+  #       )
+  #     ),
+  #     htmltools::div(
+  #       htmltools::HTML(
+  #         paste0(
+  #           tags$span(style = styleHeaderHelpText, "Latest Update: "),
+  #           tags$span(
+  #             style = styleHeaderValue,
+  #             paste0(format(inData$lw1_total_wet_hrs, nsmall = 0), ", ", format(inData$lw1_total_wet_hrs, nsmall = 0), " h")
+  #           )
+  #         )
+  #       )
+  #     ),
+  #     
+  #     class = classHeader
+  #   ),
+  #   
+  #   bslib::card_body(past30DaysCardGraphs[[4]], class = "p-0"),
+  #   
+  #   class = "past-30-days-card",
+  #   fill = TRUE,
+  #   full_screen = TRUE,
+  #   height = cardHeight,
+  #   id = NULL,
+  #   max_height = cardHeight,
+  #   min_height = cardHeight
+  # ) 
   
   
   # Card layout list ----------
   
-  past24HoursCardLayout <- list(
+  past30DaysCardLayout <- list(
     card_RH, 
     card_T, 
-    card_Tdewpoint,
-    card_DC
+    card_Tdewpoint#,
+    # card_wet_hrs
   )
   
   
-  return(past24HoursCardLayout)
+  return(past30DaysCardLayout)
 }
