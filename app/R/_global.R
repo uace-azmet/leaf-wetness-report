@@ -31,6 +31,9 @@ shiny::addResourcePath("shinyjs", system.file("srcjs", package = "shinyjs"))
 # Variables --------------------
 
 
+azmetStationPast24Hours <- shiny::reactiveVal(value = "Roll")
+azmetStationPast30Days <- shiny::reactiveVal(value = "Roll")
+
 azmetStationMetadata <- azmetr::station_info |>
   dplyr::filter(
     meta_station_name %in% c(

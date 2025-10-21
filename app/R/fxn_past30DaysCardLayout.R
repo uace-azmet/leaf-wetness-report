@@ -18,7 +18,7 @@ fxn_past30DaysCardLayout <- function(inData, azmetStation, past30DaysCardGraphs)
     dplyr::filter(date == max(date)) %>% 
     dplyr::ungroup()
   
-  cardHeight = "240px"
+  cardHeight = "360px"
   classHeader <- "d-flex justify-content-between p-1 past-30-days-card-header"
   styleHeaderHelpText <- "color: #989898; font-family: monospace; font-weight: normal; font-size: 0.8rem;"
   styleHeaderSub <- "font-family: monospace; font-weight: bold;"
@@ -29,7 +29,7 @@ fxn_past30DaysCardLayout <- function(inData, azmetStation, past30DaysCardGraphs)
   
   # Cards ----------
   
-  # `relative_humidity_30cm_mean` -----
+  # `relative_humidity_30cm_*` -----
   
   card_RH <- bslib::card(
     bslib::card_header(
@@ -47,7 +47,14 @@ fxn_past30DaysCardLayout <- function(inData, azmetStation, past30DaysCardGraphs)
             tags$span(style = styleHeaderHelpText, "Latest Update: "),
             tags$span(
               style = styleHeaderValue,
-              paste0(format(inData$relative_humidity_30cm_mean, nsmall = 0)," %")
+              paste0(
+                format(inData$relative_humidity_30cm_max, nsmall = 0),
+                ", ",
+                format(inData$relative_humidity_30cm_mean, nsmall = 0),
+                ", ",
+                format(inData$relative_humidity_30cm_min, nsmall = 0),
+                " %"
+              )
             )
           )
         )
@@ -68,7 +75,7 @@ fxn_past30DaysCardLayout <- function(inData, azmetStation, past30DaysCardGraphs)
   )
   
   
-  # `temp_air_30cm_meanF` -----
+  # `temp_air_30cm_*` -----
   
   card_T <- bslib::card(
     bslib::card_header(
@@ -87,7 +94,14 @@ fxn_past30DaysCardLayout <- function(inData, azmetStation, past30DaysCardGraphs)
             tags$span(style = styleHeaderHelpText, "Latest Update: "),
             tags$span(
               style = styleHeaderValue,
-              htmltools::HTML(paste0(format(inData$temp_air_30cm_meanF, nsmall = 1), " °F"))
+              paste0(
+                format(inData$temp_air_30cm_maxF, nsmall = 1),
+                ", ",
+                format(inData$temp_air_30cm_meanF, nsmall = 1),
+                ", ",
+                format(inData$temp_air_30cm_minF, nsmall = 1),
+                " °F"
+              )
             )
           )
         )
@@ -127,7 +141,14 @@ fxn_past30DaysCardLayout <- function(inData, azmetStation, past30DaysCardGraphs)
             tags$span(style = styleHeaderHelpText, "Latest Update: "),
             tags$span(
               style = styleHeaderValue,
-              paste0(format(inData$dwpt_30cm_meanF, nsmall = 1)," °F")
+              paste0(
+                format(inData$dwpt_30cm_maxF, nsmall = 1),
+                ", ",
+                format(inData$dwpt_30cm_meanF, nsmall = 1),
+                ", ",
+                format(inData$dwpt_30cm_minF, nsmall = 1),
+                " °F"
+              )
             )
           )
         )

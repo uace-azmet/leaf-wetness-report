@@ -31,6 +31,6 @@ past24HoursSidebar <-
       inputId = "azmetStationPast24Hours",
       label = "AZMet Station",
       choices = azmetStationMetadata[order(azmetStationMetadata$meta_station_name), ]$meta_station_name,
-      selected = azmetStationMetadata[order(azmetStationMetadata$meta_station_name), ]$meta_station_name[1]
+      selected = NULL # azmetStationMetadata[order(azmetStationMetadata$meta_station_name), ]$meta_station_name[1]
     )
   )

@@ -140,6 +140,30 @@ server <- function(input, output, session) {
     shinyjs::showElement("refreshDataInfo")
   })
   
+  shiny::observeEvent(input$azmetStationPast30Days, {
+    azmetStationPast24Hours(input$azmetStationPast30Days)
+    shiny::updateSelectInput(
+      inputId = "azmetStationPast24Hours",
+      label = "AZMet Station",
+      # choices = sort(unique(azmetStationMetadata[order(azmetStationMetadata$meta_station_name), ]$meta_station_name)),
+      selected = azmetStationPast24Hours()
+    )
+  },
+  ignoreInit = TRUE
+  )
+
+ shiny::observeEvent(input$azmetStationPast24Hours, {
+    azmetStationPast30Days(input$azmetStationPast24Hours)
+    shiny::updateSelectInput(
+      inputId = "azmetStationPast30Days",
+      label = "AZMet Station",
+      # choices = sort(unique(azmetStationMetadata[order(azmetStationMetadata$meta_station_name), ]$meta_station_name)),
+      selected = azmetStationPast30Days()
+    )
+  },
+  ignoreInit = TRUE
+  )
+  
   
   # Reactives -----
   
