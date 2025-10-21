@@ -326,12 +326,22 @@ server <- function(input, output, session) {
   
   output$refreshDataInfo <- shiny::renderUI({
     #req(lw15min())
-    bslib::tooltip(
-      bsicons::bs_icon("info-circle"),
-      "Click or tap to refresh the above table with the latest leaf wetness conditions.",
-      id = "refreshDataInfo",
-      placement = "right"
-    )
+    activeTab = input$navsetCardTab
+    if (activeTab == "latest-conditions") {
+      bslib::tooltip(
+        bsicons::bs_icon("info-circle"),
+        "Click or tap to refresh the above table with the latest leaf wetness conditions.",
+        id = "refreshDataInfo",
+        placement = "right"
+      )
+    } else {
+      bslib::tooltip(
+        bsicons::bs_icon("info-circle"),
+        "Click or tap to refresh the above graphs with the latest leaf wetness conditions.",
+        id = "refreshDataInfo",
+        placement = "right"
+      )
+    }
   })
 }
 

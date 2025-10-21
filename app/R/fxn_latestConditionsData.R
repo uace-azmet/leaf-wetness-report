@@ -24,7 +24,12 @@ fxn_latestConditionsData <- function(inData) {
   if (maxMeanMVObs > maxMeanMV) {
     maxMeanMV <- maxMeanMVObs
     rangeMeanMV <- maxMeanMV - minMeanMV
-  }
+  } 
+  
+  # TO-DO: revert back to initial values
+  # else {
+  #   
+  # }
   
   
   # Data transform -----

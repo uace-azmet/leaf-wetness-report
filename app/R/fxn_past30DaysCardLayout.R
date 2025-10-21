@@ -41,24 +41,6 @@ fxn_past30DaysCardLayout <- function(inData, azmetStation, past30DaysCardGraphs)
           )
         )
       ),
-      htmltools::div(
-        htmltools::HTML(
-          paste0(
-            tags$span(style = styleHeaderHelpText, "Latest Update: "),
-            tags$span(
-              style = styleHeaderValue,
-              paste0(
-                format(inData$relative_humidity_30cm_max, nsmall = 0),
-                ", ",
-                format(inData$relative_humidity_30cm_mean, nsmall = 0),
-                ", ",
-                format(inData$relative_humidity_30cm_min, nsmall = 0),
-                " %"
-              )
-            )
-          )
-        )
-      ),
       
       class = classHeader
     ),
@@ -85,24 +67,6 @@ fxn_past30DaysCardLayout <- function(inData, azmetStation, past30DaysCardGraphs)
             tags$span(style = styleHeaderVariable, "T"),
             "<sub>", tags$span(style = styleHeaderSub, "air"), "</sub>",
             "<sup>", tags$span(style = styleHeaderSup, "1"), "</sup>"
-          )
-        )
-      ),
-      htmltools::div(
-        htmltools::HTML(
-          paste0(
-            tags$span(style = styleHeaderHelpText, "Latest Update: "),
-            tags$span(
-              style = styleHeaderValue,
-              paste0(
-                format(inData$temp_air_30cm_maxF, nsmall = 1),
-                ", ",
-                format(inData$temp_air_30cm_meanF, nsmall = 1),
-                ", ",
-                format(inData$temp_air_30cm_minF, nsmall = 1),
-                " °F"
-              )
-            )
           )
         )
       ),
@@ -135,24 +99,6 @@ fxn_past30DaysCardLayout <- function(inData, azmetStation, past30DaysCardGraphs)
           )
         )
       ),
-      htmltools::div(
-        htmltools::HTML(
-          paste0(
-            tags$span(style = styleHeaderHelpText, "Latest Update: "),
-            tags$span(
-              style = styleHeaderValue,
-              paste0(
-                format(inData$dwpt_30cm_maxF, nsmall = 1),
-                ", ",
-                format(inData$dwpt_30cm_meanF, nsmall = 1),
-                ", ",
-                format(inData$dwpt_30cm_minF, nsmall = 1),
-                " °F"
-              )
-            )
-          )
-        )
-      ),
       
       class = classHeader
     ),
@@ -169,43 +115,32 @@ fxn_past30DaysCardLayout <- function(inData, azmetStation, past30DaysCardGraphs)
   )
   
   
-  # `lw*_total_wet_hrs` -----
+  # `lw*_total_***_hrs` -----
   
-  # card_wet_hrs <- bslib::card(
-  #   bslib::card_header(
-  #     htmltools::div(
-  #       htmltools::HTML(
-  #         paste0(
-  #           tags$span(style = styleHeaderVariable, "Wet Hours"),
-  #           "<sup>", tags$span(style = styleHeaderSup, "1,2"), "</sup>"
-  #         )
-  #       )
-  #     ),
-  #     htmltools::div(
-  #       htmltools::HTML(
-  #         paste0(
-  #           tags$span(style = styleHeaderHelpText, "Latest Update: "),
-  #           tags$span(
-  #             style = styleHeaderValue,
-  #             paste0(format(inData$lw1_total_wet_hrs, nsmall = 0), ", ", format(inData$lw1_total_wet_hrs, nsmall = 0), " h")
-  #           )
-  #         )
-  #       )
-  #     ),
-  #     
-  #     class = classHeader
-  #   ),
-  #   
-  #   bslib::card_body(past30DaysCardGraphs[[4]], class = "p-0"),
-  #   
-  #   class = "past-30-days-card",
-  #   fill = TRUE,
-  #   full_screen = TRUE,
-  #   height = cardHeight,
-  #   id = NULL,
-  #   max_height = cardHeight,
-  #   min_height = cardHeight
-  # ) 
+  card_condition_hrs <- bslib::card(
+    bslib::card_header(
+      htmltools::div(
+        htmltools::HTML(
+          paste0(
+            tags$span(style = styleHeaderVariable, "Condition"),
+            "<sup>", tags$span(style = styleHeaderSup, "1"), "</sup>"
+          )
+        )
+      ),
+      
+      class = classHeader
+    ),
+    
+    bslib::card_body(past30DaysCardGraphs[[4]], class = "p-0"),
+    
+    class = "past-30-days-card",
+    fill = TRUE,
+    full_screen = TRUE,
+    height = cardHeight,
+    id = NULL,
+    max_height = cardHeight,
+    min_height = cardHeight
+  )
   
   
   # Card layout list ----------
@@ -213,8 +148,8 @@ fxn_past30DaysCardLayout <- function(inData, azmetStation, past30DaysCardGraphs)
   past30DaysCardLayout <- list(
     card_RH, 
     card_T, 
-    card_Tdewpoint#,
-    # card_wet_hrs
+    card_Tdewpoint,
+    card_condition_hrs
   )
   
   
