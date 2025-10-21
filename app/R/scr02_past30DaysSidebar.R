@@ -1,4 +1,4 @@
-past24HoursSidebar <- 
+past30DaysSidebar <- 
   bslib::sidebar(
     width = 300,
     position = "left",
@@ -28,7 +28,7 @@ past24HoursSidebar <-
     ),
     
     shiny::selectInput(
-      inputId = "azmetStationPast24Hours",
+      inputId = "azmetStationPast30Days",
       label = "AZMet Station",
       choices = azmetStationMetadata[order(azmetStationMetadata$meta_station_name), ]$meta_station_name,
       selected = NULL # azmetStationMetadata[order(azmetStationMetadata$meta_station_name), ]$meta_station_name[1]

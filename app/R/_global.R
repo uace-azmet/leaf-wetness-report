@@ -31,6 +31,9 @@ shiny::addResourcePath("shinyjs", system.file("srcjs", package = "shinyjs"))
 # Variables --------------------
 
 
+azmetStationPast24Hours <- shiny::reactiveVal(value = "Roll")
+azmetStationPast30Days <- shiny::reactiveVal(value = "Roll")
+
 azmetStationMetadata <- azmetr::station_info |>
   dplyr::filter(
     meta_station_name %in% c(
@@ -47,4 +50,4 @@ minMeanMV <- 200
 rangeMeanMV <- maxMeanMV - minMeanMV
 thresholdMeanMVDry <- 273#245#273
 thresholdMeanMVWet <- 284#260#284
-thresholdTempAir <- 84#32 # for `latestConditionsTable` warning cell color
+thresholdTempAir <- 32 # for `latestConditionsTable` warning cell color

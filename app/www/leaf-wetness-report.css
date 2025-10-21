@@ -116,11 +116,24 @@
   padding-bottom: 1rem;
 }
 
-.past-30-days-graph-footer {
+.past-30-days-card-header {
+  background-color: #F7F7F7 !important;
+  border-bottom-width: 1px !important;
+  border-bottom-color: var(--bs-card-border-color) !important;
+}
+
+.past-30-days-card-layout-footer {
   color: #606060; 
   font-size: 0.85rem;
   font-style: normal;
   margin-top: 0.25rem;
+}
+
+.past-30-days-latest-data-update {
+  color: #191919;
+  font-family: monospace !important;
+  font-size: 0.9rem;
+  margin-bottom: 12px;
 }
 
 .past-30-days-title {

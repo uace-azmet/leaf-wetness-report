@@ -1,9 +1,9 @@
-#' `fxn_past24HoursCardLayout.R` - Generate list of cards with variable time series of 30-cm conditions based on selected station
+#' `fxn_past24HoursCardLayout.R` - Generate list of cards with 15-minute variable time series of 30-cm conditions based on selected station
 #' 
 #' @param azmetStation - user-specified AZMet station
 #' @param inData - AZMet 15-minute leaf wetness data from `fxn_lw15min.R`
 #' @param past24HoursCardGraphs - `list` of plotly graphs from `fxn_past24HoursCardGraphs.R`
-#' @return `past24HoursCardLayout` - `list` of cards with variable time series of 30-cm conditions based on selected station
+#' @return `past24HoursCardLayout` - `list` of cards with 15-minute variable time series of 30-cm conditions based on selected station
 
 
 fxn_past24HoursCardLayout <- function(inData, azmetStation, past24HoursCardGraphs) {

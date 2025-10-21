@@ -508,8 +508,9 @@ fxn_past24HoursCardGraphs <- function(azmetStation, inData) {
             xanchor = "left",
             xref = "paper",
             xshift = 5,
-            y = mean(c(thresholdMeanMVDry, thresholdMeanMVWet)),
-            yanchor = "center",
+            # y = mean(c(thresholdMeanMVDry, thresholdMeanMVWet)),
+            y = thresholdMeanMVDry,
+            yanchor = "bottom",
             yref = "y"
           ),
           list( # Dry
@@ -525,8 +526,10 @@ fxn_past24HoursCardGraphs <- function(azmetStation, inData) {
             xanchor = "left",
             xref = "paper",
             xshift = 5,
-            y = thresholdMeanMVDry,
-            yanchor = "top",
+            # y = thresholdMeanMVDry,
+            # yanchor = "top",
+            y = thresholdMeanMVDry - (thresholdMeanMVWet - thresholdMeanMVDry),
+            yanchor = "bottom",
             yref = "y"
           )
         ),

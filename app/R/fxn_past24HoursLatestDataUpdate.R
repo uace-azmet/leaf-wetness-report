@@ -1,8 +1,8 @@
-#' `fxn_past24HoursLatestDataUpdate.R` - Build text for latest update information
+#' `fxn_past24HoursLatestDataUpdate.R` - Build text for latest update information on Past 24 Hours tab
 #' 
 #' @param azmetStation - AZMet station selection by user
 #' @param inData - AZMet 15-minute leaf wetness data from `fxn_lw15min.R`
-#' @return `past24HoursLatestDataUpdate` - Text for latest update information
+#' @return `past24HoursLatestDataUpdate` - Text for latest update information on Past 24 Hours tab
 
 
 fxn_past24HoursLatestDataUpdate <- function(azmetStation, inData) {
