@@ -6,6 +6,44 @@
 
 fxn_latestConditionsTable <- function(inData) {
   
+  
+  # For responsive bar graph scaling -----
+  
+  maxMeanMV <- maxMeanMVInit # See `_global.R`
+  minMeanMV <- minMeanMVInit
+  rangeMeanMV <- rangeMeanMVInit
+  
+  maxMeanMVObs <- 
+    max(
+      c(
+        max(inData$lw1_mean_mV, na.rm = TRUE), 
+        max(inData$lw2_mean_mV, na.rm = TRUE)
+      ), 
+      na.rm = TRUE
+    )
+  
+  minMeanMVObs <- 
+    max(
+      c(
+        min(inData$lw1_mean_mV, na.rm = TRUE), 
+        min(inData$lw2_mean_mV, na.rm = TRUE)
+      ), 
+      na.rm = TRUE
+    )
+  
+  if (maxMeanMVObs > maxMeanMV) {
+    maxMeanMV <- maxMeanMVObs
+    rangeMeanMV <- maxMeanMV - minMeanMV
+  }
+  
+  if (minMeanMVObs < minMeanMV) {
+    minMeanMV <- minMeanMVObs
+    rangeMeanMV <- maxMeanMV - minMeanMV
+  }
+  
+  
+  # Build table -----
+  
   latestConditionsTable <- inData %>% 
     reactable::reactable(
       columns = list(

@@ -3,10 +3,8 @@
 
 library(azmetr)
 library(bslib)
-library(dataui)
 library(dplyr)
 library(htmltools)
-library(htmlwidgets)
 library(lubridate)
 library(plotly)
 library(reactable)
@@ -45,9 +43,9 @@ azmetStationMetadata <- azmetr::station_info |>
     )
   )
 
-maxMeanMV <- 400
-minMeanMV <- 200
-rangeMeanMV <- maxMeanMV - minMeanMV
-thresholdMeanMVDry <- 273#245#273
-thresholdMeanMVWet <- 284#260#284
-thresholdTempAir <- 32 # for `latestConditionsTable` warning cell color
+maxMeanMVInit <- 400
+minMeanMVInit <- 200
+rangeMeanMVInit <- maxMeanMVInit - minMeanMVInit
+thresholdMeanMVDry <- 273
+thresholdMeanMVWet <- 284
+thresholdTempAir <- 32.0 # for `latestConditionsTable` warning cell color

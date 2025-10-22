@@ -270,25 +270,6 @@
       ],
       "Hash": "1d991cd6160fa7b1fdbd3689034cbd15"
     },
-    "dataui": {
-      "Package": "dataui",
-      "Version": "0.0.1",
-      "Source": "GitHub",
-      "RemoteType": "github",
-      "RemoteHost": "api.github.com",
-      "RemoteUsername": "timelyportfolio",
-      "RemoteRepo": "dataui",
-      "RemoteRef": "master",
-      "RemoteSha": "39583c661edddb44214a269aed5393ba91b2789d",
-      "Requirements": [
-        "glue",
-        "htmltools",
-        "htmlwidgets",
-        "jsonlite",
-        "reactR"
-      ],
-      "Hash": "5f1d9194502decd17c5f773d3da43eb2"
-    },
     "digest": {
       "Package": "digest",
       "Version": "0.6.37",

@@ -4,10 +4,10 @@
 # Add code for the following
 # 
 # 'azmet-shiny-template.html': <!-- Google tag (gtag.js) -->
-# 'azmet-shiny-template.html': <!-- CSS specific to this AZMet Shiny app -->
 
 
 # UI --------------------
+
 
 ui <- htmltools::htmlTemplate(
   filename = "azmet-shiny-template.html",
@@ -47,6 +47,7 @@ ui <- htmltools::htmlTemplate(
         
         value = "latest-conditions"
       ),
+      
       
       # Past 24 Hours -----
       
@@ -125,10 +126,11 @@ ui <- htmltools::htmlTemplate(
 
 # Server --------------------
 
+
 server <- function(input, output, session) {
   shinyjs::useShinyjs(html = TRUE)
   shinyjs::hideElement("pageBottomText")
-  shinyjs::hideElement("refreshDataButton") # Needs to be 'present' on page for `dataETL <- shiny::reactive({})` statement to work on initial page load
+  shinyjs::hideElement("refreshDataButton")
   shinyjs::hideElement("refreshDataInfo")
   
   
@@ -140,27 +142,29 @@ server <- function(input, output, session) {
     shinyjs::showElement("refreshDataInfo")
   })
   
-  shiny::observeEvent(input$azmetStationPast30Days, {
-    azmetStationPast24Hours(input$azmetStationPast30Days)
+  shiny::observeEvent(input$azmetStationPast30Days, { # Keep selected station between tabs
+    azmetStationPast24Hours(input$azmetStationPast30Days) # See `_global.R`
     shiny::updateSelectInput(
       inputId = "azmetStationPast24Hours",
       label = "AZMet Station",
       # choices = sort(unique(azmetStationMetadata[order(azmetStationMetadata$meta_station_name), ]$meta_station_name)),
-      selected = azmetStationPast24Hours()
+      selected = azmetStationPast24Hours() # See `_global.R`
     )
   },
+  
   ignoreInit = TRUE
   )
 
- shiny::observeEvent(input$azmetStationPast24Hours, {
-    azmetStationPast30Days(input$azmetStationPast24Hours)
+ shiny::observeEvent(input$azmetStationPast24Hours, { # Keep selected station between tabs
+    azmetStationPast30Days(input$azmetStationPast24Hours) # See `_global.R`
     shiny::updateSelectInput(
       inputId = "azmetStationPast30Days",
       label = "AZMet Station",
       # choices = sort(unique(azmetStationMetadata[order(azmetStationMetadata$meta_station_name), ]$meta_station_name)),
-      selected = azmetStationPast30Days()
+      selected = azmetStationPast30Days() # See `_global.R`
     )
   },
+  
   ignoreInit = TRUE
   )
   
@@ -261,17 +265,17 @@ server <- function(input, output, session) {
     )
   })
   
+  output$past24HoursCardLayoutFooter <- shiny::renderUI({
+    shiny::req(lw15min())
+    fxn_past24HoursCardLayoutFooter()
+  })
+  
   output$past24HoursLatestDataUpdate <- shiny::renderUI({
     # shiny::req(lw15min())
     fxn_past24HoursLatestDataUpdate(
       azmetStation = input$azmetStationPast24Hours,
       inData = lw15min()
     )
-  })
-  
-  output$past24HoursCardLayoutFooter <- shiny::renderUI({
-    shiny::req(lw15min())
-    fxn_past24HoursCardLayoutFooter()
   })
   
   output$past24HoursTitle <- shiny::renderUI({
@@ -296,17 +300,17 @@ server <- function(input, output, session) {
     )
   })
   
+  output$past30DaysCardLayoutFooter <- shiny::renderUI({
+    shiny::req(lwdaily())
+    fxn_past30DaysCardLayoutFooter()
+  })
+  
   output$past30DaysLatestDataUpdate <- shiny::renderUI({
     # shiny::req(lwdaily())
     fxn_past30DaysLatestDataUpdate(
       azmetStation = input$azmetStationPast30Days,
       inData = lwdaily()
     )
-  })
-  
-  output$past30DaysCardLayoutFooter <- shiny::renderUI({
-    shiny::req(lwdaily())
-    fxn_past30DaysCardLayoutFooter()
   })
   
   output$past30DaysTitle <- shiny::renderUI({
@@ -347,5 +351,6 @@ server <- function(input, output, session) {
 
 
 # Run --------------------
+
 
 shiny::shinyApp(ui = ui, server = server)
