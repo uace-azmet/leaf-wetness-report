@@ -1,48 +1,15 @@
 #' `fxn_latestConditionsData.R` - Transform most recent 15-minute leaf wetness data from each station for table
 #' 
 #' @param inData - 15-minute leaf wetness data from `fxn_lw15min.R`
+#' @param meanMVStats - List of `mean_mV` maximum, minimum, and range from `fxn_latestConditionsMeanMVStats.R`
 #' @return `latestConditionsData` - Most recent 15-minute leaf wetness data from each station, transformed for table
 
 
-fxn_latestConditionsData <- function(inData) {
+fxn_latestConditionsData <- function(inData, meanMVStats) {
   
-  
-  # For responsive bar graph scaling -----
-  
-  maxMeanMV <- maxMeanMVInit # See `_global.R`
-  minMeanMV <- minMeanMVInit
-  rangeMeanMV <- rangeMeanMVInit
-  
-  maxMeanMVObs <- 
-    max(
-      c(
-        max(inData$lw1_mean_mV, na.rm = TRUE), 
-        max(inData$lw2_mean_mV, na.rm = TRUE)
-      ), 
-      na.rm = TRUE
-    )
-  
-  minMeanMVObs <- 
-    max(
-      c(
-        min(inData$lw1_mean_mV, na.rm = TRUE), 
-        min(inData$lw2_mean_mV, na.rm = TRUE)
-      ), 
-      na.rm = TRUE
-    )
-  
-  if (maxMeanMVObs > maxMeanMV) {
-    maxMeanMV <- maxMeanMVObs
-    rangeMeanMV <- maxMeanMV - minMeanMV
-  }
-  
-  if (minMeanMVObs < minMeanMV) {
-    minMeanMV <- minMeanMVObs
-    rangeMeanMV <- maxMeanMV - minMeanMV
-  }
-  
-  
-  # Data transform -----
+  maxMeanMV <- meanMVStats[[1]]
+  minMeanMV <- meanMVStats[[2]]
+  rangeMeanMV <- meanMVStats[[3]]
   
   latestConditionsData <- inData %>%
     dplyr::group_by(meta_station_name) %>%

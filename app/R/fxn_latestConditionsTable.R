@@ -1,48 +1,15 @@
 #' `fxn_latestConditionsTable.R` - Build latest conditions table
 #' 
 #' @param inData - Most recent 15-minute leaf wetness data, transformed, from `fxn_latestConditionsData.R`
+#' @param meanMVStats - List of `mean_mV` maximum, minimum, and range from `fxn_latestConditionsMeanMVStats.R`
 #' @return `latestConditionsTable` - Latest conditions table, reactable format
 
 
-fxn_latestConditionsTable <- function(inData) {
+fxn_latestConditionsTable <- function(inData, meanMVStats) {
   
-  
-  # For responsive bar graph scaling -----
-  
-  maxMeanMV <- maxMeanMVInit # See `_global.R`
-  minMeanMV <- minMeanMVInit
-  rangeMeanMV <- rangeMeanMVInit
-  
-  maxMeanMVObs <- 
-    max(
-      c(
-        max(inData$lw1_mean_mV, na.rm = TRUE), 
-        max(inData$lw2_mean_mV, na.rm = TRUE)
-      ), 
-      na.rm = TRUE
-    )
-  
-  minMeanMVObs <- 
-    max(
-      c(
-        min(inData$lw1_mean_mV, na.rm = TRUE), 
-        min(inData$lw2_mean_mV, na.rm = TRUE)
-      ), 
-      na.rm = TRUE
-    )
-  
-  if (maxMeanMVObs > maxMeanMV) {
-    maxMeanMV <- maxMeanMVObs
-    rangeMeanMV <- maxMeanMV - minMeanMV
-  }
-  
-  if (minMeanMVObs < minMeanMV) {
-    minMeanMV <- minMeanMVObs
-    rangeMeanMV <- maxMeanMV - minMeanMV
-  }
-  
-  
-  # Build table -----
+  maxMeanMV <- meanMVStats[[1]]
+  minMeanMV <- meanMVStats[[2]]
+  rangeMeanMV <- meanMVStats[[3]]
   
   latestConditionsTable <- inData %>% 
     reactable::reactable(
@@ -98,6 +65,24 @@ fxn_latestConditionsTable <- function(inData) {
           vAlign = "center",
           width = 160
         ),
+        relative_humidity_30cm_mean = reactable::colDef(
+          name = 
+            htmltools::HTML(
+              paste0(
+                "RH<sup>", 
+                tags$span(style = "font-weight: normal", "1"),
+                "</sup><br>", 
+                tags$span(style = "font-weight: normal; font-size: 0.8rem", "(%)")
+              )
+            ),
+          format = reactable::colFormat(digits = 0),
+          html = TRUE,
+          #na = "NA",
+          rowHeader = TRUE,
+          align = "right",
+          vAlign = "center",
+          width = 60
+        ),
         temp_air_30cm_meanF = reactable::colDef(
           name = 
             htmltools::HTML(
@@ -144,24 +129,6 @@ fxn_latestConditionsTable <- function(inData) {
           align = "right",
           vAlign = "center",
           width = 100
-        ),
-        relative_humidity_30cm_mean = reactable::colDef(
-          name = 
-            htmltools::HTML(
-              paste0(
-                "RH<sup>", 
-                tags$span(style = "font-weight: normal", "1"),
-                "</sup><br>", 
-                tags$span(style = "font-weight: normal; font-size: 0.8rem", "(%)")
-              )
-            ),
-          format = reactable::colFormat(digits = 0),
-          html = TRUE,
-          #na = "NA",
-          rowHeader = TRUE,
-          align = "right",
-          vAlign = "center",
-          width = 60
         ),
         lw_sensor = reactable::colDef(
           name = "&nbsp;&nbsp;&nbsp;Sensor",

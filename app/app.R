@@ -172,8 +172,20 @@ server <- function(input, output, session) {
   # Reactives -----
   
   latestConditionsData <- shiny::eventReactive(lw15min(), {
-    fxn_latestConditionsData(inData = lw15min())
+    fxn_latestConditionsData(
+      inData = lw15min(),
+      meanMVStats = latestConditionsMeanMVStats()
+    )
   })
+  
+  # latestConditionsMeanMVStats <- shiny::eventReactive(lw15min(), {
+  #   fxn_latestConditionsMeanMVStats(inData = lw15min())
+  # })
+  
+  latestConditionsMeanMVStats <- shiny::reactive({
+    fxn_latestConditionsMeanMVStats(inData = lw15min())
+  }) %>% 
+    shiny::bindEvent(lw15min())
   
   lw15min <- shiny::reactive({
     fxn_lw15min()
@@ -230,7 +242,10 @@ server <- function(input, output, session) {
   # Outputs -----
   
   output$latestConditionsTable <- reactable::renderReactable({
-    fxn_latestConditionsTable(inData = latestConditionsData())
+    fxn_latestConditionsTable(
+      inData = latestConditionsData(),
+      meanMVStats = latestConditionsMeanMVStats()
+    )
   })
   
   output$latestConditionsTableFooter <- shiny::renderUI({
