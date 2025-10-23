@@ -688,7 +688,8 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
         range = c(0, 24),
         rangemode = "nonnegative", # one of ("normal" | "tozero" | "nonnegative")
         title = "", 
-        zeroline = FALSE
+        zeroline = TRUE,
+        zerolinecolor = "#eeeeee"
       )
     )
   
@@ -790,7 +791,8 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
         range = c(0, 24),
         rangemode = "nonnegative", # one of ("normal" | "tozero" | "nonnegative")
         title = "Hours", 
-        zeroline = FALSE
+        zeroline = TRUE,
+        zerolinecolor = "#eeeeee"
       )
     )
   
@@ -892,7 +894,8 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
         range = c(0, 24),
         rangemode = "nonnegative", # one of ("normal" | "tozero" | "nonnegative")
         title = "", 
-        zeroline = FALSE
+        zeroline = TRUE,
+        zerolinecolor = "#eeeeee"
       )
     )
   
