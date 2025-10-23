@@ -1,6 +1,6 @@
 #' `fxn_lwdaily.R` Download AZMet daily leaf wetness data, transform variables, and return to app
 #' 
-#' @return `lwdaily` - Transformed AZMet daily leaf wetness data over previous 24 hours, tibble format
+#' @return `lwdaily` - Transformed AZMet daily leaf wetness data over previous 30 days, tibble format
 
 
 fxn_lwdaily <- function() {
