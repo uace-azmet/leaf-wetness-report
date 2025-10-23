@@ -169,7 +169,7 @@ fxn_latestConditionsTable <- function(inData, meanMVStats) {
                   marker = list(color = ~bar_color),
                   name = "mV value",
                   hovertext = ~condition,
-                  hovertemplate = ~paste0("<b>Condition:  </b>",  .data$condition, "<extra></extra>")
+                  hovertemplate = ~paste0("<b>Condition: </b>",  .data$condition, "<extra></extra>")
                 ) %>% 
                 
                 plotly::config(

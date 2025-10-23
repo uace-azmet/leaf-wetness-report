@@ -72,10 +72,10 @@ fxn_past24HoursCardGraphs <- function(azmetStation, inData) {
       marker = list(color = traceMarkerColorOtherStations, size = traceMarkerSize),
       hoverinfo = "text",
       text = ~paste0(
-        "<br><b>AZMet Station:</b>  ", meta_station_name,
-        "<br><b>Date:</b>  ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>Time:</b>  ", format(datetime, "%H:%M:%S"),
-        "<br><b>RH:</b>  ", format(relative_humidity_30cm_mean, nsmall = 0), " %"
+        "<br><b>AZMet Station:</b> ", meta_station_name,
+        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+        "<br><b>Time:</b> ", format(datetime, "%H:%M:%S"),
+        "<br><b>RH:</b> ", format(relative_humidity_30cm_mean, nsmall = 0), " %"
       ),
       name = "other stations",
       showlegend = TRUE,
@@ -92,10 +92,10 @@ fxn_past24HoursCardGraphs <- function(azmetStation, inData) {
         marker = list(color = traceMarkerColorSelectedStation, size = traceMarkerSize),
         hoverinfo = "text",
         text = ~paste0(
-          "<br><b>AZMet Station:</b>  ", meta_station_name,
-          "<br><b>Date:</b>  ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-          "<br><b>Time:</b>  ", format(datetime, "%H:%M:%S"),
-          "<br><b>RH:</b>  ", format(relative_humidity_30cm_mean, nsmall = 0), " %"
+          "<br><b>AZMet Station:</b> ", meta_station_name,
+          "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+          "<br><b>Time:</b> ", format(datetime, "%H:%M:%S"),
+          "<br><b>RH:</b> ", format(relative_humidity_30cm_mean, nsmall = 0), " %"
         ),
         name = ~meta_station_name,
         showlegend = TRUE,
@@ -179,10 +179,10 @@ fxn_past24HoursCardGraphs <- function(azmetStation, inData) {
       marker = list(color = traceMarkerColorOtherStations, size = traceMarkerSize),
       hoverinfo = "text",
       text = ~paste0(
-        "<br><b>AZMet Station:</b>  ", meta_station_name,
-        "<br><b>Date:</b>  ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>Time:</b>  ", format(datetime, "%H:%M:%S"),
-        "<br><b>T<sub>air</sub>:</b>  ", format(temp_air_30cm_meanF, nsmall = 1), " °F"
+        "<br><b>AZMet Station:</b> ", meta_station_name,
+        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+        "<br><b>Time:</b> ", format(datetime, "%H:%M:%S"),
+        "<br><b>T<sub>air</sub>:</b> ", format(temp_air_30cm_meanF, nsmall = 1), " °F"
       ),
       name = "other stations",
       showlegend = TRUE,
@@ -199,10 +199,10 @@ fxn_past24HoursCardGraphs <- function(azmetStation, inData) {
         marker = list(color = traceMarkerColorSelectedStation, size = traceMarkerSize),
         hoverinfo = "text",
         text = ~paste0(
-          "<br><b>AZMet Station:</b>  ", meta_station_name,
-          "<br><b>Date:</b>  ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-          "<br><b>Time:</b>  ", format(datetime, "%H:%M:%S"),
-          "<br><b>T<sub>air</sub>:</b>  ", format(temp_air_30cm_meanF, nsmall = 1), " °F"
+          "<br><b>AZMet Station:</b> ", meta_station_name,
+          "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+          "<br><b>Time:</b> ", format(datetime, "%H:%M:%S"),
+          "<br><b>T<sub>air</sub>:</b> ", format(temp_air_30cm_meanF, nsmall = 1), " °F"
         ),
         name = ~meta_station_name,
         showlegend = TRUE,
@@ -286,10 +286,10 @@ fxn_past24HoursCardGraphs <- function(azmetStation, inData) {
       marker = list(color = traceMarkerColorOtherStations, size = traceMarkerSize),
       hoverinfo = "text",
       text = ~paste0(
-        "<br><b>AZMet Station:</b>  ", meta_station_name,
-        "<br><b>Date:</b>  ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>Time:</b>  ", format(datetime, "%H:%M:%S"),
-        "<br><b>T<sub>dew point</sub>:</b>  ", format(dwpt_30cm_meanF, nsmall = 1), " °F"
+        "<br><b>AZMet Station:</b> ", meta_station_name,
+        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+        "<br><b>Time:</b> ", format(datetime, "%H:%M:%S"),
+        "<br><b>T<sub>dew point</sub>:</b> ", format(dwpt_30cm_meanF, nsmall = 1), " °F"
       ),
       name = "other stations",
       showlegend = TRUE,
@@ -306,10 +306,10 @@ fxn_past24HoursCardGraphs <- function(azmetStation, inData) {
         marker = list(color = traceMarkerColorSelectedStation, size = traceMarkerSize),
         hoverinfo = "text",
         text = ~paste0(
-          "<br><b>AZMet Station:</b>  ", meta_station_name,
-          "<br><b>Date:</b>  ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-          "<br><b>Time:</b>  ", format(datetime, "%H:%M:%S"),
-          "<br><b>T<sub>dew point</sub>:</b>  ", format(dwpt_30cm_meanF, nsmall = 1), " °F"
+          "<br><b>AZMet Station:</b> ", meta_station_name,
+          "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+          "<br><b>Time:</b> ", format(datetime, "%H:%M:%S"),
+          "<br><b>T<sub>dew point</sub>:</b> ", format(dwpt_30cm_meanF, nsmall = 1), " °F"
         ),
         name = ~meta_station_name,
         showlegend = TRUE,
@@ -393,12 +393,12 @@ fxn_past24HoursCardGraphs <- function(azmetStation, inData) {
       marker = list(color = traceMarkerColorOtherStations, size = traceMarkerSize),
       hoverinfo = "text",
       text = ~paste0(
-        "<br><b>AZMet Station:</b>  ", meta_station_name,
-        "<br><b>Date:</b>  ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>Time:</b>  ", format(datetime, "%H:%M:%S"),
-        "<br><b>Sensor:</b>  Sensor 1",
-        "<br><b>Condition:</b>  ", lw1_condition,
-        "<br><b>DC:</b>  ", format(lw1_mean_mV, nsmall = 0), " mV"
+        "<br><b>AZMet Station:</b> ", meta_station_name,
+        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+        "<br><b>Time:</b> ", format(datetime, "%H:%M:%S"),
+        "<br><b>Sensor:</b> Sensor 1",
+        "<br><b>Condition:</b> ", lw1_condition,
+        "<br><b>DC:</b> ", format(lw1_mean_mV, nsmall = 0), " mV"
       ),
       name = "other stations",
       showlegend = TRUE,
@@ -415,11 +415,11 @@ fxn_past24HoursCardGraphs <- function(azmetStation, inData) {
         marker = list(color = traceMarkerColorOtherStations, size = traceMarkerSize),
         hoverinfo = "text",
         text = ~paste0(
-          "<br><b>AZMet Station:</b>  ", meta_station_name,
+          "<br><b>AZMet Station:</b> ", meta_station_name,
           "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
           "<br><b>Time:</b> ", format(datetime, "%H:%M:%S"),
-          "<br><b>Sensor:</b>  Sensor 2",
-          "<br><b>Condition:</b>  ", lw2_condition,
+          "<br><b>Sensor:</b> Sensor 2",
+          "<br><b>Condition:</b> ", lw2_condition,
           "<br><b>DC:</b> ", format(lw2_mean_mV, nsmall = 0), " mV"
         ),
         name = "other stations",
@@ -437,11 +437,11 @@ fxn_past24HoursCardGraphs <- function(azmetStation, inData) {
         marker = list(color = traceLineColorSelectedStations, size = traceMarkerSize),
         hoverinfo = "text",
         text = ~paste0(
-          "<br><b>AZMet Station:</b>  ", meta_station_name,
+          "<br><b>AZMet Station:</b> ", meta_station_name,
           "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
           "<br><b>Time:</b> ", format(datetime, "%H:%M:%S"),
-          "<br><b>Sensor:</b>  Sensor 1",
-          "<br><b>Condition:</b>  ", lw1_condition,
+          "<br><b>Sensor:</b> Sensor 1",
+          "<br><b>Condition:</b> ", lw1_condition,
           "<br><b>DC:</b> ", format(lw1_mean_mV, nsmall = 0), " mV"
         ),
         name = ~meta_station_name,
@@ -459,11 +459,11 @@ fxn_past24HoursCardGraphs <- function(azmetStation, inData) {
         marker = list(color = traceLineColorSelectedStations, size = traceMarkerSize),
         hoverinfo = "text",
         text = ~paste0(
-          "<br><b>AZMet Station:</b>  ", meta_station_name,
+          "<br><b>AZMet Station:</b> ", meta_station_name,
           "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
           "<br><b>Time:</b> ", format(datetime, "%H:%M:%S"),
-          "<br><b>Sensor:</b>  Sensor 2",
-          "<br><b>Condition:</b>  ", lw2_condition,
+          "<br><b>Sensor:</b> Sensor 2",
+          "<br><b>Condition:</b> ", lw2_condition,
           "<br><b>DC:</b> ", format(lw2_mean_mV, nsmall = 0), " mV"
         ),
         name = ~meta_station_name,

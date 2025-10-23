@@ -58,9 +58,9 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       marker = list(color = traceMarkerColorOtherStations, size = traceMarkerSize),
       hoverinfo = "text",
       text = ~paste0(
-        "<br><b>AZMet Station:</b>  ", meta_station_name,
-        "<br><b>Date:</b>  ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>RH<sub>max</sub>:</b>  ", format(relative_humidity_30cm_max, nsmall = 0), " %"
+        "<br><b>AZMet Station:</b> ", meta_station_name,
+        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+        "<br><b>RH<sub>max</sub>:</b> ", format(relative_humidity_30cm_max, nsmall = 0), " %"
       ),
       name = "other stations",
       showlegend = TRUE,
@@ -77,9 +77,9 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       marker = list(color = traceMarkerColorSelectedStation, size = traceMarkerSize),
       hoverinfo = "text",
       text = ~paste0(
-        "<br><b>AZMet Station:</b>  ", meta_station_name,
-        "<br><b>Date:</b>  ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>RH<sub>max</sub>:</b>  ", format(relative_humidity_30cm_max, nsmall = 0), " %"
+        "<br><b>AZMet Station:</b> ", meta_station_name,
+        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+        "<br><b>RH<sub>max</sub>:</b> ", format(relative_humidity_30cm_max, nsmall = 0), " %"
       ),
       name = ~meta_station_name,
       showlegend = TRUE,
@@ -119,9 +119,9 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       marker = list(color = traceMarkerColorOtherStations, size = traceMarkerSize),
       hoverinfo = "text",
       text = ~paste0(
-        "<br><b>AZMet Station:</b>  ", meta_station_name,
-        "<br><b>Date:</b>  ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>RH<sub>avg</sub>:</b>  ", format(relative_humidity_30cm_mean, nsmall = 0), " %"
+        "<br><b>AZMet Station:</b> ", meta_station_name,
+        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+        "<br><b>RH<sub>avg</sub>:</b> ", format(relative_humidity_30cm_mean, nsmall = 0), " %"
       ),
       name = "other stations",
       showlegend = FALSE,
@@ -138,9 +138,9 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       marker = list(color = traceMarkerColorSelectedStation, size = traceMarkerSize),
       hoverinfo = "text",
       text = ~paste0(
-        "<br><b>AZMet Station:</b>  ", meta_station_name,
-        "<br><b>Date:</b>  ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>RH<sub>avg</sub>:</b>  ", format(relative_humidity_30cm_mean, nsmall = 0), " %"
+        "<br><b>AZMet Station:</b> ", meta_station_name,
+        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+        "<br><b>RH<sub>avg</sub>:</b> ", format(relative_humidity_30cm_mean, nsmall = 0), " %"
       ),
       name = ~meta_station_name,
       showlegend = FALSE,
@@ -180,9 +180,9 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       marker = list(color = traceMarkerColorOtherStations, size = traceMarkerSize),
       hoverinfo = "text",
       text = ~paste0(
-        "<br><b>AZMet Station:</b>  ", meta_station_name,
-        "<br><b>Date:</b>  ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>RH<sub>min</sub>:</b>  ", format(relative_humidity_30cm_min, nsmall = 0), " %"
+        "<br><b>AZMet Station:</b> ", meta_station_name,
+        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+        "<br><b>RH<sub>min</sub>:</b> ", format(relative_humidity_30cm_min, nsmall = 0), " %"
       ),
       name = "other stations",
       showlegend = FALSE,
@@ -199,9 +199,9 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       marker = list(color = traceMarkerColorSelectedStation, size = traceMarkerSize),
       hoverinfo = "text",
       text = ~paste0(
-        "<br><b>AZMet Station:</b>  ", meta_station_name,
-        "<br><b>Date:</b>  ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>RH<sub>min</sub>:</b>  ", format(relative_humidity_30cm_min, nsmall = 0), " %"
+        "<br><b>AZMet Station:</b> ", meta_station_name,
+        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+        "<br><b>RH<sub>min</sub>:</b> ", format(relative_humidity_30cm_min, nsmall = 0), " %"
       ),
       name = ~meta_station_name,
       showlegend = FALSE,
@@ -242,9 +242,9 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       marker = list(color = traceMarkerColorOtherStations, size = traceMarkerSize),
       hoverinfo = "text",
       text = ~paste0(
-        "<br><b>AZMet Station:</b>  ", meta_station_name,
-        "<br><b>Date:</b>  ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>T<sub>air max</sub>:</b>  ", format(temp_air_30cm_maxF, nsmall = 1), " °F"
+        "<br><b>AZMet Station:</b> ", meta_station_name,
+        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+        "<br><b>T<sub>air max</sub>:</b> ", format(temp_air_30cm_maxF, nsmall = 1), " °F"
       ),
       name = "other stations",
       showlegend = TRUE,
@@ -261,9 +261,9 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       marker = list(color = traceMarkerColorSelectedStation, size = traceMarkerSize),
       hoverinfo = "text",
       text = ~paste0(
-        "<br><b>AZMet Station:</b>  ", meta_station_name,
-        "<br><b>Date:</b>  ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>T<sub>air max</sub>:</b>  ", format(temp_air_30cm_maxF, nsmall = 1), " °F"
+        "<br><b>AZMet Station:</b> ", meta_station_name,
+        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+        "<br><b>T<sub>air max</sub>:</b> ", format(temp_air_30cm_maxF, nsmall = 1), " °F"
       ),
       name = ~meta_station_name,
       showlegend = TRUE,
@@ -301,9 +301,9 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       marker = list(color = traceMarkerColorOtherStations, size = traceMarkerSize),
       hoverinfo = "text",
       text = ~paste0(
-        "<br><b>AZMet Station:</b>  ", meta_station_name,
-        "<br><b>Date:</b>  ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>T<sub>air avg</sub>:</b>  ", format(temp_air_30cm_meanF, nsmall = 1), " °F"
+        "<br><b>AZMet Station:</b> ", meta_station_name,
+        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+        "<br><b>T<sub>air avg</sub>:</b> ", format(temp_air_30cm_meanF, nsmall = 1), " °F"
       ),
       name = "other stations",
       showlegend = FALSE,
@@ -320,9 +320,9 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       marker = list(color = traceMarkerColorSelectedStation, size = traceMarkerSize),
       hoverinfo = "text",
       text = ~paste0(
-        "<br><b>AZMet Station:</b>  ", meta_station_name,
-        "<br><b>Date:</b>  ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>T<sub>air avg</sub>:</b>  ", format(temp_air_30cm_meanF, nsmall = 1), " °F"
+        "<br><b>AZMet Station:</b> ", meta_station_name,
+        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+        "<br><b>T<sub>air avg</sub>:</b> ", format(temp_air_30cm_meanF, nsmall = 1), " °F"
       ),
       name = ~meta_station_name,
       showlegend = FALSE,
@@ -360,9 +360,9 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       marker = list(color = traceMarkerColorOtherStations, size = traceMarkerSize),
       hoverinfo = "text",
       text = ~paste0(
-        "<br><b>AZMet Station:</b>  ", meta_station_name,
-        "<br><b>Date:</b>  ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>T<sub>air min</sub>:</b>  ", format(temp_air_30cm_minF, nsmall = 1), " °F"
+        "<br><b>AZMet Station:</b> ", meta_station_name,
+        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+        "<br><b>T<sub>air min</sub>:</b> ", format(temp_air_30cm_minF, nsmall = 1), " °F"
       ),
       name = "other stations",
       showlegend = FALSE,
@@ -379,9 +379,9 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       marker = list(color = traceMarkerColorSelectedStation, size = traceMarkerSize),
       hoverinfo = "text",
       text = ~paste0(
-        "<br><b>AZMet Station:</b>  ", meta_station_name,
-        "<br><b>Date:</b>  ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>T<sub>air min</sub>:</b>  ", format(temp_air_30cm_minF, nsmall = 1), " °F"
+        "<br><b>AZMet Station:</b> ", meta_station_name,
+        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+        "<br><b>T<sub>air min</sub>:</b> ", format(temp_air_30cm_minF, nsmall = 1), " °F"
       ),
       name = ~meta_station_name,
       showlegend = FALSE,
@@ -422,9 +422,9 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       marker = list(color = traceMarkerColorOtherStations, size = traceMarkerSize),
       hoverinfo = "text",
       text = ~paste0(
-        "<br><b>AZMet Station:</b>  ", meta_station_name,
-        "<br><b>Date:</b>  ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>T<sub>dew point max</sub>:</b>  ", format(dwpt_30cm_maxF, nsmall = 1), " °F"
+        "<br><b>AZMet Station:</b> ", meta_station_name,
+        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+        "<br><b>T<sub>dew point max</sub>:</b> ", format(dwpt_30cm_maxF, nsmall = 1), " °F"
       ),
       name = "other stations",
       showlegend = TRUE,
@@ -441,9 +441,9 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       marker = list(color = traceMarkerColorSelectedStation, size = traceMarkerSize),
       hoverinfo = "text",
       text = ~paste0(
-        "<br><b>AZMet Station:</b>  ", meta_station_name,
-        "<br><b>Date:</b>  ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>T<sub>dew point max</sub>:</b>  ", format(dwpt_30cm_maxF, nsmall = 1), " °F"
+        "<br><b>AZMet Station:</b> ", meta_station_name,
+        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+        "<br><b>T<sub>dew point max</sub>:</b> ", format(dwpt_30cm_maxF, nsmall = 1), " °F"
       ),
       name = ~meta_station_name,
       showlegend = TRUE,
@@ -481,9 +481,9 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       marker = list(color = traceMarkerColorOtherStations, size = traceMarkerSize),
       hoverinfo = "text",
       text = ~paste0(
-        "<br><b>AZMet Station:</b>  ", meta_station_name,
-        "<br><b>Date:</b>  ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>T<sub>dew point avg</sub>:</b>  ", format(dwpt_30cm_meanF, nsmall = 1), " °F"
+        "<br><b>AZMet Station:</b> ", meta_station_name,
+        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+        "<br><b>T<sub>dew point avg</sub>:</b> ", format(dwpt_30cm_meanF, nsmall = 1), " °F"
       ),
       name = "other stations",
       showlegend = FALSE,
@@ -500,9 +500,9 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       marker = list(color = traceMarkerColorSelectedStation, size = traceMarkerSize),
       hoverinfo = "text",
       text = ~paste0(
-        "<br><b>AZMet Station:</b>  ", meta_station_name,
-        "<br><b>Date:</b>  ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>T<sub>dew point avg</sub>:</b>  ", format(dwpt_30cm_meanF, nsmall = 1), " °F"
+        "<br><b>AZMet Station:</b> ", meta_station_name,
+        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+        "<br><b>T<sub>dew point avg</sub>:</b> ", format(dwpt_30cm_meanF, nsmall = 1), " °F"
       ),
       name = ~meta_station_name,
       showlegend = FALSE,
@@ -540,9 +540,9 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       marker = list(color = traceMarkerColorOtherStations, size = traceMarkerSize),
       hoverinfo = "text",
       text = ~paste0(
-        "<br><b>AZMet Station:</b>  ", meta_station_name,
-        "<br><b>Date:</b>  ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>T<sub>dew point min</sub>:</b>  ", format(dwpt_30cm_minF, nsmall = 1), " °F"
+        "<br><b>AZMet Station:</b> ", meta_station_name,
+        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+        "<br><b>T<sub>dew point min</sub>:</b> ", format(dwpt_30cm_minF, nsmall = 1), " °F"
       ),
       name = "other stations",
       showlegend = FALSE,
@@ -559,9 +559,9 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       marker = list(color = traceMarkerColorSelectedStation, size = traceMarkerSize),
       hoverinfo = "text",
       text = ~paste0(
-        "<br><b>AZMet Station:</b>  ", meta_station_name,
-        "<br><b>Date:</b>  ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>T<sub>dew point min</sub>:</b>  ", format(dwpt_30cm_minF, nsmall = 1), " °F"
+        "<br><b>AZMet Station:</b> ", meta_station_name,
+        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+        "<br><b>T<sub>dew point min</sub>:</b> ", format(dwpt_30cm_minF, nsmall = 1), " °F"
       ),
       name = ~meta_station_name,
       showlegend = FALSE,
@@ -601,10 +601,10 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       marker = list(color = traceMarkerColorOtherStations, size = traceMarkerSize),
       hoverinfo = "text",
       text = ~paste0(
-        "<br><b>AZMet Station:</b>  ", meta_station_name,
-        "<br><b>Date:</b>  ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>Sensor:</b>  Sensor 1",
-        "<br><b>Condition<sub>wet</sub>:</b>  ", format(lw1_total_wet_hrs, nsmall = 1), " hrs"
+        "<br><b>AZMet Station:</b> ", meta_station_name,
+        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+        "<br><b>Sensor:</b> Sensor 1",
+        "<br><b>Condition<sub>wet</sub>:</b> ", format(lw1_total_wet_hrs, nsmall = 1), " hrs"
       ),
       name = "other stations",
       showlegend = TRUE,
@@ -621,10 +621,10 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       marker = list(color = traceMarkerColorOtherStations, size = traceMarkerSize),
       hoverinfo = "text",
       text = ~paste0(
-        "<br><b>AZMet Station:</b>  ", meta_station_name,
-        "<br><b>Date:</b>  ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>Sensor:</b>  Sensor 2",
-        "<br><b>Condition<sub>wet</sub>:</b>  ", format(lw2_total_wet_hrs, nsmall = 1), " hrs"
+        "<br><b>AZMet Station:</b> ", meta_station_name,
+        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+        "<br><b>Sensor:</b> Sensor 2",
+        "<br><b>Condition<sub>wet</sub>:</b> ", format(lw2_total_wet_hrs, nsmall = 1), " hrs"
       ),
       name = "other stations",
       showlegend = FALSE,
@@ -641,10 +641,10 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       marker = list(color = traceMarkerColorSelectedStation, size = traceMarkerSize),
       hoverinfo = "text",
       text = ~paste0(
-        "<br><b>AZMet Station:</b>  ", meta_station_name,
-        "<br><b>Date:</b>  ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>Sensor:</b>  Sensor 1",
-        "<br><b>Condition<sub>wet</sub>:</b>  ", format(lw1_total_wet_hrs, nsmall = 1), " hrs"
+        "<br><b>AZMet Station:</b> ", meta_station_name,
+        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+        "<br><b>Sensor:</b> Sensor 1",
+        "<br><b>Condition<sub>wet</sub>:</b> ", format(lw1_total_wet_hrs, nsmall = 1), " hrs"
       ),
       name = ~meta_station_name,
       showlegend = TRUE,
@@ -661,10 +661,10 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       marker = list(color = traceMarkerColorSelectedStation, size = traceMarkerSize),
       hoverinfo = "text",
       text = ~paste0(
-        "<br><b>AZMet Station:</b>  ", meta_station_name,
-        "<br><b>Date:</b>  ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>Sensor:</b>  Sensor 2",
-        "<br><b>Condition<sub>wet</sub>:</b>  ", format(lw2_total_wet_hrs, nsmall = 1), " hrs"
+        "<br><b>AZMet Station:</b> ", meta_station_name,
+        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+        "<br><b>Sensor:</b> Sensor 2",
+        "<br><b>Condition<sub>wet</sub>:</b> ", format(lw2_total_wet_hrs, nsmall = 1), " hrs"
       ),
       name = ~meta_station_name,
       showlegend = FALSE,
@@ -704,10 +704,10 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       marker = list(color = traceMarkerColorOtherStations, size = traceMarkerSize),
       hoverinfo = "text",
       text = ~paste0(
-        "<br><b>AZMet Station:</b>  ", meta_station_name,
-        "<br><b>Date:</b>  ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>Sensor:</b>  Sensor 1",
-        "<br><b>Condition<sub>transition</sub>:</b>  ", format(lw1_total_con_hrs, nsmall = 1), " hrs"
+        "<br><b>AZMet Station:</b> ", meta_station_name,
+        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+        "<br><b>Sensor:</b> Sensor 1",
+        "<br><b>Condition<sub>transition</sub>:</b> ", format(lw1_total_con_hrs, nsmall = 1), " hrs"
       ),
       name = "other stations",
       showlegend = FALSE,
@@ -724,10 +724,10 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       marker = list(color = traceMarkerColorOtherStations, size = traceMarkerSize),
       hoverinfo = "text",
       text = ~paste0(
-        "<br><b>AZMet Station:</b>  ", meta_station_name,
-        "<br><b>Date:</b>  ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>Sensor:</b>  Sensor 2",
-        "<br><b>Condition<sub>transition</sub>:</b>  ", format(lw2_total_con_hrs, nsmall = 1), " hrs"
+        "<br><b>AZMet Station:</b> ", meta_station_name,
+        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+        "<br><b>Sensor:</b> Sensor 2",
+        "<br><b>Condition<sub>transition</sub>:</b> ", format(lw2_total_con_hrs, nsmall = 1), " hrs"
       ),
       name = "other stations",
       showlegend = FALSE,
@@ -744,10 +744,10 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       marker = list(color = traceMarkerColorSelectedStation, size = traceMarkerSize),
       hoverinfo = "text",
       text = ~paste0(
-        "<br><b>AZMet Station:</b>  ", meta_station_name,
-        "<br><b>Date:</b>  ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>Sensor:</b>  Sensor 1",
-        "<br><b>Condition<sub>transition</sub>:</b>  ", format(lw1_total_con_hrs, nsmall = 1), " hrs"
+        "<br><b>AZMet Station:</b> ", meta_station_name,
+        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+        "<br><b>Sensor:</b> Sensor 1",
+        "<br><b>Condition<sub>transition</sub>:</b> ", format(lw1_total_con_hrs, nsmall = 1), " hrs"
       ),
       name = ~meta_station_name,
       showlegend = FALSE,
@@ -764,10 +764,10 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       marker = list(color = traceMarkerColorSelectedStation, size = traceMarkerSize),
       hoverinfo = "text",
       text = ~paste0(
-        "<br><b>AZMet Station:</b>  ", meta_station_name,
-        "<br><b>Date:</b>  ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>Sensor:</b>  Sensor 2",
-        "<br><b>Condition<sub>transition</sub>:</b>  ", format(lw2_total_con_hrs, nsmall = 1), " hrs"
+        "<br><b>AZMet Station:</b> ", meta_station_name,
+        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+        "<br><b>Sensor:</b> Sensor 2",
+        "<br><b>Condition<sub>transition</sub>:</b> ", format(lw2_total_con_hrs, nsmall = 1), " hrs"
       ),
       name = ~meta_station_name,
       showlegend = FALSE,
@@ -807,10 +807,10 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       marker = list(color = traceMarkerColorOtherStations, size = traceMarkerSize),
       hoverinfo = "text",
       text = ~paste0(
-        "<br><b>AZMet Station:</b>  ", meta_station_name,
-        "<br><b>Date:</b>  ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>Sensor:</b>  Sensor 1",
-        "<br><b>Condition<sub>dry</sub>:</b>  ", format(lw1_total_dry_hrs, nsmall = 1), " hrs"
+        "<br><b>AZMet Station:</b> ", meta_station_name,
+        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+        "<br><b>Sensor:</b> Sensor 1",
+        "<br><b>Condition<sub>dry</sub>:</b> ", format(lw1_total_dry_hrs, nsmall = 1), " hrs"
       ),
       name = "other stations",
       showlegend = FALSE,
@@ -827,10 +827,10 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       marker = list(color = traceMarkerColorOtherStations, size = traceMarkerSize),
       hoverinfo = "text",
       text = ~paste0(
-        "<br><b>AZMet Station:</b>  ", meta_station_name,
-        "<br><b>Date:</b>  ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>Sensor:</b>  Sensor 2",
-        "<br><b>Condition<sub>dry</sub>:</b>  ", format(lw2_total_dry_hrs, nsmall = 1), " hrs"
+        "<br><b>AZMet Station:</b> ", meta_station_name,
+        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+        "<br><b>Sensor:</b> Sensor 2",
+        "<br><b>Condition<sub>dry</sub>:</b> ", format(lw2_total_dry_hrs, nsmall = 1), " hrs"
       ),
       name = "other stations",
       showlegend = FALSE,
@@ -847,10 +847,10 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       marker = list(color = traceMarkerColorSelectedStation, size = traceMarkerSize),
       hoverinfo = "text",
       text = ~paste0(
-        "<br><b>AZMet Station:</b>  ", meta_station_name,
-        "<br><b>Date:</b>  ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>Sensor:</b>  Sensor 1",
-        "<br><b>Condition<sub>dry</sub>:</b>  ", format(lw1_total_dry_hrs, nsmall = 1), " hrs"
+        "<br><b>AZMet Station:</b> ", meta_station_name,
+        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+        "<br><b>Sensor:</b> Sensor 1",
+        "<br><b>Condition<sub>dry</sub>:</b> ", format(lw1_total_dry_hrs, nsmall = 1), " hrs"
       ),
       name = ~meta_station_name,
       showlegend = FALSE,
@@ -867,10 +867,10 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       marker = list(color = traceMarkerColorSelectedStation, size = traceMarkerSize),
       hoverinfo = "text",
       text = ~paste0(
-        "<br><b>AZMet Station:</b>  ", meta_station_name,
-        "<br><b>Date:</b>  ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>Sensor:</b>  Sensor 2",
-        "<br><b>Condition<sub>dry</sub>:</b>  ", format(lw2_total_dry_hrs, nsmall = 1), " hrs"
+        "<br><b>AZMet Station:</b> ", meta_station_name,
+        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+        "<br><b>Sensor:</b> Sensor 2",
+        "<br><b>Condition<sub>dry</sub>:</b> ", format(lw2_total_dry_hrs, nsmall = 1), " hrs"
       ),
       name = ~meta_station_name,
       showlegend = FALSE,
