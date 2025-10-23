@@ -128,7 +128,7 @@ fxn_latestConditionsTable <- function(inData, meanMVStats) {
           rowHeader = TRUE,
           align = "right",
           vAlign = "center",
-          width = 100
+          width = 96
         ),
         lw_sensor = reactable::colDef(
           name = "&nbsp;&nbsp;&nbsp;Sensor",
@@ -150,7 +150,7 @@ fxn_latestConditionsTable <- function(inData, meanMVStats) {
             ),
           cell = 
             function(value) {
-              plotly::plot_ly( # Depicts range of 200-400 mV
+              plotly::plot_ly( # Depicts scaled range, initially 200-400 mV
                 data = .[value, ],
                 x = 1,
                 y = ~as.factor(row_number),
@@ -282,7 +282,7 @@ fxn_latestConditionsTable <- function(inData, meanMVStats) {
           rowHeader = TRUE,
           align = "left",
           vAlign = "center",
-          minWidth = 250
+          minWidth = 300
         ),
         mean_mV = reactable::colDef(
           name =
@@ -299,7 +299,7 @@ fxn_latestConditionsTable <- function(inData, meanMVStats) {
           rowHeader = TRUE,
           align = "right",
           vAlign = "center",
-          width = 50
+          width = 44
         ),
         mean_mV_adj = reactable::colDef(show = FALSE),
         condition = reactable::colDef(show = FALSE),
