@@ -10,7 +10,7 @@ fxn_past30DaysCardLayoutFooter <- function() {
         paste0(
           "<sup>1</sup> Values based on measurements taken 12 inches above ground 
         
-        <br><br>Values of 'NA' denote no data. Variable key: <strong>RH</strong> relative humidity in percent; <strong>T<sub>air</sub></strong> air temperature in degrees Fahrenheit; <strong>T<sub>dew point</sub></strong> dew point temperature in degrees Fahrenheit; <strong>Condition</strong> DC values less than or equal to ", thresholdMeanMVDry, " mV suggest dry conditions, between ", thresholdMeanMVDry, " and ", thresholdMeanMVWet, " mV the transition between dry and wet conditions, and equal to or greater than ", thresholdMeanMVWet, " mV wet conditions. Higher DC values indicate greater leaf wetness."
+        <br><br>Values of 'NA' denote no data. Variable key: <strong>RH</strong> relative humidity in percent; <strong>T<sub>air</sub></strong> air temperature in degrees Fahrenheit; <strong>T<sub>dew point</sub></strong> dew point temperature in degrees Fahrenheit; <strong>Condition</strong> DC values less than or equal to ", thresholdMeanMVDry, " mV indicate dry conditions, between ", thresholdMeanMVDry, " and ", thresholdMeanMVWet, " mV the transition between dry and wet conditions, and equal to or greater than ", thresholdMeanMVWet, " mV wet conditions. Higher DC values indicate greater leaf wetness."
         )
       ),
       
