@@ -59,7 +59,6 @@ fxn_latestConditionsTable <- function(inData, meanMVStats) {
         datetime = reactable::colDef(
           name = "Latest Update",
           html = TRUE,
-          #minWidth = 180,
           #na = "NA",
           rowHeader = TRUE,
           vAlign = "center",
@@ -236,37 +235,36 @@ fxn_latestConditionsTable <- function(inData, meanMVStats) {
                     t = 0,
                     pad = 0
                   ),
-                  shapes = 
-                    list(
-                      list( # Lower transition threshold
-                        type = "line",
-                        x0 = ((thresholdMeanMVDry - minMeanMV) / rangeMeanMV),
-                        x1 = ((thresholdMeanMVDry - minMeanMV) / rangeMeanMV),
-                        y0 = 0,
-                        y1 = 1,
-                        yref = "paper",
-                        line = list(
-                          color = "#707070",
-                          dash = "solid",
-                          width = 1
-                        ),
-                        layer = "above"
+                  shapes = list(
+                    list( # Lower transition threshold
+                      type = "line",
+                      x0 = ((thresholdMeanMVDry - minMeanMV) / rangeMeanMV),
+                      x1 = ((thresholdMeanMVDry - minMeanMV) / rangeMeanMV),
+                      y0 = 0,
+                      y1 = 1,
+                      yref = "paper",
+                      line = list(
+                        color = "#707070",
+                        dash = "solid",
+                        width = 1
                       ),
-                      list( # Upper transition threshold
-                        type = "line",
-                        x0 = ((thresholdMeanMVWet - minMeanMV) / rangeMeanMV),
-                        x1 = ((thresholdMeanMVWet - minMeanMV) / rangeMeanMV),
-                        y0 = 0,
-                        y1 = 1,
-                        yref = "paper",
-                        line = list(
-                          color = "#707070",
-                          dash = "solid",
-                          width = 1
-                        ),
-                        layer = "above"
-                      )
+                      layer = "above"
                     ),
+                    list( # Upper transition threshold
+                      type = "line",
+                      x0 = ((thresholdMeanMVWet - minMeanMV) / rangeMeanMV),
+                      x1 = ((thresholdMeanMVWet - minMeanMV) / rangeMeanMV),
+                      y0 = 0,
+                      y1 = 1,
+                      yref = "paper",
+                      line = list(
+                        color = "#707070",
+                        dash = "solid",
+                        width = 1
+                      ),
+                      layer = "above"
+                    )
+                  ),
                   xaxis = list(
                     fixedrange = TRUE,
                     visible = FALSE
@@ -276,6 +274,7 @@ fxn_latestConditionsTable <- function(inData, meanMVStats) {
                     visible = FALSE
                   )
                 )
+                    
             },
           html = TRUE,
           na = "NA",
@@ -349,7 +348,7 @@ fxn_latestConditionsTable <- function(inData, meanMVStats) {
         function(index) { # https://stackoverflow.com/questions/66946229/insert-borders-underneath-selected-rows-in-reactable-r
           if (index %in% c(3, 5, 7, 9)) {
             list(
-              "border-top" = "1px solid rgba(40,70,94,0.1)" # --bs-border-color-translucent
+              "border-top" = "1px solid rgba(40, 70, 94, 0.1)" # --bs-border-color-translucent
             )
           }
         },
@@ -367,15 +366,14 @@ fxn_latestConditionsTable <- function(inData, meanMVStats) {
           cellPadding = NULL,
           style = NULL,
           tableStyle = NULL,
-          headerStyle = 
-            list(
-              color = "#191919",
-              fontFamily = "monospace",
-              fontSize = "0.8rem",
-              borderBottomColor = rgb(180/255, 180/255, 180/255, 1.0),
-              borderBottomWidth = "1px",
-              boxShadow = "0px 1px 0px 0px #e3e3e3"
-            ),
+          headerStyle = list(
+            color = "#191919",
+            fontFamily = "monospace",
+            fontSize = "0.8rem",
+            borderBottomColor = rgb(180/255, 180/255, 180/255, 1.0),
+            borderBottomWidth = "1px",
+            boxShadow = "0px 1px 0px 0px #e3e3e3"
+          ),
           groupHeaderStyle = NULL,
           tableBodyStyle = NULL,
           rowGroupStyle = NULL,
@@ -383,7 +381,11 @@ fxn_latestConditionsTable <- function(inData, meanMVStats) {
           rowStripedStyle = NULL,
           rowHighlightStyle = NULL,
           rowSelectedStyle = NULL,
-          cellStyle = list(color = "#191919", fontFamily = "monospace", fontSize = "0.8rem"),
+          cellStyle = list(
+            color = "#191919", 
+            fontFamily = "monospace", 
+            fontSize = "0.8rem"
+          ),
           footerStyle = NULL,
           inputStyle = NULL,
           filterInputStyle = NULL,
