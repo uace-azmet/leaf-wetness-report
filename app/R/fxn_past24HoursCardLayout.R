@@ -11,6 +11,7 @@ fxn_past24HoursCardLayout <- function(inData, azmetStation, past24HoursCardGraph
   
   # Variables ----------
   
+  
   inData <- inData %>%
     dplyr::filter(meta_station_name == azmetStation) %>% 
     dplyr::mutate(datetime = lubridate::ymd_hms(datetime)) %>% 
@@ -28,6 +29,7 @@ fxn_past24HoursCardLayout <- function(inData, azmetStation, past24HoursCardGraph
   
   
   # Cards ----------
+  
   
   # `relative_humidity_30cm_mean` -----
   
@@ -188,6 +190,7 @@ fxn_past24HoursCardLayout <- function(inData, azmetStation, past24HoursCardGraph
   
   
   # Card layout list ----------
+  
   
   past24HoursCardLayout <- list(
     card_RH, 
