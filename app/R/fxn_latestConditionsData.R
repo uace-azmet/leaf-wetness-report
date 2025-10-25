@@ -1,38 +1,15 @@
 #' `fxn_latestConditionsData.R` - Transform most recent 15-minute leaf wetness data from each station for table
 #' 
 #' @param inData - 15-minute leaf wetness data from `fxn_lw15min.R`
+#' @param meanMVStats - List of `mean_mV` maximum, minimum, and range from `fxn_latestConditionsMeanMVStats.R`
 #' @return `latestConditionsData` - Most recent 15-minute leaf wetness data from each station, transformed for table
 
 
-fxn_latestConditionsData <- function(inData) {
+fxn_latestConditionsData <- function(inData, meanMVStats) {
   
-  # For responsive bar graph scaling -----
-  
-  # maxMeanMV <- 400
-  # minMeanMV <- 200
-  # rangeMeanMV <- maxMeanMV - minMeanMV
-  
-  maxMeanMVObs <- 
-    max(
-      c(
-        max(inData$lw1_mean_mV, na.rm = TRUE), 
-        max(inData$lw2_mean_mV, na.rm = TRUE)
-      ), 
-      na.rm = TRUE
-    )
-  
-  if (maxMeanMVObs > maxMeanMV) {
-    maxMeanMV <- maxMeanMVObs
-    rangeMeanMV <- maxMeanMV - minMeanMV
-  } 
-  
-  # TO-DO: revert back to initial values
-  # else {
-  #   
-  # }
-  
-  
-  # Data transform -----
+  maxMeanMV <- meanMVStats[[1]]
+  minMeanMV <- meanMVStats[[2]]
+  rangeMeanMV <- meanMVStats[[3]]
   
   latestConditionsData <- inData %>%
     dplyr::group_by(meta_station_name) %>%
@@ -40,7 +17,13 @@ fxn_latestConditionsData <- function(inData) {
     dplyr::ungroup() %>%
     
     reshape2::melt(
-      id.vars = c("meta_station_name", "datetime", "temp_air_30cm_meanF", "dwpt_30cm_meanF", "relative_humidity_30cm_mean"),
+      id.vars = c(
+        "meta_station_name", 
+        "datetime", 
+        "relative_humidity_30cm_mean", 
+        "temp_air_30cm_meanF", 
+        "dwpt_30cm_meanF"
+      ),
       measure.vars = c("lw1_mean_mV", "lw2_mean_mV"),
       variable.name = "lw_sensor",
       value.name = "mean_mV",
@@ -51,12 +34,31 @@ fxn_latestConditionsData <- function(inData) {
     
     # https://stackoverflow.com/questions/78275267/add-a-second-groupname-col-in-gt-table-without-concatenating-the-column-valu
     dplyr::mutate(
-      meta_station_name = ifelse(dplyr::row_number() == 1, meta_station_name, ""),
-      datetime = ifelse(dplyr::row_number() == 1, datetime, ""),
-      temp_air_30cm_meanF = ifelse(dplyr::row_number() == 1, temp_air_30cm_meanF, NA),
-      dwpt_30cm_meanF = ifelse(dplyr::row_number() == 1, dwpt_30cm_meanF, NA),
-      relative_humidity_30cm_mean = ifelse(dplyr::row_number() == 1, relative_humidity_30cm_mean, NA),
-      lw_sensor = ifelse(dplyr::row_number() == 1, "&nbsp;&nbsp;&nbsp;Sensor 1", "&nbsp;&nbsp;&nbsp;Sensor 2"),
+      meta_station_name = 
+        ifelse(
+          dplyr::row_number() == 1, meta_station_name, ""
+        ),
+      datetime = 
+        ifelse(
+          dplyr::row_number() == 1, datetime, ""
+        ),
+      relative_humidity_30cm_mean = 
+        ifelse(
+          dplyr::row_number() == 1, relative_humidity_30cm_mean, NA
+        ),
+      temp_air_30cm_meanF = 
+        ifelse(
+          dplyr::row_number() == 1, temp_air_30cm_meanF, NA
+        ),
+      dwpt_30cm_meanF = 
+        ifelse(
+          dplyr::row_number() == 1, dwpt_30cm_meanF, NA
+        ),
+      lw_sensor = 
+        ifelse(
+          dplyr::row_number() == 1, "&nbsp;&nbsp;&nbsp;Sensor 1", "&nbsp;&nbsp;&nbsp;Sensor 2"
+        ),
+      
       .by = meta_station_name
     ) %>%
     
@@ -87,9 +89,9 @@ fxn_latestConditionsData <- function(inData) {
     dplyr::select(
       meta_station_name,
       datetime,
+      relative_humidity_30cm_mean,
       temp_air_30cm_meanF,
       dwpt_30cm_meanF,
-      relative_humidity_30cm_mean,
       lw_sensor,
       row_number,
       mean_mV,

@@ -31,6 +31,6 @@ past30DaysSidebar <-
       inputId = "azmetStationPast30Days",
       label = "AZMet Station",
       choices = azmetStationMetadata[order(azmetStationMetadata$meta_station_name), ]$meta_station_name,
-      selected = NULL # azmetStationMetadata[order(azmetStationMetadata$meta_station_name), ]$meta_station_name[1]
+      selected = NULL # See `app.R`, `Server > Observables`
     )
   )

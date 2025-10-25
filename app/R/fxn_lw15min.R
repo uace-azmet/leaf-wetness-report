@@ -32,12 +32,12 @@ fxn_lw15min <- function() {
     dplyr::mutate(
       datetime = format(datetime, format = "%Y-%m-%d %H:%M:%S"),
       dwpt_30cm_meanF = fxn_c_to_f(dwpt_30cm_mean),
-      temp_air_30cm_meanF = fxn_c_to_f(temp_air_30cm_meanC),
-      temp_air_meanF = fxn_c_to_f(temp_air_meanC),
-      temp_wetbulb_meanF = fxn_c_to_f(temp_wetbulb_meanC),
-      wind_spd_max_mph = fxn_mps_to_mph(wind_spd_max_mps),
-      wind_spd_mean_mph = fxn_mps_to_mph(wind_spd_mean_mps),
-      wind_spd_min_mph = fxn_mps_to_mph(wind_spd_min_mps)
+      temp_air_30cm_meanF = fxn_c_to_f(temp_air_30cm_meanC)# ,
+      # temp_air_meanF = fxn_c_to_f(temp_air_meanC),
+      # temp_wetbulb_meanF = fxn_c_to_f(temp_wetbulb_meanC),
+      # wind_spd_max_mph = fxn_mps_to_mph(wind_spd_max_mps),
+      # wind_spd_mean_mph = fxn_mps_to_mph(wind_spd_mean_mps),
+      # wind_spd_min_mph = fxn_mps_to_mph(wind_spd_min_mps)
     ) |>
     
     dplyr::mutate(
@@ -51,8 +51,8 @@ fxn_lw15min <- function() {
           "lw2_total_con_mins",
           "lw2_total_dry_mins",
           "lw2_total_wet_mins",
-          "relative_humidity_30cm_mean",
-          "relative_humidity_mean"
+          "relative_humidity_30cm_mean"# ,
+          # "relative_humidity_mean"
         ),
         \(x) round(x, digits = 0)
       )
@@ -62,12 +62,12 @@ fxn_lw15min <- function() {
       dplyr::across(
         c(
           "dwpt_30cm_meanF",
-          "temp_air_30cm_meanF",
-          "temp_air_meanF",
-          "temp_wetbulb_meanF",
-          "wind_spd_max_mph",
-          "wind_spd_mean_mph",
-          "wind_spd_min_mph"
+          "temp_air_30cm_meanF"# ,
+          # "temp_air_meanF",
+          # "temp_wetbulb_meanF",
+          # "wind_spd_max_mph",
+          # "wind_spd_mean_mph",
+          # "wind_spd_min_mph"
         ),
         \(x) round(x, digits = 1)
       )
