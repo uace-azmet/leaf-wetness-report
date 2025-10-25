@@ -51,19 +51,6 @@
       ],
       "Hash": "5deb66b3ae702137e1f4162c11861e76"
     },
-    "V8": {
-      "Package": "V8",
-      "Version": "8.0.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "Rcpp",
-        "curl",
-        "jsonlite",
-        "utils"
-      ],
-      "Hash": "031fcc75f23e88e0be1bebcad1c442e7"
-    },
     "askpass": {
       "Package": "askpass",
       "Version": "1.2.1",
@@ -118,23 +105,6 @@
         "R"
       ],
       "Hash": "543776ae6848fde2f48ff3816d0628bc"
-    },
-    "bigD": {
-      "Package": "bigD",
-      "Version": "0.3.1",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R"
-      ],
-      "Hash": "ad123ab90aa2fc795512f61ff6939c4a"
-    },
-    "bitops": {
-      "Package": "bitops",
-      "Version": "1.0-9",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "d972ef991d58c19e6efa71b21f5e144b"
     },
     "bsicons": {
       "Package": "bsicons",
@@ -407,58 +377,6 @@
       ],
       "Hash": "5899f1eaa825580172bb56c08266f37c"
     },
-    "gt": {
-      "Package": "gt",
-      "Version": "1.1.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R",
-        "base64enc",
-        "bigD",
-        "bitops",
-        "cli",
-        "commonmark",
-        "dplyr",
-        "fs",
-        "glue",
-        "htmltools",
-        "htmlwidgets",
-        "juicyjuice",
-        "magrittr",
-        "markdown",
-        "reactable",
-        "rlang",
-        "sass",
-        "scales",
-        "tidyselect",
-        "vctrs",
-        "xml2"
-      ],
-      "Hash": "15fe412fb08b4334c67901a31d643e96"
-    },
-    "gtExtras": {
-      "Package": "gtExtras",
-      "Version": "0.6.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R",
-        "cli",
-        "commonmark",
-        "dplyr",
-        "fontawesome",
-        "ggplot2",
-        "glue",
-        "gt",
-        "htmltools",
-        "knitr",
-        "paletteer",
-        "rlang",
-        "scales"
-      ],
-      "Hash": "45bd4e19628051a0c88c99472ceae25b"
-    },
     "gtable": {
       "Package": "gtable",
       "Version": "0.3.6",
@@ -599,16 +517,6 @@
       ],
       "Hash": "4e993b65c2c3ffbffce7bb3e2c6f832b"
     },
-    "juicyjuice": {
-      "Package": "juicyjuice",
-      "Version": "0.1.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "V8"
-      ],
-      "Hash": "3bcd11943da509341838da9399e18bce"
-    },
     "knitr": {
       "Package": "knitr",
       "Version": "1.50",
@@ -670,19 +578,6 @@
       ],
       "Hash": "b8552d117e1b808b09a832f589b79035"
     },
-    "litedown": {
-      "Package": "litedown",
-      "Version": "0.7",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R",
-        "commonmark",
-        "utils",
-        "xfun"
-      ],
-      "Hash": "6145ea7089736f7b6585243bd3992508"
-    },
     "lubridate": {
       "Package": "lubridate",
       "Version": "1.9.3",
@@ -705,19 +600,6 @@
         "R"
       ],
       "Hash": "7ce2733a9826b3aeb1775d56fd305472"
-    },
-    "markdown": {
-      "Package": "markdown",
-      "Version": "2.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R",
-        "litedown",
-        "utils",
-        "xfun"
-      ],
-      "Hash": "b4349847250b103bbbb8bc6819c4fbca"
     },
     "memoise": {
       "Package": "memoise",
@@ -749,20 +631,6 @@
         "askpass"
       ],
       "Hash": "05ce1ed077e8c97fbb3ec1cb078f1159"
-    },
-    "paletteer": {
-      "Package": "paletteer",
-      "Version": "1.6.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R",
-        "prismatic",
-        "rematch2",
-        "rlang",
-        "rstudioapi"
-      ],
-      "Hash": "ac364dee7ff8277fb4144fcc1e26302f"
     },
     "pillar": {
       "Package": "pillar",
@@ -833,19 +701,6 @@
         "Rcpp"
       ],
       "Hash": "6b8177fd19982f0020743fadbfdbd933"
-    },
-    "prismatic": {
-      "Package": "prismatic",
-      "Version": "1.1.2",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R",
-        "farver",
-        "grDevices",
-        "graphics"
-      ],
-      "Hash": "51967d2e55a523791ae22832e86209ae"
     },
     "processx": {
       "Package": "processx",
@@ -961,16 +816,6 @@
       ],
       "Hash": "03265b5334226d0ad25e1fc170ed6c27"
     },
-    "rematch2": {
-      "Package": "rematch2",
-      "Version": "2.1.2",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "tibble"
-      ],
-      "Hash": "76c9e04c712a05848ae7a23d2f170a40"
-    },
     "renv": {
       "Package": "renv",
       "Version": "1.0.11",
@@ -1027,13 +872,6 @@
         "yaml"
       ],
       "Hash": "df99277f63d01c34e95e3d2f06a79736"
-    },
-    "rstudioapi": {
-      "Package": "rstudioapi",
-      "Version": "0.17.1",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "5f90cd73946d706cfe26024294236113"
     },
     "sass": {
       "Package": "sass",
@@ -1325,19 +1163,6 @@
         "tools"
       ],
       "Hash": "1befe97a0d56060b3964e3986d408df9"
-    },
-    "xml2": {
-      "Package": "xml2",
-      "Version": "1.4.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R",
-        "cli",
-        "methods",
-        "rlang"
-      ],
-      "Hash": "3dfd9ffbe221af775cb37f95e7e893ec"
     },
     "xtable": {
       "Package": "xtable",
