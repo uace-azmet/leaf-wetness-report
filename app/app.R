@@ -1,9 +1,4 @@
-# Current conditions and recent data of leaf wetness estimates in Yuma County
-
-
-# Add code for the following
-# 
-# 'azmet-shiny-template.html': <!-- Google tag (gtag.js) -->
+# The latest conditions and recent data of leaf wetness estimates in Yuma County
 
 
 # UI --------------------
