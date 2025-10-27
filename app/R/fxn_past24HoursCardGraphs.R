@@ -566,7 +566,7 @@ fxn_past24HoursCardGraphs <- function(azmetStation, inData) {
         shapes = 
           list(
             list( # Wet minimum threshold
-              layer = "between",
+              layer = "below",
               line = list(color = "#378dbd"),
               showlegend = FALSE,
               type = "line",
@@ -578,7 +578,7 @@ fxn_past24HoursCardGraphs <- function(azmetStation, inData) {
               yref = "y"
             ),
             list( # Transition minimum threshold
-              layer = "between",
+              layer = "below",
               line = list(color = "#81d3eb"),
               showlegend = FALSE,
               type = "line",
