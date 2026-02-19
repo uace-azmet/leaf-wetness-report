@@ -920,7 +920,7 @@
     },
     "rsconnect": {
       "Package": "rsconnect",
-      "Version": "1.5.1",
+      "Version": "1.7.0",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -941,7 +941,7 @@
         "utils",
         "yaml"
       ],
-      "Hash": "17c9ca8fc7fa2d49fd5ba6f4b3ad2b76"
+      "Hash": "bb44049707584498dc7fdae0963aa8a6"
     },
     "rstudioapi": {
       "Package": "rstudioapi",
@@ -1031,7 +1031,7 @@
     },
     "snowflakeauth": {
       "Package": "snowflakeauth",
-      "Version": "0.2.0",
+      "Version": "0.2.1",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -1043,7 +1043,7 @@
         "openssl",
         "rlang"
       ],
-      "Hash": "cc966d509015e3eeaf0a09ab9b4b535c"
+      "Hash": "92d609625659f49f064819f4c9c4b773"
     },
     "sourcetools": {
       "Package": "sourcetools",
