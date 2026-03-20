@@ -13,10 +13,9 @@ past24HoursSidebar <-
     padding = NULL,
     
     htmltools::p(
-      bsicons::bs_icon("sliders"), 
-      htmltools::HTML("&nbsp;"), 
-      "DATA DISPLAY",
-      htmltools::HTML("&nbsp;&nbsp;&nbsp;&nbsp;"),
+      bsicons::bs_icon("sliders", class = "bolder-icon"), 
+      htmltools::HTML("&nbsp;&nbsp;"), 
+      htmltools::HTML("<strong>DATA OPTIONS</strong>&nbsp;"),
       bslib::tooltip(
         bsicons::bs_icon("info-circle"),
         "Specify an AZMet station to highlight in the graphs.",
