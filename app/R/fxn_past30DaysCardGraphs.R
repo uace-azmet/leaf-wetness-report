@@ -162,7 +162,7 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       yaxis = list(
         fixedrange = TRUE,
         rangemode = "nonnegative", # one of ("normal" | "tozero" | "nonnegative")
-        title = "%", 
+        title = "<b>%</b>", 
         zeroline = FALSE
       )
     )
@@ -344,7 +344,7 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       yaxis = list(
         fixedrange = TRUE,
         rangemode = "normal", # one of ("normal" | "tozero" | "nonnegative")
-        title = "°F", 
+        title = "<b>°F</b>", 
         zeroline = FALSE
       )
     )
@@ -524,7 +524,7 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       yaxis = list(
         fixedrange = TRUE,
         rangemode = "normal", # one of ("normal" | "tozero" | "nonnegative")
-        title = "°F", 
+        title = "<b>°F</b>", 
         zeroline = FALSE
       )
     )
@@ -790,7 +790,7 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
         fixedrange = TRUE,
         range = c(0, 24),
         rangemode = "nonnegative", # one of ("normal" | "tozero" | "nonnegative")
-        title = "Hours", 
+        title = "<b>Hours</b>", 
         zeroline = TRUE,
         zerolinecolor = "#eeeeee"
       )
