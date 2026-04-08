@@ -998,8 +998,10 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
           x = 0.00,
           xanchor = "left",
           xref = "container",
-          y = 1.05,
-          yanchor = "bottom",
+          # y = 1.05,
+          # yanchor = "bottom",
+          y = 1.0,
+          yanchor = "top",
           yref = "container"
         ),
         margin = list(
@@ -1121,8 +1123,10 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
           x = 0.00,
           xanchor = "left",
           xref = "container",
-          y = 1.05,
-          yanchor = "bottom",
+          # y = 1.05,
+          # yanchor = "bottom",
+          y = 1.0,
+          yanchor = "top",
           yref = "container"
         ),
         margin = list(
@@ -1244,8 +1248,10 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
           x = 0.00,
           xanchor = "left",
           xref = "container",
-          y = 1.05,
-          yanchor = "bottom",
+          # y = 1.05,
+          # yanchor = "bottom",
+          y = 1.0,
+          yanchor = "top",
           yref = "container"
         ),
         margin = list(
@@ -1367,8 +1373,10 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
           x = 0.00,
           xanchor = "left",
           xref = "container",
-          y = 1.05,
-          yanchor = "bottom",
+          # y = 1.05,
+          # yanchor = "bottom",
+          y = 1.0,
+          yanchor = "top",
           yref = "container"
         ),
         margin = list(
