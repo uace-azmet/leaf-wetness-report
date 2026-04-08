@@ -4,6 +4,7 @@
 
 
 fxn_latestConditionsTitle <- function() {
+  
   latestConditionsTitle <- 
     htmltools::p(
       htmltools::HTML(
@@ -14,7 +15,7 @@ fxn_latestConditionsTitle <- function() {
           htmltools::HTML("&nbsp;"),
           bslib::tooltip(
             bsicons::bs_icon("info-circle"),
-            "Scroll or swipe over the table to view additional columns on narrow browser windows. Hover over bar graphs for wetness conditions.",
+            "Scroll or swipe over the table to view additional columns (when hidden). Hover over bar graphs for wetness conditions.",
             id = "infolatestConditionsTitle",
             placement = "right"
           )

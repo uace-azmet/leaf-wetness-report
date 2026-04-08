@@ -10,62 +10,70 @@ fxn_pageBottomText <- function(activeTab) {
   # Define inputs -----
   
   if (activeTab == "latest-conditions" | activeTab == "past-24-hours") {
-    apiURL <- a(
-      "api.azmet.arizona.edu", 
-      href="https://api.azmet.arizona.edu/v1/observations/lw15min",
-      target="_blank"
-    )
+    apiURL <- 
+      a(
+        "api.azmet.arizona.edu", 
+        href="https://api.azmet.arizona.edu/v1/observations/lw15min",
+        target="_blank"
+      )
     
     timeStep <- "15-minute"
   } else { # activeTab == "past-30-days"
-    apiURL <- a(
-      "api.azmet.arizona.edu", 
-      href="https://api.azmet.arizona.edu/v1/observations/lwdaily",
-      target="_blank"
-    )
+    apiURL <- 
+      a(
+        "api.azmet.arizona.edu", 
+        href="https://api.azmet.arizona.edu/v1/observations/lwdaily",
+        target="_blank"
+      )
     
     timeStep <- "daily"
   }
   
-  azmetrURL <- a(
-    "azmetr", 
-    href="https://uace-azmet.github.io/azmetr/",
-    target="_blank"
-  )
+  azmetrURL <- 
+    a(
+      "azmetr", 
+      href="https://uace-azmet.github.io/azmetr/",
+      target="_blank"
+    )
   
   todayDate <- gsub(" 0", " ", format(lubridate::today(), "%B %d, %Y"))
   
   todayYear <- lubridate::year(lubridate::today())
   
-  webpageCode <- a(
-    "GitHub page", 
-    href="https://github.com/uace-azmet/leaf-wetness-report", 
-    target="_blank"
-  )
+  webpageCode <- 
+    a(
+      "GitHub page", 
+      href="https://github.com/uace-azmet/leaf-wetness-report", 
+      target="_blank"
+    )
   
-  webpageDataVariables <- a(
-    "data variables", 
-    href="https://azmet.arizona.edu/about/data-variables", 
-    target="_blank"
-  )
+  webpageDataVariables <- 
+    a(
+      "data variables", 
+      href="https://azmet.arizona.edu/about/data-variables", 
+      target="_blank"
+    )
   
-  webpageNetworkMap <- a(
-    "station locations", 
-    href="https://azmet.arizona.edu/about/network-map", 
-    target="_blank"
-  )
+  webpageNetworkMap <- 
+    a(
+      "station locations", 
+      href="https://azmet.arizona.edu/about/network-map", 
+      target="_blank"
+    )
   
-  webpageStationMetadata <- a(
-    "station metadata", 
-    href="https://azmet.arizona.edu/about/station-metadata", 
-    target="_blank"
-  )
+  webpageStationMetadata <- 
+    a(
+      "station metadata", 
+      href="https://azmet.arizona.edu/about/station-metadata", 
+      target="_blank"
+    )
   
-  webpageAZMet <- a(
-    "AZMet website", 
-    href="https://azmet.arizona.edu/", 
-    target="_blank"
-  )
+  webpageAZMet <- 
+    a(
+      "AZMet website", 
+      href="https://azmet.arizona.edu/", 
+      target="_blank"
+    )
   
   
   # Build text -----

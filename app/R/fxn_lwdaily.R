@@ -4,19 +4,20 @@
 
 
 fxn_lwdaily <- function() {
-  idRetrievingData <- shiny::showNotification(
-    ui = "Retrieving the latest data . . .",
-    action = NULL,
-    duration = NULL,
-    closeButton = FALSE,
-    id = "idRetrievingData",
-    type = "message"
-  )
+  
+  idRetrievingData <- 
+    shiny::showNotification(
+      ui = "Retrieving the latest data . . .",
+      action = NULL,
+      duration = NULL,
+      closeButton = FALSE,
+      id = "idRetrievingData",
+      type = "message"
+    )
   
   lwdaily <- 
     azmetr::az_lwdaily(
-      start_date = 
-        lubridate::today(tzone = "America/Phoenix") - lubridate::days(30)
+      start_date = lubridate::today(tzone = "America/Phoenix") - lubridate::days(30)
     ) |> 
     
     dplyr::filter(

@@ -6,6 +6,7 @@
 
 
 fxn_past30DaysLatestDataUpdate <- function(azmetStation, inData) {
+  
   inData <- inData %>% 
     dplyr::filter(meta_station_name == azmetStation) %>% 
     dplyr::filter(date == max(date))

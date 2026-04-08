@@ -4,6 +4,7 @@
 
 
 fxn_past30DaysTitle <- function() {
+  
   past30DaysTitle <- 
     htmltools::p(
       htmltools::HTML(

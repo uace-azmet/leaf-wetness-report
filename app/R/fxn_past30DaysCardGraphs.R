@@ -57,11 +57,12 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       line = list(color = traceLineColorOtherStations, width = traceLineWidth),
       marker = list(color = traceMarkerColorOtherStations, size = traceMarkerSize),
       hoverinfo = "text",
-      text = ~paste0(
-        "<br><b>AZMet Station:</b> ", meta_station_name,
-        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>RH<sub>max</sub>:</b> ", format(relative_humidity_30cm_max, nsmall = 0), " %"
-      ),
+      text = 
+        ~paste0(
+          "<br><b>AZMet Station:</b> ", meta_station_name,
+          "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+          "<br><b>RH<sub>max</sub>:</b> ", format(relative_humidity_30cm_max, nsmall = 0), " %"
+        ),
       name = "other stations",
       showlegend = TRUE,
       legendgroup = "dataOtherStations"
@@ -76,34 +77,34 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       line = list(color = traceLineColorSelectedStation, width = traceLineWidth),
       marker = list(color = traceMarkerColorSelectedStation, size = traceMarkerSize),
       hoverinfo = "text",
-      text = ~paste0(
-        "<br><b>AZMet Station:</b> ", meta_station_name,
-        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>RH<sub>max</sub>:</b> ", format(relative_humidity_30cm_max, nsmall = 0), " %"
-      ),
+      text = 
+        ~paste0(
+          "<br><b>AZMet Station:</b> ", meta_station_name,
+          "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+          "<br><b>RH<sub>max</sub>:</b> ", format(relative_humidity_30cm_max, nsmall = 0), " %"
+        ),
       name = ~meta_station_name,
       showlegend = TRUE,
       legendgroup = "dataSelectedStation"
     ) %>% 
     
     plotly::layout(
-      xaxis = list(
-        # fixedrange = TRUE,
-        range = list(
-          ~(min(datetime) - 86400), # unix time
-          ~(max(datetime) + 86400)
-        )#,
-        # showgrid = TRUE,
-        # showticklabels = TRUE,
-        # title = FALSE,
-        # zeroline = FALSE
-      ),
-      yaxis = list(
-        fixedrange = TRUE,
-        rangemode = "nonnegative", # one of ("normal" | "tozero" | "nonnegative")
-        title = "", 
-        zeroline = FALSE
-      )
+      xaxis = 
+        list(
+          # fixedrange = TRUE,
+          range = list(~(min(datetime) - 86400), ~(max(datetime) + 86400))#,  # unix time
+          # showgrid = TRUE,
+          # showticklabels = TRUE,
+          # title = FALSE,
+          # zeroline = FALSE
+        ),
+      yaxis = 
+        list(
+          fixedrange = TRUE,
+          rangemode = "nonnegative", # one of ("normal" | "tozero" | "nonnegative")
+          title = "", 
+          zeroline = FALSE
+        )
     )
   
   
@@ -118,11 +119,12 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       line = list(color = traceLineColorOtherStations, width = traceLineWidth),
       marker = list(color = traceMarkerColorOtherStations, size = traceMarkerSize),
       hoverinfo = "text",
-      text = ~paste0(
-        "<br><b>AZMet Station:</b> ", meta_station_name,
-        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>RH<sub>avg</sub>:</b> ", format(relative_humidity_30cm_mean, nsmall = 0), " %"
-      ),
+      text = 
+        ~paste0(
+          "<br><b>AZMet Station:</b> ", meta_station_name,
+          "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+          "<br><b>RH<sub>avg</sub>:</b> ", format(relative_humidity_30cm_mean, nsmall = 0), " %"
+        ),
       name = "other stations",
       showlegend = FALSE,
       legendgroup = "dataOtherStations"
@@ -137,34 +139,34 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       line = list(color = traceLineColorSelectedStation, width = traceLineWidth),
       marker = list(color = traceMarkerColorSelectedStation, size = traceMarkerSize),
       hoverinfo = "text",
-      text = ~paste0(
-        "<br><b>AZMet Station:</b> ", meta_station_name,
-        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>RH<sub>avg</sub>:</b> ", format(relative_humidity_30cm_mean, nsmall = 0), " %"
-      ),
+      text = 
+        ~paste0(
+          "<br><b>AZMet Station:</b> ", meta_station_name,
+          "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+          "<br><b>RH<sub>avg</sub>:</b> ", format(relative_humidity_30cm_mean, nsmall = 0), " %"
+        ),
       name = ~meta_station_name,
       showlegend = FALSE,
       legendgroup = "dataSelectedStation"
     ) %>% 
     
     plotly::layout(
-      xaxis = list(
-        # fixedrange = TRUE,
-        range = list(
-          ~(min(datetime) - 86400), # unix time
-          ~(max(datetime) + 86400)
-        )#,
-        # showgrid = TRUE,
-        # showticklabels = TRUE,
-        # title = FALSE,
-        # zeroline = FALSE
-      ),
-      yaxis = list(
-        fixedrange = TRUE,
-        rangemode = "nonnegative", # one of ("normal" | "tozero" | "nonnegative")
-        title = "<b>%</b>", 
-        zeroline = FALSE
-      )
+      xaxis = 
+        list(
+          # fixedrange = TRUE,
+          range = list(~(min(datetime) - 86400), ~(max(datetime) + 86400))#,  # unix time
+          # showgrid = TRUE,
+          # showticklabels = TRUE,
+          # title = FALSE,
+          # zeroline = FALSE
+        ),
+      yaxis = 
+        list(
+          fixedrange = TRUE,
+          rangemode = "nonnegative", # one of ("normal" | "tozero" | "nonnegative")
+          title = "<b>%</b>", 
+          zeroline = FALSE
+        )
     )
   
   
@@ -179,11 +181,12 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       line = list(color = traceLineColorOtherStations, width = traceLineWidth),
       marker = list(color = traceMarkerColorOtherStations, size = traceMarkerSize),
       hoverinfo = "text",
-      text = ~paste0(
-        "<br><b>AZMet Station:</b> ", meta_station_name,
-        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>RH<sub>min</sub>:</b> ", format(relative_humidity_30cm_min, nsmall = 0), " %"
-      ),
+      text = 
+        ~paste0(
+          "<br><b>AZMet Station:</b> ", meta_station_name,
+          "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+          "<br><b>RH<sub>min</sub>:</b> ", format(relative_humidity_30cm_min, nsmall = 0), " %"
+        ),
       name = "other stations",
       showlegend = FALSE,
       legendgroup = "dataOtherStations"
@@ -198,34 +201,34 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       line = list(color = traceLineColorSelectedStation, width = traceLineWidth),
       marker = list(color = traceMarkerColorSelectedStation, size = traceMarkerSize),
       hoverinfo = "text",
-      text = ~paste0(
-        "<br><b>AZMet Station:</b> ", meta_station_name,
-        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>RH<sub>min</sub>:</b> ", format(relative_humidity_30cm_min, nsmall = 0), " %"
-      ),
+      text = 
+        ~paste0(
+          "<br><b>AZMet Station:</b> ", meta_station_name,
+          "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+          "<br><b>RH<sub>min</sub>:</b> ", format(relative_humidity_30cm_min, nsmall = 0), " %"
+        ),
       name = ~meta_station_name,
       showlegend = FALSE,
       legendgroup = "dataSelectedStation"
     ) %>% 
     
     plotly::layout(
-      xaxis = list(
-        # fixedrange = TRUE,
-        range = list(
-          ~(min(datetime) - 86400), # unix time
-          ~(max(datetime) + 86400)
-        )#,
-        # showgrid = TRUE,
-        # showticklabels = TRUE,
-        # title = FALSE,
-        # zeroline = FALSE
-      ),
-      yaxis = list(
-        fixedrange = TRUE,
-        rangemode = "nonnegative", # one of ("normal" | "tozero" | "nonnegative")
-        title = "", 
-        zeroline = FALSE
-      )
+      xaxis = 
+        list(
+          # fixedrange = TRUE,
+          range = list(~(min(datetime) - 86400), ~(max(datetime) + 86400))#,  # unix time
+          # showgrid = TRUE,
+          # showticklabels = TRUE,
+          # title = FALSE,
+          # zeroline = FALSE
+        ),
+      yaxis = 
+        list(
+          fixedrange = TRUE,
+          rangemode = "nonnegative", # one of ("normal" | "tozero" | "nonnegative")
+          title = "", 
+          zeroline = FALSE
+        )
     )
  
   
@@ -241,11 +244,12 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       line = list(color = traceLineColorOtherStations, width = traceLineWidth),
       marker = list(color = traceMarkerColorOtherStations, size = traceMarkerSize),
       hoverinfo = "text",
-      text = ~paste0(
-        "<br><b>AZMet Station:</b> ", meta_station_name,
-        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>T<sub>air max</sub>:</b> ", format(temp_air_30cm_maxF, nsmall = 1), " °F"
-      ),
+      text = 
+        ~paste0(
+          "<br><b>AZMet Station:</b> ", meta_station_name,
+          "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+          "<br><b>T<sub>air max</sub>:</b> ", format(temp_air_30cm_maxF, nsmall = 1), " °F"
+        ),
       name = "other stations",
       showlegend = TRUE,
       legendgroup = "dataOtherStations"
@@ -260,34 +264,34 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       line = list(color = traceLineColorSelectedStation, width = traceLineWidth),
       marker = list(color = traceMarkerColorSelectedStation, size = traceMarkerSize),
       hoverinfo = "text",
-      text = ~paste0(
-        "<br><b>AZMet Station:</b> ", meta_station_name,
-        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>T<sub>air max</sub>:</b> ", format(temp_air_30cm_maxF, nsmall = 1), " °F"
-      ),
+      text = 
+        ~paste0(
+          "<br><b>AZMet Station:</b> ", meta_station_name,
+          "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+          "<br><b>T<sub>air max</sub>:</b> ", format(temp_air_30cm_maxF, nsmall = 1), " °F"
+        ),
       name = ~meta_station_name,
       showlegend = TRUE,
       legendgroup = "dataSelectedStation"
     ) %>% 
     
     plotly::layout(
-      xaxis = list(
-        # fixedrange = TRUE,
-        range = list(
-          ~(min(datetime) - 86400), # unix time
-          ~(max(datetime) + 86400)
-        )#,
-        # showgrid = TRUE,
-        # showticklabels = TRUE,
-        # title = FALSE,
-        # zeroline = FALSE
-      ),
-      yaxis = list(
-        fixedrange = TRUE,
-        rangemode = "normal", # one of ("normal" | "tozero" | "nonnegative")
-        title = "", 
-        zeroline = FALSE
-      )
+      xaxis = 
+        list(
+          # fixedrange = TRUE,
+          range = list(~(min(datetime) - 86400), ~(max(datetime) + 86400))#,  # unix time
+          # showgrid = TRUE,
+          # showticklabels = TRUE,
+          # title = FALSE,
+          # zeroline = FALSE
+        ),
+      yaxis = 
+        list(
+          fixedrange = TRUE,
+          rangemode = "normal", # one of ("normal" | "tozero" | "nonnegative")
+          title = "", 
+          zeroline = FALSE
+        )
     )
   
   temp_air_30cm_meanF <- 
@@ -300,11 +304,12 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       line = list(color = traceLineColorOtherStations, width = traceLineWidth),
       marker = list(color = traceMarkerColorOtherStations, size = traceMarkerSize),
       hoverinfo = "text",
-      text = ~paste0(
-        "<br><b>AZMet Station:</b> ", meta_station_name,
-        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>T<sub>air avg</sub>:</b> ", format(temp_air_30cm_meanF, nsmall = 1), " °F"
-      ),
+      text = 
+        ~paste0(
+          "<br><b>AZMet Station:</b> ", meta_station_name,
+          "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+          "<br><b>T<sub>air avg</sub>:</b> ", format(temp_air_30cm_meanF, nsmall = 1), " °F"
+        ),
       name = "other stations",
       showlegend = FALSE,
       legendgroup = "dataOtherStations"
@@ -319,34 +324,34 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       line = list(color = traceLineColorSelectedStation, width = traceLineWidth),
       marker = list(color = traceMarkerColorSelectedStation, size = traceMarkerSize),
       hoverinfo = "text",
-      text = ~paste0(
-        "<br><b>AZMet Station:</b> ", meta_station_name,
-        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>T<sub>air avg</sub>:</b> ", format(temp_air_30cm_meanF, nsmall = 1), " °F"
-      ),
+      text = 
+        ~paste0(
+          "<br><b>AZMet Station:</b> ", meta_station_name,
+          "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+          "<br><b>T<sub>air avg</sub>:</b> ", format(temp_air_30cm_meanF, nsmall = 1), " °F"
+        ),
       name = ~meta_station_name,
       showlegend = FALSE,
       legendgroup = "dataSelectedStation"
     ) %>% 
     
     plotly::layout(
-      xaxis = list(
-        # fixedrange = TRUE,
-        range = list(
-          ~(min(datetime) - 86400), # unix time
-          ~(max(datetime) + 86400)
-        )#,
-        # showgrid = TRUE,
-        # showticklabels = TRUE,
-        # title = FALSE,
-        # zeroline = FALSE
-      ),
-      yaxis = list(
-        fixedrange = TRUE,
-        rangemode = "normal", # one of ("normal" | "tozero" | "nonnegative")
-        title = "<b>°F</b>", 
-        zeroline = FALSE
-      )
+      xaxis = 
+        list(
+          # fixedrange = TRUE,
+          range = list(~(min(datetime) - 86400), ~(max(datetime) + 86400))#,  # unix time
+          # showgrid = TRUE,
+          # showticklabels = TRUE,
+          # title = FALSE,
+          # zeroline = FALSE
+        ),
+      yaxis = 
+        list(
+          fixedrange = TRUE,
+          rangemode = "normal", # one of ("normal" | "tozero" | "nonnegative")
+          title = "<b>°F</b>", 
+          zeroline = FALSE
+        )
     )
   
   temp_air_30cm_minF <- 
@@ -359,11 +364,12 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       line = list(color = traceLineColorOtherStations, width = traceLineWidth),
       marker = list(color = traceMarkerColorOtherStations, size = traceMarkerSize),
       hoverinfo = "text",
-      text = ~paste0(
-        "<br><b>AZMet Station:</b> ", meta_station_name,
-        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>T<sub>air min</sub>:</b> ", format(temp_air_30cm_minF, nsmall = 1), " °F"
-      ),
+      text = 
+        ~paste0(
+          "<br><b>AZMet Station:</b> ", meta_station_name,
+          "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+          "<br><b>T<sub>air min</sub>:</b> ", format(temp_air_30cm_minF, nsmall = 1), " °F"
+        ),
       name = "other stations",
       showlegend = FALSE,
       legendgroup = "dataOtherStations"
@@ -378,34 +384,34 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       line = list(color = traceLineColorSelectedStation, width = traceLineWidth),
       marker = list(color = traceMarkerColorSelectedStation, size = traceMarkerSize),
       hoverinfo = "text",
-      text = ~paste0(
-        "<br><b>AZMet Station:</b> ", meta_station_name,
-        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>T<sub>air min</sub>:</b> ", format(temp_air_30cm_minF, nsmall = 1), " °F"
-      ),
+      text = 
+        ~paste0(
+          "<br><b>AZMet Station:</b> ", meta_station_name,
+          "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+          "<br><b>T<sub>air min</sub>:</b> ", format(temp_air_30cm_minF, nsmall = 1), " °F"
+        ),
       name = ~meta_station_name,
       showlegend = FALSE,
       legendgroup = "dataSelectedStation"
     ) %>% 
     
     plotly::layout(
-      xaxis = list(
-        # fixedrange = TRUE,
-        range = list(
-          ~(min(datetime) - 86400), # unix time
-          ~(max(datetime) + 86400)
-        )#,
-        # showgrid = TRUE,
-        # showticklabels = TRUE,
-        # title = FALSE,
-        # zeroline = FALSE
-      ),
-      yaxis = list(
-        fixedrange = TRUE,
-        rangemode = "normal", # one of ("normal" | "tozero" | "nonnegative")
-        title = "", 
-        zeroline = FALSE
-      )
+      xaxis = 
+        list(
+          # fixedrange = TRUE,
+          range = list(~(min(datetime) - 86400), ~(max(datetime) + 86400))#,  # unix time
+          # showgrid = TRUE,
+          # showticklabels = TRUE,
+          # title = FALSE,
+          # zeroline = FALSE
+        ),
+      yaxis = 
+        list(
+          fixedrange = TRUE,
+          rangemode = "normal", # one of ("normal" | "tozero" | "nonnegative")
+          title = "", 
+          zeroline = FALSE
+        )
     )
   
   
@@ -421,11 +427,12 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       line = list(color = traceLineColorOtherStations, width = traceLineWidth),
       marker = list(color = traceMarkerColorOtherStations, size = traceMarkerSize),
       hoverinfo = "text",
-      text = ~paste0(
-        "<br><b>AZMet Station:</b> ", meta_station_name,
-        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>T<sub>dew point max</sub>:</b> ", format(dwpt_30cm_maxF, nsmall = 1), " °F"
-      ),
+      text = 
+        ~paste0(
+          "<br><b>AZMet Station:</b> ", meta_station_name,
+          "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+          "<br><b>T<sub>dew point max</sub>:</b> ", format(dwpt_30cm_maxF, nsmall = 1), " °F"
+        ),
       name = "other stations",
       showlegend = TRUE,
       legendgroup = "dataOtherStations"
@@ -440,34 +447,34 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       line = list(color = traceLineColorSelectedStation, width = traceLineWidth),
       marker = list(color = traceMarkerColorSelectedStation, size = traceMarkerSize),
       hoverinfo = "text",
-      text = ~paste0(
-        "<br><b>AZMet Station:</b> ", meta_station_name,
-        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>T<sub>dew point max</sub>:</b> ", format(dwpt_30cm_maxF, nsmall = 1), " °F"
-      ),
+      text = 
+        ~paste0(
+          "<br><b>AZMet Station:</b> ", meta_station_name,
+          "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+          "<br><b>T<sub>dew point max</sub>:</b> ", format(dwpt_30cm_maxF, nsmall = 1), " °F"
+        ),
       name = ~meta_station_name,
       showlegend = TRUE,
       legendgroup = "dataSelectedStation"
     ) %>% 
     
     plotly::layout(
-      xaxis = list(
-        # fixedrange = TRUE,
-        range = list(
-          ~(min(datetime) - 86400), # unix time
-          ~(max(datetime) + 86400)
-        )#,
-        # showgrid = TRUE,
-        # showticklabels = TRUE,
-        # title = FALSE,
-        # zeroline = FALSE
-      ),
-      yaxis = list(
-        fixedrange = TRUE,
-        rangemode = "normal", # one of ("normal" | "tozero" | "nonnegative")
-        title = "", 
-        zeroline = FALSE
-      )
+      xaxis = 
+        list(
+          # fixedrange = TRUE,
+          range = list(~(min(datetime) - 86400), ~(max(datetime) + 86400))#,  # unix time
+          # showgrid = TRUE,
+          # showticklabels = TRUE,
+          # title = FALSE,
+          # zeroline = FALSE
+        ),
+      yaxis = 
+        list(
+          fixedrange = TRUE,
+          rangemode = "normal", # one of ("normal" | "tozero" | "nonnegative")
+          title = "", 
+          zeroline = FALSE
+        )
     )
   
   dwpt_30cm_meanF <- 
@@ -480,11 +487,12 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       line = list(color = traceLineColorOtherStations, width = traceLineWidth),
       marker = list(color = traceMarkerColorOtherStations, size = traceMarkerSize),
       hoverinfo = "text",
-      text = ~paste0(
-        "<br><b>AZMet Station:</b> ", meta_station_name,
-        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>T<sub>dew point avg</sub>:</b> ", format(dwpt_30cm_meanF, nsmall = 1), " °F"
-      ),
+      text = 
+        ~paste0(
+          "<br><b>AZMet Station:</b> ", meta_station_name,
+          "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+          "<br><b>T<sub>dew point avg</sub>:</b> ", format(dwpt_30cm_meanF, nsmall = 1), " °F"
+        ),
       name = "other stations",
       showlegend = FALSE,
       legendgroup = "dataOtherStations"
@@ -499,34 +507,34 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       line = list(color = traceLineColorSelectedStation, width = traceLineWidth),
       marker = list(color = traceMarkerColorSelectedStation, size = traceMarkerSize),
       hoverinfo = "text",
-      text = ~paste0(
-        "<br><b>AZMet Station:</b> ", meta_station_name,
-        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>T<sub>dew point avg</sub>:</b> ", format(dwpt_30cm_meanF, nsmall = 1), " °F"
-      ),
+      text = 
+        ~paste0(
+          "<br><b>AZMet Station:</b> ", meta_station_name,
+          "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+          "<br><b>T<sub>dew point avg</sub>:</b> ", format(dwpt_30cm_meanF, nsmall = 1), " °F"
+        ),
       name = ~meta_station_name,
       showlegend = FALSE,
       legendgroup = "dataSelectedStation"
     ) %>% 
     
     plotly::layout(
-      xaxis = list(
-        # fixedrange = TRUE,
-        range = list(
-          ~(min(datetime) - 86400), # unix time
-          ~(max(datetime) + 86400)
-        )#,
-        # showgrid = TRUE,
-        # showticklabels = TRUE,
-        # title = FALSE,
-        # zeroline = FALSE
-      ),
-      yaxis = list(
-        fixedrange = TRUE,
-        rangemode = "normal", # one of ("normal" | "tozero" | "nonnegative")
-        title = "<b>°F</b>", 
-        zeroline = FALSE
-      )
+      xaxis = 
+        list(
+          # fixedrange = TRUE,
+          range = list(~(min(datetime) - 86400), ~(max(datetime) + 86400))#,  # unix time
+          # showgrid = TRUE,
+          # showticklabels = TRUE,
+          # title = FALSE,
+          # zeroline = FALSE
+        ),
+      yaxis = 
+        list(
+          fixedrange = TRUE,
+          rangemode = "normal", # one of ("normal" | "tozero" | "nonnegative")
+          title = "<b>°F</b>", 
+          zeroline = FALSE
+        )
     )
   
   dwpt_30cm_minF <- 
@@ -539,11 +547,12 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       line = list(color = traceLineColorOtherStations, width = traceLineWidth),
       marker = list(color = traceMarkerColorOtherStations, size = traceMarkerSize),
       hoverinfo = "text",
-      text = ~paste0(
-        "<br><b>AZMet Station:</b> ", meta_station_name,
-        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>T<sub>dew point min</sub>:</b> ", format(dwpt_30cm_minF, nsmall = 1), " °F"
-      ),
+      text = 
+        ~paste0(
+          "<br><b>AZMet Station:</b> ", meta_station_name,
+          "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+          "<br><b>T<sub>dew point min</sub>:</b> ", format(dwpt_30cm_minF, nsmall = 1), " °F"
+        ),
       name = "other stations",
       showlegend = FALSE,
       legendgroup = "dataOtherStations"
@@ -558,34 +567,34 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       line = list(color = traceLineColorSelectedStation, width = traceLineWidth),
       marker = list(color = traceMarkerColorSelectedStation, size = traceMarkerSize),
       hoverinfo = "text",
-      text = ~paste0(
-        "<br><b>AZMet Station:</b> ", meta_station_name,
-        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>T<sub>dew point min</sub>:</b> ", format(dwpt_30cm_minF, nsmall = 1), " °F"
-      ),
+      text = 
+        ~paste0(
+          "<br><b>AZMet Station:</b> ", meta_station_name,
+          "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+          "<br><b>T<sub>dew point min</sub>:</b> ", format(dwpt_30cm_minF, nsmall = 1), " °F"
+        ),
       name = ~meta_station_name,
       showlegend = FALSE,
       legendgroup = "dataSelectedStation"
     ) %>% 
     
     plotly::layout(
-      xaxis = list(
-        # fixedrange = TRUE,
-        range = list(
-          ~(min(datetime) - 86400), # unix time
-          ~(max(datetime) + 86400)
-        )#,
-        # showgrid = TRUE,
-        # showticklabels = TRUE,
-        # title = FALSE,
-        # zeroline = FALSE
-      ),
-      yaxis = list(
-        fixedrange = TRUE,
-        rangemode = "normal", # one of ("normal" | "tozero" | "nonnegative")
-        title = "", 
-        zeroline = FALSE
-      )
+      xaxis = 
+        list(
+          # fixedrange = TRUE,
+          range = list(~(min(datetime) - 86400), ~(max(datetime) + 86400))#,  # unix time
+          # showgrid = TRUE,
+          # showticklabels = TRUE,
+          # title = FALSE,
+          # zeroline = FALSE
+        ),
+      yaxis = 
+        list(
+          fixedrange = TRUE,
+          rangemode = "normal", # one of ("normal" | "tozero" | "nonnegative")
+          title = "", 
+          zeroline = FALSE
+        )
     )
   
   # `lw*_total_***_hrs` -----
@@ -600,12 +609,13 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       line = list(color = traceLineColorOtherStations, width = traceLineWidth),
       marker = list(color = traceMarkerColorOtherStations, size = traceMarkerSize),
       hoverinfo = "text",
-      text = ~paste0(
-        "<br><b>AZMet Station:</b> ", meta_station_name,
-        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>Sensor:</b> Sensor 1",
-        "<br><b>Condition<sub>wet</sub>:</b> ", format(lw1_total_wet_hrs, nsmall = 1), " hrs"
-      ),
+      text = 
+        ~paste0(
+          "<br><b>AZMet Station:</b> ", meta_station_name,
+          "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+          "<br><b>Sensor:</b> Sensor 1",
+          "<br><b>Condition<sub>wet</sub>:</b> ", format(lw1_total_wet_hrs, nsmall = 1), " hrs"
+        ),
       name = "other stations",
       showlegend = TRUE,
       legendgroup = "dataOtherStations"
@@ -620,12 +630,13 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       line = list(color = traceLineColorOtherStations, width = traceLineWidth),
       marker = list(color = traceMarkerColorOtherStations, size = traceMarkerSize),
       hoverinfo = "text",
-      text = ~paste0(
-        "<br><b>AZMet Station:</b> ", meta_station_name,
-        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>Sensor:</b> Sensor 2",
-        "<br><b>Condition<sub>wet</sub>:</b> ", format(lw2_total_wet_hrs, nsmall = 1), " hrs"
-      ),
+      text = 
+        ~paste0(
+          "<br><b>AZMet Station:</b> ", meta_station_name,
+          "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+          "<br><b>Sensor:</b> Sensor 2",
+          "<br><b>Condition<sub>wet</sub>:</b> ", format(lw2_total_wet_hrs, nsmall = 1), " hrs"
+        ),
       name = "other stations",
       showlegend = FALSE,
       legendgroup = "dataOtherStations"
@@ -640,12 +651,13 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       line = list(color = traceLineColorSelectedStation, width = traceLineWidth),
       marker = list(color = traceMarkerColorSelectedStation, size = traceMarkerSize),
       hoverinfo = "text",
-      text = ~paste0(
-        "<br><b>AZMet Station:</b> ", meta_station_name,
-        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>Sensor:</b> Sensor 1",
-        "<br><b>Condition<sub>wet</sub>:</b> ", format(lw1_total_wet_hrs, nsmall = 1), " hrs"
-      ),
+      text = 
+        ~paste0(
+          "<br><b>AZMet Station:</b> ", meta_station_name,
+          "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+          "<br><b>Sensor:</b> Sensor 1",
+          "<br><b>Condition<sub>wet</sub>:</b> ", format(lw1_total_wet_hrs, nsmall = 1), " hrs"
+        ),
       name = ~meta_station_name,
       showlegend = TRUE,
       legendgroup = "dataSelectedStation"
@@ -660,37 +672,37 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       line = list(color = traceLineColorSelectedStation, width = traceLineWidth),
       marker = list(color = traceMarkerColorSelectedStation, size = traceMarkerSize),
       hoverinfo = "text",
-      text = ~paste0(
-        "<br><b>AZMet Station:</b> ", meta_station_name,
-        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>Sensor:</b> Sensor 2",
-        "<br><b>Condition<sub>wet</sub>:</b> ", format(lw2_total_wet_hrs, nsmall = 1), " hrs"
-      ),
+      text = 
+        ~paste0(
+          "<br><b>AZMet Station:</b> ", meta_station_name,
+          "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+          "<br><b>Sensor:</b> Sensor 2",
+          "<br><b>Condition<sub>wet</sub>:</b> ", format(lw2_total_wet_hrs, nsmall = 1), " hrs"
+        ),
       name = ~meta_station_name,
       showlegend = FALSE,
       legendgroup = "dataSelectedStation"
     ) %>% 
     
     plotly::layout(
-      xaxis = list(
-        # fixedrange = TRUE,
-        range = list(
-          ~(min(datetime) - 86400), # unix time
-          ~(max(datetime) + 86400)
-        )#,
-        # showgrid = TRUE,
-        # showticklabels = TRUE,
-        # title = FALSE,
-        # zeroline = FALSE
-      ),
-      yaxis = list(
-        fixedrange = TRUE,
-        range = c(0, 24),
-        rangemode = "nonnegative", # one of ("normal" | "tozero" | "nonnegative")
-        title = "", 
-        zeroline = TRUE,
-        zerolinecolor = "#eeeeee"
-      )
+      xaxis = 
+        list(
+          # fixedrange = TRUE,
+          range = list(~(min(datetime) - 86400), ~(max(datetime) + 86400))#,  # unix time
+          # showgrid = TRUE,
+          # showticklabels = TRUE,
+          # title = FALSE,
+          # zeroline = FALSE
+        ),
+      yaxis = 
+        list(
+          fixedrange = TRUE,
+          range = c(0, 24),
+          rangemode = "nonnegative", # one of ("normal" | "tozero" | "nonnegative")
+          title = "", 
+          zeroline = TRUE,
+          zerolinecolor = "#eeeeee"
+        )
     )
   
   lw_total_con_hrs <- 
@@ -703,12 +715,13 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       line = list(color = traceLineColorOtherStations, width = traceLineWidth),
       marker = list(color = traceMarkerColorOtherStations, size = traceMarkerSize),
       hoverinfo = "text",
-      text = ~paste0(
-        "<br><b>AZMet Station:</b> ", meta_station_name,
-        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>Sensor:</b> Sensor 1",
-        "<br><b>Condition<sub>transition</sub>:</b> ", format(lw1_total_con_hrs, nsmall = 1), " hrs"
-      ),
+      text = 
+        ~paste0(
+          "<br><b>AZMet Station:</b> ", meta_station_name,
+          "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+          "<br><b>Sensor:</b> Sensor 1",
+          "<br><b>Condition<sub>transition</sub>:</b> ", format(lw1_total_con_hrs, nsmall = 1), " hrs"
+        ),
       name = "other stations",
       showlegend = FALSE,
       legendgroup = "dataOtherStations"
@@ -723,12 +736,13 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       line = list(color = traceLineColorOtherStations, width = traceLineWidth),
       marker = list(color = traceMarkerColorOtherStations, size = traceMarkerSize),
       hoverinfo = "text",
-      text = ~paste0(
-        "<br><b>AZMet Station:</b> ", meta_station_name,
-        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>Sensor:</b> Sensor 2",
-        "<br><b>Condition<sub>transition</sub>:</b> ", format(lw2_total_con_hrs, nsmall = 1), " hrs"
-      ),
+      text = 
+        ~paste0(
+          "<br><b>AZMet Station:</b> ", meta_station_name,
+          "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+          "<br><b>Sensor:</b> Sensor 2",
+          "<br><b>Condition<sub>transition</sub>:</b> ", format(lw2_total_con_hrs, nsmall = 1), " hrs"
+        ),
       name = "other stations",
       showlegend = FALSE,
       legendgroup = "dataOtherStations"
@@ -743,12 +757,13 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       line = list(color = traceLineColorSelectedStation, width = traceLineWidth),
       marker = list(color = traceMarkerColorSelectedStation, size = traceMarkerSize),
       hoverinfo = "text",
-      text = ~paste0(
-        "<br><b>AZMet Station:</b> ", meta_station_name,
-        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>Sensor:</b> Sensor 1",
-        "<br><b>Condition<sub>transition</sub>:</b> ", format(lw1_total_con_hrs, nsmall = 1), " hrs"
-      ),
+      text = 
+        ~paste0(
+          "<br><b>AZMet Station:</b> ", meta_station_name,
+          "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+          "<br><b>Sensor:</b> Sensor 1",
+          "<br><b>Condition<sub>transition</sub>:</b> ", format(lw1_total_con_hrs, nsmall = 1), " hrs"
+        ),
       name = ~meta_station_name,
       showlegend = FALSE,
       legendgroup = "dataSelectedStation"
@@ -763,37 +778,37 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       line = list(color = traceLineColorSelectedStation, width = traceLineWidth),
       marker = list(color = traceMarkerColorSelectedStation, size = traceMarkerSize),
       hoverinfo = "text",
-      text = ~paste0(
-        "<br><b>AZMet Station:</b> ", meta_station_name,
-        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>Sensor:</b> Sensor 2",
-        "<br><b>Condition<sub>transition</sub>:</b> ", format(lw2_total_con_hrs, nsmall = 1), " hrs"
-      ),
+      text = 
+        ~paste0(
+          "<br><b>AZMet Station:</b> ", meta_station_name,
+          "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+          "<br><b>Sensor:</b> Sensor 2",
+          "<br><b>Condition<sub>transition</sub>:</b> ", format(lw2_total_con_hrs, nsmall = 1), " hrs"
+        ),
       name = ~meta_station_name,
       showlegend = FALSE,
       legendgroup = "dataSelectedStation"
     ) %>% 
     
     plotly::layout(
-      xaxis = list(
-        # fixedrange = TRUE,
-        range = list(
-          ~(min(datetime) - 86400), # unix time
-          ~(max(datetime) + 86400)
-        )#,
-        # showgrid = TRUE,
-        # showticklabels = TRUE,
-        # title = FALSE,
-        # zeroline = FALSE
-      ),
-      yaxis = list(
-        fixedrange = TRUE,
-        range = c(0, 24),
-        rangemode = "nonnegative", # one of ("normal" | "tozero" | "nonnegative")
-        title = "<b>Hours</b>", 
-        zeroline = TRUE,
-        zerolinecolor = "#eeeeee"
-      )
+      xaxis = 
+        list(
+          # fixedrange = TRUE,
+          range = list(~(min(datetime) - 86400), ~(max(datetime) + 86400))#,  # unix time
+          # showgrid = TRUE,
+          # showticklabels = TRUE,
+          # title = FALSE,
+          # zeroline = FALSE
+        ),
+      yaxis = 
+        list(
+          fixedrange = TRUE,
+          range = c(0, 24),
+          rangemode = "nonnegative", # one of ("normal" | "tozero" | "nonnegative")
+          title = "<b>Hours</b>", 
+          zeroline = TRUE,
+          zerolinecolor = "#eeeeee"
+        )
     )
   
   lw_total_dry_hrs <- 
@@ -806,12 +821,13 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       line = list(color = traceLineColorOtherStations, width = traceLineWidth),
       marker = list(color = traceMarkerColorOtherStations, size = traceMarkerSize),
       hoverinfo = "text",
-      text = ~paste0(
-        "<br><b>AZMet Station:</b> ", meta_station_name,
-        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>Sensor:</b> Sensor 1",
-        "<br><b>Condition<sub>dry</sub>:</b> ", format(lw1_total_dry_hrs, nsmall = 1), " hrs"
-      ),
+      text = 
+        ~paste0(
+          "<br><b>AZMet Station:</b> ", meta_station_name,
+          "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+          "<br><b>Sensor:</b> Sensor 1",
+          "<br><b>Condition<sub>dry</sub>:</b> ", format(lw1_total_dry_hrs, nsmall = 1), " hrs"
+        ),
       name = "other stations",
       showlegend = FALSE,
       legendgroup = "dataOtherStations"
@@ -826,12 +842,13 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       line = list(color = traceLineColorOtherStations, width = traceLineWidth),
       marker = list(color = traceMarkerColorOtherStations, size = traceMarkerSize),
       hoverinfo = "text",
-      text = ~paste0(
-        "<br><b>AZMet Station:</b> ", meta_station_name,
-        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>Sensor:</b> Sensor 2",
-        "<br><b>Condition<sub>dry</sub>:</b> ", format(lw2_total_dry_hrs, nsmall = 1), " hrs"
-      ),
+      text = 
+        ~paste0(
+          "<br><b>AZMet Station:</b> ", meta_station_name,
+          "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+          "<br><b>Sensor:</b> Sensor 2",
+          "<br><b>Condition<sub>dry</sub>:</b> ", format(lw2_total_dry_hrs, nsmall = 1), " hrs"
+        ),
       name = "other stations",
       showlegend = FALSE,
       legendgroup = "dataOtherStations"
@@ -846,12 +863,13 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       line = list(color = traceLineColorSelectedStation, width = traceLineWidth),
       marker = list(color = traceMarkerColorSelectedStation, size = traceMarkerSize),
       hoverinfo = "text",
-      text = ~paste0(
-        "<br><b>AZMet Station:</b> ", meta_station_name,
-        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>Sensor:</b> Sensor 1",
-        "<br><b>Condition<sub>dry</sub>:</b> ", format(lw1_total_dry_hrs, nsmall = 1), " hrs"
-      ),
+      text = 
+        ~paste0(
+          "<br><b>AZMet Station:</b> ", meta_station_name,
+          "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+          "<br><b>Sensor:</b> Sensor 1",
+          "<br><b>Condition<sub>dry</sub>:</b> ", format(lw1_total_dry_hrs, nsmall = 1), " hrs"
+        ),
       name = ~meta_station_name,
       showlegend = FALSE,
       legendgroup = "dataSelectedStation"
@@ -866,545 +884,482 @@ fxn_past30DaysCardGraphs <- function(azmetStation, inData) {
       line = list(color = traceLineColorSelectedStation, width = traceLineWidth),
       marker = list(color = traceMarkerColorSelectedStation, size = traceMarkerSize),
       hoverinfo = "text",
-      text = ~paste0(
-        "<br><b>AZMet Station:</b> ", meta_station_name,
-        "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
-        "<br><b>Sensor:</b> Sensor 2",
-        "<br><b>Condition<sub>dry</sub>:</b> ", format(lw2_total_dry_hrs, nsmall = 1), " hrs"
-      ),
+      text = 
+        ~paste0(
+          "<br><b>AZMet Station:</b> ", meta_station_name,
+          "<br><b>Date:</b> ", gsub(" 0", " ", format(datetime, "%b %d, %Y")),
+          "<br><b>Sensor:</b> Sensor 2",
+          "<br><b>Condition<sub>dry</sub>:</b> ", format(lw2_total_dry_hrs, nsmall = 1), " hrs"
+        ),
       name = ~meta_station_name,
       showlegend = FALSE,
       legendgroup = "dataSelectedStation"
     ) %>% 
     
     plotly::layout(
-      xaxis = list(
-        # fixedrange = TRUE,
-        range = list(
-          ~(min(datetime) - 86400), # unix time
-          ~(max(datetime) + 86400)
-        )#,
-        # showgrid = TRUE,
-        # showticklabels = TRUE,
-        # title = FALSE,
-        # zeroline = FALSE
-      ),
-      yaxis = list(
-        fixedrange = TRUE,
-        range = c(0, 24),
-        rangemode = "nonnegative", # one of ("normal" | "tozero" | "nonnegative")
-        title = "", 
-        zeroline = TRUE,
-        zerolinecolor = "#eeeeee"
-      )
+      xaxis = 
+        list(
+          # fixedrange = TRUE,
+          range = list(~(min(datetime) - 86400), ~(max(datetime) + 86400))#,  # unix time
+          # showgrid = TRUE,
+          # showticklabels = TRUE,
+          # title = FALSE,
+          # zeroline = FALSE
+        ),
+      yaxis = 
+        list(
+          fixedrange = TRUE,
+          range = c(0, 24),
+          rangemode = "nonnegative", # one of ("normal" | "tozero" | "nonnegative")
+          title = "", 
+          zeroline = TRUE,
+          zerolinecolor = "#eeeeee"
+        )
     )
   
   
   # Graphs - List ----------
   
   
-  past30DaysCardGraphs <- list(
-    
-    
-    # `relative_humidity_30cm_*` -----
-    
-    plotly::subplot(
-      relative_humidity_30cm_max, 
-      relative_humidity_30cm_mean, 
-      relative_humidity_30cm_min,
-      # heights = c(1/3, 1/3, 1/3),
-      margin = 0.02,
-      nrows = 3, 
-      shareX = TRUE,
-      shareY = TRUE,
-      titleX = FALSE,
-      titleY = TRUE,
-      widths = 1
-    ) %>% 
+  past30DaysCardGraphs <- 
+    list(
       
-      plotly::config(
-        displaylogo = FALSE,
-        displayModeBar = FALSE
+      
+      # `relative_humidity_30cm_*` -----
+      
+      plotly::subplot(
+        relative_humidity_30cm_max, 
+        relative_humidity_30cm_mean, 
+        relative_humidity_30cm_min,
+        # heights = c(1/3, 1/3, 1/3),
+        margin = 0.02,
+        nrows = 3, 
+        shareX = TRUE,
+        shareY = TRUE,
+        titleX = FALSE,
+        titleY = TRUE,
+        widths = 1
       ) %>% 
+        
+        plotly::config(
+          displaylogo = FALSE,
+          displayModeBar = FALSE
+        ) %>% 
+        
+        plotly::layout(
+          annotations = 
+            list(
+              list( 
+                align = "left",
+                font = list(color = layoutFontColor, family = layoutFontFamily, size = layoutFontSize),
+                showarrow = FALSE,
+                text = "MAXIMUM",
+                x = 0,
+                xanchor = "left",
+                xref = "paper",
+                xshift = 10,
+                y = max(inData$relative_humidity_30cm_max, na.rm = TRUE),
+                yanchor = "center",
+                yref = "y1"  
+              ),
+              list(
+                align = "left",
+                font = list(color = layoutFontColor, family = layoutFontFamily, size = layoutFontSize),
+                showarrow = FALSE,
+                text = "AVERAGE",
+                x = 0,
+                xanchor = "left",
+                xref = "paper",
+                xshift = 10,
+                y = max(inData$relative_humidity_30cm_mean, na.rm = TRUE),
+                yanchor = "center",
+                yref = "y2"  
+              ),
+              list(
+                align = "left",
+                font = list(color = layoutFontColor, family = layoutFontFamily, size = layoutFontSize),
+                showarrow = FALSE,
+                text = "MINIMUM",
+                x = 0,
+                xanchor = "left",
+                xref = "paper",
+                xshift = 10,
+                y = max(inData$relative_humidity_30cm_min, na.rm = TRUE),
+                yanchor = "center",
+                yref = "y3"  
+              )
+            ),
+          font = list(color = layoutFontColor, family = layoutFontFamily, size = layoutFontSize),
+          hoverlabel = list(font = list(family = layoutFontFamily, size = hoverlabelFontSize)),
+          legend = 
+            list(
+              orientation = "h",
+              traceorder = "reversed",
+              x = 0.00,
+              xanchor = "left",
+              xref = "container",
+              # y = 1.05,
+              # yanchor = "bottom",
+              y = 1.0,
+              yanchor = "top",
+              yref = "container"
+            ),
+          margin = 
+            list(
+              l = layoutMargin,
+              r = layoutMargin,
+              b = layoutMargin,
+              t = layoutMargin,
+              pad = layoutPadding
+            ),
+          xaxis = 
+            list(
+              fixedrange = TRUE,
+              # range = list(
+              #   ~(min(datetime) - 86400), # unix time
+              #   ~(max(datetime) + 86400)
+              # ),
+              showgrid = TRUE,
+              showticklabels = TRUE,
+              title = FALSE,
+              zeroline = FALSE
+            )#,
+          # yaxis = 
+            # list(
+            #   fixedrange = TRUE,
+            #   rangemode = "nonnegative", # one of ("normal" | "tozero" | "nonnegative")
+            #   title = "%",
+            #   zeroline = FALSE
+            # )
+        ),
       
-      plotly::layout(
-        annotations = list(
-          list( 
-            align = "left",
-            font = list(
-              color = layoutFontColor,
-              family = layoutFontFamily,
-              size = layoutFontSize
-            ),
-            showarrow = FALSE,
-            text = "MAXIMUM",
-            x = 0,
-            xanchor = "left",
-            xref = "paper",
-            xshift = 10,
-            y = max(inData$relative_humidity_30cm_max, na.rm = TRUE),
-            yanchor = "center",
-            yref = "y1"  
-          ),
-          list(
-            align = "left",
-            font = list(
-              color = layoutFontColor,
-              family = layoutFontFamily,
-              size = layoutFontSize
-            ),
-            showarrow = FALSE,
-            text = "AVERAGE",
-            x = 0,
-            xanchor = "left",
-            xref = "paper",
-            xshift = 10,
-            y = max(inData$relative_humidity_30cm_mean, na.rm = TRUE),
-            yanchor = "center",
-            yref = "y2"  
-          ),
-          list( # No Heat Stress
-            align = "left",
-            font = list(
-              color = layoutFontColor,
-              family = layoutFontFamily,
-              size = layoutFontSize
-            ),
-            showarrow = FALSE,
-            text = "MINIMUM",
-            x = 0,
-            xanchor = "left",
-            xref = "paper",
-            xshift = 10,
-            y = max(inData$relative_humidity_30cm_min, na.rm = TRUE),
-            yanchor = "center",
-            yref = "y3"  
-          )
-        ),
-        font = list(
-          color = layoutFontColor,
-          family = layoutFontFamily,
-          size = layoutFontSize
-        ),
-        hoverlabel = list(
-          font = list(
-            family = layoutFontFamily,
-            size = hoverlabelFontSize
-          )
-        ),
-        legend = list(
-          orientation = "h",
-          traceorder = "reversed",
-          x = 0.00,
-          xanchor = "left",
-          xref = "container",
-          # y = 1.05,
-          # yanchor = "bottom",
-          y = 1.0,
-          yanchor = "top",
-          yref = "container"
-        ),
-        margin = list(
-          l = layoutMargin,
-          r = layoutMargin,
-          b = layoutMargin,
-          t = layoutMargin,
-          pad = layoutPadding
-        ),
-        xaxis = list(
-          fixedrange = TRUE,
-          # range = list(
-          #   ~(min(datetime) - 86400), # unix time
-          #   ~(max(datetime) + 86400)
-          # ),
-          showgrid = TRUE,
-          showticklabels = TRUE,
-          title = FALSE,
-          zeroline = FALSE
-        )#,
-        # yaxis = list(
-        #   fixedrange = TRUE,
-        #   rangemode = "nonnegative", # one of ("normal" | "tozero" | "nonnegative")
-        #   title = "%", 
-        #   zeroline = FALSE
-        # )
-      ),
-    
-    
-    # `temp_air_30cm_*F` -----
-    
-    plotly::subplot(
-      temp_air_30cm_maxF, 
-      temp_air_30cm_meanF, 
-      temp_air_30cm_minF,
-      # heights = c(1/3, 1/3, 1/3),
-      margin = 0.02,
-      nrows = 3, 
-      shareX = TRUE,
-      shareY = TRUE,
-      titleX = FALSE,
-      titleY = TRUE,
-      widths = 1
-    ) %>% 
       
-      plotly::config(
-        displaylogo = FALSE,
-        displayModeBar = FALSE
+      # `temp_air_30cm_*F` -----
+      
+      plotly::subplot(
+        temp_air_30cm_maxF, 
+        temp_air_30cm_meanF, 
+        temp_air_30cm_minF,
+        # heights = c(1/3, 1/3, 1/3),
+        margin = 0.02,
+        nrows = 3, 
+        shareX = TRUE,
+        shareY = TRUE,
+        titleX = FALSE,
+        titleY = TRUE,
+        widths = 1
       ) %>% 
+        
+        plotly::config(
+          displaylogo = FALSE,
+          displayModeBar = FALSE
+        ) %>% 
+        
+        plotly::layout(
+          annotations = 
+            list(
+              list( 
+                align = "left",
+                font = list(color = layoutFontColor, family = layoutFontFamily, size = layoutFontSize),
+                showarrow = FALSE,
+                text = "MAXIMUM",
+                x = 0,
+                xanchor = "left",
+                xref = "paper",
+                xshift = 10,
+                y = max(inData$temp_air_30cm_maxF, na.rm = TRUE),
+                yanchor = "center",
+                yref = "y1"  
+              ),
+              list(
+                align = "left",
+                font = list(color = layoutFontColor, family = layoutFontFamily, size = layoutFontSize),
+                showarrow = FALSE,
+                text = "AVERAGE",
+                x = 0,
+                xanchor = "left",
+                xref = "paper",
+                xshift = 10,
+                y = max(inData$temp_air_30cm_meanF, na.rm = TRUE),
+                yanchor = "center",
+                yref = "y2"  
+              ),
+              list(
+                align = "left",
+                font = list(color = layoutFontColor, family = layoutFontFamily, size = layoutFontSize),
+                showarrow = FALSE,
+                text = "MINIMUM",
+                x = 0,
+                xanchor = "left",
+                xref = "paper",
+                xshift = 10,
+                y = max(inData$temp_air_30cm_minF, na.rm = TRUE),
+                yanchor = "center",
+                yref = "y3"  
+              )
+            ),
+          font = list(color = layoutFontColor, family = layoutFontFamily, size = layoutFontSize),
+          hoverlabel = list(font = list(family = layoutFontFamily, size = hoverlabelFontSize)),
+          legend = 
+            list(
+              orientation = "h",
+              traceorder = "reversed",
+              x = 0.00,
+              xanchor = "left",
+              xref = "container",
+              # y = 1.05,
+              # yanchor = "bottom",
+              y = 1.0,
+              yanchor = "top",
+              yref = "container"
+            ),
+          margin = 
+            list(
+              l = layoutMargin,
+              r = layoutMargin,
+              b = layoutMargin,
+              t = layoutMargin,
+              pad = layoutPadding
+            ),
+          xaxis = 
+            list(
+              fixedrange = TRUE,
+              # range = list(
+              #   ~(min(datetime) - 86400), # unix time
+              #   ~(max(datetime) + 86400)
+              # ),
+              showgrid = TRUE,
+              showticklabels = TRUE,
+              title = FALSE,
+              zeroline = FALSE
+            )#,
+          # yaxis = 
+          #   list(
+          #     fixedrange = TRUE,
+          #     rangemode = "nonnegative", # one of ("normal" | "tozero" | "nonnegative")
+          #     title = "%",
+          #     zeroline = FALSE
+          #   )
+        ),
       
-      plotly::layout(
-        annotations = list(
-          list( 
-            align = "left",
-            font = list(
-              color = layoutFontColor,
-              family = layoutFontFamily,
-              size = layoutFontSize
-            ),
-            showarrow = FALSE,
-            text = "MAXIMUM",
-            x = 0,
-            xanchor = "left",
-            xref = "paper",
-            xshift = 10,
-            y = max(inData$temp_air_30cm_maxF, na.rm = TRUE),
-            yanchor = "center",
-            yref = "y1"  
-          ),
-          list(
-            align = "left",
-            font = list(
-              color = layoutFontColor,
-              family = layoutFontFamily,
-              size = layoutFontSize
-            ),
-            showarrow = FALSE,
-            text = "AVERAGE",
-            x = 0,
-            xanchor = "left",
-            xref = "paper",
-            xshift = 10,
-            y = max(inData$temp_air_30cm_meanF, na.rm = TRUE),
-            yanchor = "center",
-            yref = "y2"  
-          ),
-          list( # No Heat Stress
-            align = "left",
-            font = list(
-              color = layoutFontColor,
-              family = layoutFontFamily,
-              size = layoutFontSize
-            ),
-            showarrow = FALSE,
-            text = "MINIMUM",
-            x = 0,
-            xanchor = "left",
-            xref = "paper",
-            xshift = 10,
-            y = max(inData$temp_air_30cm_minF, na.rm = TRUE),
-            yanchor = "center",
-            yref = "y3"  
-          )
-        ),
-        font = list(
-          color = layoutFontColor,
-          family = layoutFontFamily,
-          size = layoutFontSize
-        ),
-        hoverlabel = list(
-          font = list(
-            family = layoutFontFamily,
-            size = hoverlabelFontSize
-          )
-        ),
-        legend = list(
-          orientation = "h",
-          traceorder = "reversed",
-          x = 0.00,
-          xanchor = "left",
-          xref = "container",
-          # y = 1.05,
-          # yanchor = "bottom",
-          y = 1.0,
-          yanchor = "top",
-          yref = "container"
-        ),
-        margin = list(
-          l = layoutMargin,
-          r = layoutMargin,
-          b = layoutMargin,
-          t = layoutMargin,
-          pad = layoutPadding
-        ),
-        xaxis = list(
-          fixedrange = TRUE,
-          # range = list(
-          #   ~(min(datetime) - 86400), # unix time
-          #   ~(max(datetime) + 86400)
-          # ),
-          showgrid = TRUE,
-          showticklabels = TRUE,
-          title = FALSE,
-          zeroline = FALSE
-        )#,
-        # yaxis = list(
-        #   fixedrange = TRUE,
-        #   rangemode = "nonnegative", # one of ("normal" | "tozero" | "nonnegative")
-        #   title = "%", 
-        #   zeroline = FALSE
-        # )
-      ),
-    
-    
-    # `dwpt_30cm_*F` -----
-    
-    plotly::subplot(
-      dwpt_30cm_maxF, 
-      dwpt_30cm_meanF, 
-      dwpt_30cm_minF,
-      # heights = c(1/3, 1/3, 1/3),
-      margin = 0.02,
-      nrows = 3, 
-      shareX = TRUE,
-      shareY = TRUE,
-      titleX = FALSE,
-      titleY = TRUE,
-      widths = 1
-    ) %>% 
       
-      plotly::config(
-        displaylogo = FALSE,
-        displayModeBar = FALSE
+      # `dwpt_30cm_*F` -----
+      
+      plotly::subplot(
+        dwpt_30cm_maxF, 
+        dwpt_30cm_meanF, 
+        dwpt_30cm_minF,
+        # heights = c(1/3, 1/3, 1/3),
+        margin = 0.02,
+        nrows = 3, 
+        shareX = TRUE,
+        shareY = TRUE,
+        titleX = FALSE,
+        titleY = TRUE,
+        widths = 1
       ) %>% 
+        
+        plotly::config(
+          displaylogo = FALSE,
+          displayModeBar = FALSE
+        ) %>% 
+        
+        plotly::layout(
+          annotations = 
+            list(
+              list( 
+                align = "left",
+                font = list(color = layoutFontColor, family = layoutFontFamily, size = layoutFontSize),
+                showarrow = FALSE,
+                text = "MAXIMUM",
+                x = 0,
+                xanchor = "left",
+                xref = "paper",
+                xshift = 10,
+                y = max(inData$dwpt_30cm_maxF, na.rm = TRUE),
+                yanchor = "center",
+                yref = "y1"  
+              ),
+              list(
+                align = "left",
+                font = list(color = layoutFontColor, family = layoutFontFamily, size = layoutFontSize),
+                showarrow = FALSE,
+                text = "AVERAGE",
+                x = 0,
+                xanchor = "left",
+                xref = "paper",
+                xshift = 10,
+                y = max(inData$dwpt_30cm_meanF, na.rm = TRUE),
+                yanchor = "center",
+                yref = "y2"  
+              ),
+              list(
+                align = "left",
+                font = list(color = layoutFontColor, family = layoutFontFamily, size = layoutFontSize),
+                showarrow = FALSE,
+                text = "MINIMUM",
+                x = 0,
+                xanchor = "left",
+                xref = "paper",
+                xshift = 10,
+                y = max(inData$dwpt_30cm_minF, na.rm = TRUE),
+                yanchor = "center",
+                yref = "y3"  
+              )
+            ),
+          font = list(color = layoutFontColor, family = layoutFontFamily, size = layoutFontSize),
+          hoverlabel = list(font = list(family = layoutFontFamily, size = hoverlabelFontSize)),
+          legend = 
+            list(
+              orientation = "h",
+              traceorder = "reversed",
+              x = 0.00,
+              xanchor = "left",
+              xref = "container",
+              # y = 1.05,
+              # yanchor = "bottom",
+              y = 1.0,
+              yanchor = "top",
+              yref = "container"
+            ),
+          margin = 
+            list(
+              l = layoutMargin,
+              r = layoutMargin,
+              b = layoutMargin,
+              t = layoutMargin,
+              pad = layoutPadding
+            ),
+          xaxis = 
+            list(
+              fixedrange = TRUE,
+              # range = list(
+              #   ~(min(datetime) - 86400), # unix time
+              #   ~(max(datetime) + 86400)
+              # ),
+              showgrid = TRUE,
+              showticklabels = TRUE,
+              title = FALSE,
+              zeroline = FALSE
+            )#,
+          # yaxis = 
+          #   list(
+          #     fixedrange = TRUE,
+          #     rangemode = "nonnegative", # one of ("normal" | "tozero" | "nonnegative")
+          #     title = "%",
+          #     zeroline = FALSE
+          #   )
+        ),
       
-      plotly::layout(
-        annotations = list(
-          list( 
-            align = "left",
-            font = list(
-              color = layoutFontColor,
-              family = layoutFontFamily,
-              size = layoutFontSize
-            ),
-            showarrow = FALSE,
-            text = "MAXIMUM",
-            x = 0,
-            xanchor = "left",
-            xref = "paper",
-            xshift = 10,
-            y = max(inData$dwpt_30cm_maxF, na.rm = TRUE),
-            yanchor = "center",
-            yref = "y1"  
-          ),
-          list(
-            align = "left",
-            font = list(
-              color = layoutFontColor,
-              family = layoutFontFamily,
-              size = layoutFontSize
-            ),
-            showarrow = FALSE,
-            text = "AVERAGE",
-            x = 0,
-            xanchor = "left",
-            xref = "paper",
-            xshift = 10,
-            y = max(inData$dwpt_30cm_meanF, na.rm = TRUE),
-            yanchor = "center",
-            yref = "y2"  
-          ),
-          list( # No Heat Stress
-            align = "left",
-            font = list(
-              color = layoutFontColor,
-              family = layoutFontFamily,
-              size = layoutFontSize
-            ),
-            showarrow = FALSE,
-            text = "MINIMUM",
-            x = 0,
-            xanchor = "left",
-            xref = "paper",
-            xshift = 10,
-            y = max(inData$dwpt_30cm_minF, na.rm = TRUE),
-            yanchor = "center",
-            yref = "y3"  
-          )
-        ),
-        font = list(
-          color = layoutFontColor,
-          family = layoutFontFamily,
-          size = layoutFontSize
-        ),
-        hoverlabel = list(
-          font = list(
-            family = layoutFontFamily,
-            size = hoverlabelFontSize
-          )
-        ),
-        legend = list(
-          orientation = "h",
-          traceorder = "reversed",
-          x = 0.00,
-          xanchor = "left",
-          xref = "container",
-          # y = 1.05,
-          # yanchor = "bottom",
-          y = 1.0,
-          yanchor = "top",
-          yref = "container"
-        ),
-        margin = list(
-          l = layoutMargin,
-          r = layoutMargin,
-          b = layoutMargin,
-          t = layoutMargin,
-          pad = layoutPadding
-        ),
-        xaxis = list(
-          fixedrange = TRUE,
-          # range = list(
-          #   ~(min(datetime) - 86400), # unix time
-          #   ~(max(datetime) + 86400)
-          # ),
-          showgrid = TRUE,
-          showticklabels = TRUE,
-          title = FALSE,
-          zeroline = FALSE
-        )#,
-        # yaxis = list(
-        #   fixedrange = TRUE,
-        #   rangemode = "nonnegative", # one of ("normal" | "tozero" | "nonnegative")
-        #   title = "%", 
-        #   zeroline = FALSE
-        # )
-      ),
-    
-    
-    # `lw*_mean_mV` -----
-    
-    plotly::subplot(
-      lw_total_wet_hrs, 
-      lw_total_con_hrs, 
-      lw_total_dry_hrs,
-      # heights = c(1/3, 1/3, 1/3),
-      margin = 0.02,
-      nrows = 3, 
-      shareX = TRUE,
-      shareY = TRUE,
-      titleX = FALSE,
-      titleY = TRUE,
-      widths = 1
-    ) %>% 
       
-      plotly::config(
-        displaylogo = FALSE,
-        displayModeBar = FALSE
+      # `lw*_mean_mV` -----
+      
+      plotly::subplot(
+        lw_total_wet_hrs, 
+        lw_total_con_hrs, 
+        lw_total_dry_hrs,
+        # heights = c(1/3, 1/3, 1/3),
+        margin = 0.02,
+        nrows = 3, 
+        shareX = TRUE,
+        shareY = TRUE,
+        titleX = FALSE,
+        titleY = TRUE,
+        widths = 1
       ) %>% 
-      
-      plotly::layout(
-        annotations = list(
-          list( 
-            align = "left",
-            font = list(
-              color = layoutFontColor,
-              family = layoutFontFamily,
-              size = layoutFontSize
+        
+        plotly::config(
+          displaylogo = FALSE,
+          displayModeBar = FALSE
+        ) %>% 
+        
+        plotly::layout(
+          annotations = 
+            list(
+              list( 
+                align = "left",
+                font = list(color = layoutFontColor, family = layoutFontFamily, size = layoutFontSize),
+                showarrow = FALSE,
+                text = "WET",
+                x = 0,
+                xanchor = "left",
+                xref = "paper",
+                xshift = 10,
+                y = 24,
+                yanchor = "top",
+                yref = "y1"  
+              ),
+              list(
+                align = "left",
+                font = list(color = layoutFontColor, family = layoutFontFamily, size = layoutFontSize),
+                showarrow = FALSE,
+                text = "TRANSITION",
+                x = 0,
+                xanchor = "left",
+                xref = "paper",
+                xshift = 10,
+                y = 24,
+                yanchor = "top",
+                yref = "y2"  
+              ),
+              list( # No Heat Stress
+                align = "left",
+                font = list(color = layoutFontColor, family = layoutFontFamily, size = layoutFontSize),
+                showarrow = FALSE,
+                text = "DRY",
+                x = 0,
+                xanchor = "left",
+                xref = "paper",
+                xshift = 10,
+                y = 24,
+                yanchor = "top",
+                yref = "y3"  
+              )
             ),
-            showarrow = FALSE,
-            text = "WET",
-            x = 0,
-            xanchor = "left",
-            xref = "paper",
-            xshift = 10,
-            y = 24,
-            yanchor = "top",
-            yref = "y1"  
-          ),
-          list(
-            align = "left",
-            font = list(
-              color = layoutFontColor,
-              family = layoutFontFamily,
-              size = layoutFontSize
+          font = list(color = layoutFontColor, family = layoutFontFamily, size = layoutFontSize),
+          hoverlabel = list(font = list(family = layoutFontFamily, size = hoverlabelFontSize)),
+          legend = 
+            list(
+              orientation = "h",
+              traceorder = "reversed",
+              x = 0.00,
+              xanchor = "left",
+              xref = "container",
+              # y = 1.05,
+              # yanchor = "bottom",
+              y = 1.0,
+              yanchor = "top",
+              yref = "container"
             ),
-            showarrow = FALSE,
-            text = "TRANSITION",
-            x = 0,
-            xanchor = "left",
-            xref = "paper",
-            xshift = 10,
-            y = 24,
-            yanchor = "top",
-            yref = "y2"  
-          ),
-          list( # No Heat Stress
-            align = "left",
-            font = list(
-              color = layoutFontColor,
-              family = layoutFontFamily,
-              size = layoutFontSize
+          margin = 
+            list(
+              l = layoutMargin,
+              r = layoutMargin,
+              b = layoutMargin,
+              t = layoutMargin,
+              pad = layoutPadding
             ),
-            showarrow = FALSE,
-            text = "DRY",
-            x = 0,
-            xanchor = "left",
-            xref = "paper",
-            xshift = 10,
-            y = 24,
-            yanchor = "top",
-            yref = "y3"  
-          )
-        ),
-        font = list(
-          color = layoutFontColor,
-          family = layoutFontFamily,
-          size = layoutFontSize
-        ),
-        hoverlabel = list(
-          font = list(
-            family = layoutFontFamily,
-            size = hoverlabelFontSize
-          )
-        ),
-        legend = list(
-          orientation = "h",
-          traceorder = "reversed",
-          x = 0.00,
-          xanchor = "left",
-          xref = "container",
-          # y = 1.05,
-          # yanchor = "bottom",
-          y = 1.0,
-          yanchor = "top",
-          yref = "container"
-        ),
-        margin = list(
-          l = layoutMargin,
-          r = layoutMargin,
-          b = layoutMargin,
-          t = layoutMargin,
-          pad = layoutPadding
-        ),
-        xaxis = list(
-          fixedrange = TRUE,
-          # range = list(
-          #   ~(min(datetime) - 86400), # unix time
-          #   ~(max(datetime) + 86400)
-          # ),
-          showgrid = TRUE,
-          showticklabels = TRUE,
-          title = FALSE,
-          zeroline = FALSE
-        )#,
-        # yaxis = list(
-        #   fixedrange = TRUE,
-        #   rangemode = "nonnegative", # one of ("normal" | "tozero" | "nonnegative")
-        #   title = "%", 
-        #   zeroline = FALSE
-        # )
-      )
-  ) # `past30DaysCardGraphs`
+          xaxis = 
+            list(
+              fixedrange = TRUE,
+              # range = list(
+              #   ~(min(datetime) - 86400), # unix time
+              #   ~(max(datetime) + 86400)
+              # ),
+              showgrid = TRUE,
+              showticklabels = TRUE,
+              title = FALSE,
+              zeroline = FALSE
+            )#,
+          # yaxis = 
+          #   list(
+          #     fixedrange = TRUE,
+          #     rangemode = "nonnegative", # one of ("normal" | "tozero" | "nonnegative")
+          #     title = "%",
+          #     zeroline = FALSE
+          #   )
+        )
+    ) # `past30DaysCardGraphs`
   
   
   return(past30DaysCardGraphs)

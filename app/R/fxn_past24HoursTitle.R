@@ -4,6 +4,7 @@
 
 
 fxn_past24HoursTitle <- function() {
+  
   past24HoursTitle <- 
     htmltools::p(
       htmltools::HTML(

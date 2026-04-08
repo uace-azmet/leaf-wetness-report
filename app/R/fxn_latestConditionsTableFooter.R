@@ -4,6 +4,7 @@
 
 
 fxn_latestConditionsTableFooter <- function() {
+  
   latestConditionsTableFooter <- 
     htmltools::p(
       htmltools::HTML(
