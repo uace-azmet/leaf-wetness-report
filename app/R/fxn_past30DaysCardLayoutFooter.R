@@ -4,6 +4,7 @@
 
 
 fxn_past30DaysCardLayoutFooter <- function() {
+  
   past30DaysCardLayoutFooter <- 
     htmltools::p(
       htmltools::HTML(

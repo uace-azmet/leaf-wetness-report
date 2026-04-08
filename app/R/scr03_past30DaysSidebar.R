@@ -14,8 +14,7 @@ past30DaysSidebar <-
     
     htmltools::p(
       bsicons::bs_icon("sliders", class = "bolder-icon"), 
-      htmltools::HTML("&nbsp;"), 
-      htmltools::HTML("<strong>DATA OPTIONS</strong>&nbsp;"),
+      htmltools::HTML("&nbsp;<strong>DATA OPTIONS</strong>&nbsp;"),
       bslib::tooltip(
         bsicons::bs_icon("info-circle"),
         "Specify an AZMet station to highlight in the graphs.",

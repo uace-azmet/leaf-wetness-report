@@ -33,172 +33,176 @@ fxn_past24HoursCardLayout <- function(inData, azmetStation, past24HoursCardGraph
   
   # `relative_humidity_30cm_mean` -----
   
-  card_RH <- bslib::card(
-    bslib::card_header(
-      htmltools::div(
-        htmltools::HTML(
-          paste0(
-            tags$span(style = styleHeaderVariable, "RH"),
-            "<sup>", tags$span(style = styleHeaderSup, "1"), "</sup>"
-          )
-        )
-      ),
-      htmltools::div(
-        htmltools::HTML(
-          paste0(
-            tags$span(style = styleHeaderHelpText, "Latest Update: "),
-            tags$span(
-              style = styleHeaderValue,
-              paste0(format(inData$relative_humidity_30cm_mean, nsmall = 0)," %")
+  card_RH <- 
+    bslib::card(
+      bslib::card_header(
+        htmltools::div(
+          htmltools::HTML(
+            paste0(
+              tags$span(style = styleHeaderVariable, "RH"), 
+              "<sup>", tags$span(style = styleHeaderSup, "1"), "</sup>"
             )
           )
-        )
+        ),
+        htmltools::div(
+          htmltools::HTML(
+            paste0(
+              tags$span(style = styleHeaderHelpText, "Latest Update: "),
+              tags$span(
+                style = styleHeaderValue,
+                paste0(format(inData$relative_humidity_30cm_mean, nsmall = 0)," %")
+              )
+            )
+          )
+        ),
+        
+        class = classHeader
       ),
       
-      class = classHeader
-    ),
-    
-    bslib::card_body(past24HoursCardGraphs[[1]], class = "p-0"),
-    
-    class = "past-24-hours-card",
-    fill = TRUE,
-    full_screen = TRUE,
-    height = cardHeight,
-    id = NULL,
-    max_height = cardHeight,
-    min_height = cardHeight
-  )
+      bslib::card_body(past24HoursCardGraphs[[1]], class = "p-0"),
+      
+      class = "past-24-hours-card",
+      fill = TRUE,
+      full_screen = TRUE,
+      height = cardHeight,
+      id = NULL,
+      max_height = cardHeight,
+      min_height = cardHeight
+    )
   
   
   # `temp_air_30cm_meanF` -----
   
-  card_T <- bslib::card(
-    bslib::card_header(
-      htmltools::div(
-        htmltools::HTML(
-          paste0(
-            tags$span(style = styleHeaderVariable, "T"),
-            "<sub>", tags$span(style = styleHeaderSub, "air"), "</sub>",
-            "<sup>", tags$span(style = styleHeaderSup, "1"), "</sup>"
-          )
-        )
-      ),
-      htmltools::div(
-        htmltools::HTML(
-          paste0(
-            tags$span(style = styleHeaderHelpText, "Latest Update: "),
-            tags$span(
-              style = styleHeaderValue,
-              htmltools::HTML(paste0(format(inData$temp_air_30cm_meanF, nsmall = 1), " °F"))
+  card_T <- 
+    bslib::card(
+      bslib::card_header(
+        htmltools::div(
+          htmltools::HTML(
+            paste0(
+              tags$span(style = styleHeaderVariable, "T"),
+              "<sub>", tags$span(style = styleHeaderSub, "air"), "</sub>",
+              "<sup>", tags$span(style = styleHeaderSup, "1"), "</sup>"
             )
           )
-        )
+        ),
+        htmltools::div(
+          htmltools::HTML(
+            paste0(
+              tags$span(style = styleHeaderHelpText, "Latest Update: "),
+              tags$span(
+                style = styleHeaderValue,
+                htmltools::HTML(paste0(format(inData$temp_air_30cm_meanF, nsmall = 1), " °F"))
+              )
+            )
+          )
+        ),
+        
+        class = classHeader
       ),
       
-      class = classHeader
-    ),
-    
-    bslib::card_body(past24HoursCardGraphs[[2]], class = "p-0"),
-    
-    class = "past-24-hours-card",
-    fill = TRUE,
-    full_screen = TRUE,
-    height = cardHeight,
-    id = NULL,
-    max_height = cardHeight,
-    min_height = cardHeight
-  )
+      bslib::card_body(past24HoursCardGraphs[[2]], class = "p-0"),
+      
+      class = "past-24-hours-card",
+      fill = TRUE,
+      full_screen = TRUE,
+      height = cardHeight,
+      id = NULL,
+      max_height = cardHeight,
+      min_height = cardHeight
+    )
   
   
   # `dwpt_30cm_meanF` -----
   
-  card_Tdewpoint <- bslib::card(
-    bslib::card_header(
-      htmltools::div(
-        htmltools::HTML(
-          paste0(
-            tags$span(style = styleHeaderVariable, "T"),
-            "<sub>", tags$span(style = styleHeaderSub, "dew point"), "</sub>",
-            "<sup>", tags$span(style = styleHeaderSup, "1"), "</sup>"
-          )
-        )
-      ),
-      htmltools::div(
-        htmltools::HTML(
-          paste0(
-            tags$span(style = styleHeaderHelpText, "Latest Update: "),
-            tags$span(
-              style = styleHeaderValue,
-              paste0(format(inData$dwpt_30cm_meanF, nsmall = 1)," °F")
+  card_Tdewpoint <- 
+    bslib::card(
+      bslib::card_header(
+        htmltools::div(
+          htmltools::HTML(
+            paste0(
+              tags$span(style = styleHeaderVariable, "T"),
+              "<sub>", tags$span(style = styleHeaderSub, "dew point"), "</sub>",
+              "<sup>", tags$span(style = styleHeaderSup, "1"), "</sup>"
             )
           )
-        )
+        ),
+        htmltools::div(
+          htmltools::HTML(
+            paste0(
+              tags$span(style = styleHeaderHelpText, "Latest Update: "),
+              tags$span(
+                style = styleHeaderValue,
+                paste0(format(inData$dwpt_30cm_meanF, nsmall = 1)," °F")
+              )
+            )
+          )
+        ),
+        
+        class = classHeader
       ),
       
-      class = classHeader
-    ),
-    
-    bslib::card_body(past24HoursCardGraphs[[3]], class = "p-0"),
-    
-    class = "past-24-hours-card",
-    fill = TRUE,
-    full_screen = TRUE,
-    height = cardHeight,
-    id = NULL,
-    max_height = cardHeight,
-    min_height = cardHeight
-  )
+      bslib::card_body(past24HoursCardGraphs[[3]], class = "p-0"),
+      
+      class = "past-24-hours-card",
+      fill = TRUE,
+      full_screen = TRUE,
+      height = cardHeight,
+      id = NULL,
+      max_height = cardHeight,
+      min_height = cardHeight
+    )
   
   
   # `lw*_mean_mV` -----
   
-  card_DC <- bslib::card(
-    bslib::card_header(
-      htmltools::div(
-        htmltools::HTML(
-          paste0(
-            tags$span(style = styleHeaderVariable, "DC"),
-            "<sup>", tags$span(style = styleHeaderSup, "1,2"), "</sup>"
-          )
-        )
-      ),
-      htmltools::div(
-        htmltools::HTML(
-          paste0(
-            tags$span(style = styleHeaderHelpText, "Latest Update: "),
-            tags$span(
-              style = styleHeaderValue,
-              paste0(format(inData$lw1_mean_mV, nsmall = 0), ", ", format(inData$lw2_mean_mV, nsmall = 0), " mV")
+  card_DC <- 
+    bslib::card(
+      bslib::card_header(
+        htmltools::div(
+          htmltools::HTML(
+            paste0(
+              tags$span(style = styleHeaderVariable, "DC"),
+              "<sup>", tags$span(style = styleHeaderSup, "1,2"), "</sup>"
             )
           )
-        )
+        ),
+        htmltools::div(
+          htmltools::HTML(
+            paste0(
+              tags$span(style = styleHeaderHelpText, "Latest Update: "),
+              tags$span(
+                style = styleHeaderValue,
+                paste0(format(inData$lw1_mean_mV, nsmall = 0), ", ", format(inData$lw2_mean_mV, nsmall = 0), " mV")
+              )
+            )
+          )
+        ),
+        
+        class = classHeader
       ),
       
-      class = classHeader
-    ),
-    
-    bslib::card_body(past24HoursCardGraphs[[4]], class = "p-0"),
-    
-    class = "past-24-hours-card",
-    fill = TRUE,
-    full_screen = TRUE,
-    height = cardHeight,
-    id = NULL,
-    max_height = cardHeight,
-    min_height = cardHeight
-  ) 
+      bslib::card_body(past24HoursCardGraphs[[4]], class = "p-0"),
+      
+      class = "past-24-hours-card",
+      fill = TRUE,
+      full_screen = TRUE,
+      height = cardHeight,
+      id = NULL,
+      max_height = cardHeight,
+      min_height = cardHeight
+    ) 
   
   
   # Card layout list ----------
   
   
-  past24HoursCardLayout <- list(
-    card_RH, 
-    card_T, 
-    card_Tdewpoint,
-    card_DC
-  )
-  
+  past24HoursCardLayout <- 
+    list(
+      card_RH, 
+      card_T, 
+      card_Tdewpoint,
+      card_DC
+    )
   
   return(past24HoursCardLayout)
 }

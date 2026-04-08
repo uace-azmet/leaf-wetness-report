@@ -4,6 +4,7 @@
 
 
 fxn_past24HoursCardLayoutFooter <- function() {
+  
   past24HoursCardLayoutFooter <- 
     htmltools::p(
       htmltools::HTML(

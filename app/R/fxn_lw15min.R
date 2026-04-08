@@ -4,6 +4,7 @@
 
 
 fxn_lw15min <- function() {
+  
   idRetrievingData <- shiny::showNotification(
     ui = "Retrieving the latest data . . .",
     action = NULL,
@@ -15,8 +16,7 @@ fxn_lw15min <- function() {
   
   lw15min <- 
     azmetr::az_lw15min(
-      start_date_time = 
-        lubridate::now(tzone = "America/Phoenix") - lubridate::hours(25)
+      start_date_time = lubridate::now(tzone = "America/Phoenix") - lubridate::hours(25)
     ) |> 
     
     dplyr::filter(
